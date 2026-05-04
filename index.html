@@ -1967,16 +1967,16 @@ border-radius: 10px; padding: 14px 16px;
     <a class="logo">chifoune<span class="dot">.</span></a>
     <div class="nav-search">
       <span class="search-ico">🔍</span>
-      <input type="text" id="navQ" placeholder="Nike, Zara, robe d'été..." onkeypress="if(event.key==='Enter')search()" />
+      <input type="text" id="navQ" placeholder="Nike, Zara, robe d'été..." />
     </div>
     <div class="nav-actions">
       <div class="lang-pills">
-        <button class="lpill on" id="lpill-fr" onclick="lang('fr')">FR</button>
-        <button class="lpill"    id="lpill-en" onclick="lang('en')">EN</button>
-        <button class="lpill"    id="lpill-ar" onclick="lang('ar')">عر</button>
+        <button class="lpill on" id="lpill-fr">FR</button>
+        <button class="lpill"    id="lpill-en">EN</button>
+        <button class="lpill"    id="lpill-ar">عر</button>
       </div>
       <div style="position:relative">
-        <button class="icon-btn" id="notifTrigger" onclick="toggleNotif()">
+        <button class="icon-btn" id="notifTrigger">
           🔔
           <div class="badge-dot" style="display:none">0</div>
         </button>
@@ -1991,19 +1991,19 @@ border-radius: 10px; padding: 14px 16px;
           </div>
         </div>
       </div>
-      <button class="icon-btn" onclick="showFavorites()">🤍</button>
-      <button class="icon-btn" id="msgNavBtn" onclick="openMsgPage()" style="position:relative">
+      <button class="icon-btn" id="navFavBtn">🤍</button>
+      <button class="icon-btn" id="msgNavBtn" style="position:relative">
         💬
         <div class="badge-dot" id="msgBadge" style="display:none">0</div>
       </button>
-      <button class="nbtn nbtn-outline" id="btnConnexion" data-fr="Se connecter" data-en="Log in" data-ar="دخول" onclick="openAuth('login')">Se connecter</button>
-      <button class="nbtn nbtn-dark" id="btnInscription" onclick="openAuth('signup')" data-fr="S'inscrire" data-en="Sign up" data-ar="تسجيل">S'inscrire</button>
+      <button class="nbtn nbtn-outline" id="btnConnexion" data-fr="Se connecter" data-en="Log in" data-ar="دخول" >Se connecter</button>
+      <button class="nbtn nbtn-dark" id="btnInscription"  data-fr="S'inscrire" data-en="Sign up" data-ar="تسجيل">S'inscrire</button>
       <div id="userInfo" style="display:none;align-items:center;gap:8px;">
         <div style="width:32px;height:32px;border-radius:50%;background:var(--accent);color:white;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;font-family:'Nunito',sans-serif;" id="userAvatar">U</div>
         <span class="user-name" style="font-size:13px;font-weight:600;color:var(--dark);max-width:100px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;"></span>
       </div>
-      <button class="nbtn" id="btnLogout" style="display:none;background:var(--bg);border:1px solid var(--border);color:var(--gray);font-size:12px;" onclick="doLogout()">Déconnexion</button>
-      <button class="nbtn" id="btnVendre" style="display:none;background:var(--accent);color:white;margin-left:2px;" data-fr="Vendre" data-en="Sell" data-ar="بيع" onclick="openPost()">Vendre</button>
+      <button class="nbtn" id="btnLogout" style="display:none;background:var(--bg);border:1px solid var(--border);color:var(--gray);font-size:12px;" >Déconnexion</button>
+      <button class="nbtn" id="btnVendre" style="display:none;background:var(--accent);color:white;margin-left:2px;" data-fr="Vendre" data-en="Sell" data-ar="بيع" >Vendre</button>
     </div>
   </div>
 </nav>
@@ -2022,10 +2022,10 @@ border-radius: 10px; padding: 14px 16px;
   <div class="hero-inner">
     <h1 data-fr="Achète &amp; vends tes vêtements<br><em>partout en Algérie</em>" data-en="Buy &amp; sell your clothes<br><em>across Algeria</em>" data-ar="اشترِ وبِع ملابسك<br><em>في كل أنحاء الجزائر</em>">Achète &amp; vends tes vêtements<br><em>partout en Algérie</em></h1>
     <div class="hero-search-wrap" style="margin-top:20px">
-      <input type="text" id="heroQ" placeholder="Nike, Zara, jeans Levi's..." onkeypress="if(event.key==='Enter')search()" />
+      <input type="text" id="heroQ" placeholder="Nike, Zara, jeans Levi's..." />
       <!-- wilayas select hidden — kept for filterW() compatibility -->
-      <select id="wilayas" onchange="filterW(this.value)" style="display:none"></select>
-      <button onclick="search()" data-fr="Chercher" data-en="Search" data-ar="بحث">Chercher</button>
+      <select id="wilayas" style="display:none"></select>
+      <button id="heroSearchBtn" data-fr="Chercher" data-en="Search" data-ar="بحث">Chercher</button>
     </div>
     <div class="hero-pills">
       <div class="hero-pill" onclick="filterCat('Femme')">      👗 <span data-fr="Femme" data-en="Women"       data-ar="نساء">Femme</span></div>
@@ -2050,7 +2050,7 @@ border-radius: 10px; padding: 14px 16px;
       <h2 data-fr="Tu as des vêtements à vendre ?" data-en="Got clothes to sell?" data-ar="لديك ملابس للبيع؟">Tu as des vêtements à vendre ?</h2>
       <p data-fr="انشر إعلانك مجاناً في أقل من دقيقتين" data-en="Post your listing for free in under 2 minutes" data-ar="انشر إعلانك مجاناً في أقل من دقيقتين">انشر إعلانك مجاناً في أقل من دقيقتين</p>
     </div>
-    <button class="promo-btn" data-fr="Publier gratuitement" data-en="List for free" data-ar="نشر مجاناً" onclick="openPost()">Publier gratuitement</button>
+    <button class="promo-btn" id="promoPubBtn" data-fr="Publier gratuitement" data-en="List for free" data-ar="نشر مجاناً" >Publier gratuitement</button>
   </div>
 
   <div class="layout">
@@ -2064,7 +2064,7 @@ border-radius: 10px; padding: 14px 16px;
       <div class="sidebar-block">
         <div class="sb-head" data-fr="Wilaya" data-en="Wilaya" data-ar="الولاية">Wilaya</div>
         <div class="sb-body">
-          <select class="sb-select" onchange="filterW(this.value)">
+          <select class="sb-select">
             <option value="" data-fr="Toutes" data-en="All" data-ar="الكل">Toutes</option>
             <option>Adrar</option><option>Chlef</option><option>Laghouat</option><option>Oum El Bouaghi</option>
             <option>Batna</option><option>Béjaïa</option><option>Biskra</option><option>Béchar</option>
@@ -2104,11 +2104,11 @@ border-radius: 10px; padding: 14px 16px;
 
       <div class="sidebar-block">
         <div class="sb-head" data-fr="État" data-en="Condition" data-ar="الحالة">État</div>
-        <div class="sb-item" onclick="filterState('Neuf avec étiquette')"><span class="sb-ico">✨</span><span data-fr="Neuf avec étiquette" data-en="New with tags"  data-ar="جديد بوسم">Neuf avec étiquette</span></div>
-        <div class="sb-item" onclick="filterState('Neuf sans étiquette')"><span class="sb-ico">🆕</span><span data-fr="Neuf sans étiquette" data-en="New without tags" data-ar="جديد بدون وسم">Neuf sans étiquette</span></div>
-        <div class="sb-item" onclick="filterState('Très bon état')">       <span class="sb-ico">⭐</span><span data-fr="Très bon état" data-en="Very good"        data-ar="جيد جداً">Très bon état</span></div>
-        <div class="sb-item" onclick="filterState('Bon état')">            <span class="sb-ico">👍</span><span data-fr="Bon état" data-en="Good"            data-ar="جيد">Bon état</span></div>
-        <div class="sb-item" onclick="filterState('Satisfaisant')">        <span class="sb-ico">✅</span><span data-fr="Satisfaisant" data-en="Satisfactory"        data-ar="مقبول">Satisfaisant</span></div>
+        <div class="sb-item" data-state="Neuf avec étiquette"><span class="sb-ico">✨</span><span data-fr="Neuf avec étiquette" data-en="New with tags" data-ar="جديد بوسم">Neuf avec étiquette</span></div>
+        <div class="sb-item" data-state="Neuf sans étiquette"><span class="sb-ico">🆕</span><span data-fr="Neuf sans étiquette" data-en="New without tags" data-ar="جديد بدون وسم">Neuf sans étiquette</span></div>
+        <div class="sb-item" data-state="Très bon état"><span class="sb-ico">⭐</span><span data-fr="Très bon état" data-en="Very good" data-ar="جيد جداً">Très bon état</span></div>
+        <div class="sb-item" data-state="Bon état"><span class="sb-ico">👍</span><span data-fr="Bon état" data-en="Good" data-ar="جيد">Bon état</span></div>
+        <div class="sb-item" data-state="Satisfaisant"><span class="sb-ico">✅</span><span data-fr="Satisfaisant" data-en="Satisfactory" data-ar="مقبول">Satisfaisant</span></div>
       </div>
     </aside>
 
@@ -2116,7 +2116,7 @@ border-radius: 10px; padding: 14px 16px;
     <div>
       <div class="grid-head">
         <div class="grid-count"><strong id="cnt">0</strong> <span data-fr="articles trouvés" data-en="items found" data-ar="منتج وجد">articles trouvés</span></div>
-        <select class="grid-sort" onchange="sort(this.value)">
+        <select class="grid-sort" id="gridSort">
           <option value="r" data-fr="Plus récents" data-en="Newest" data-ar="الأحدث">Plus récents</option>
           <option value="pa" data-fr="Prix ↑" data-en="Price ↑" data-ar="السعر ↑">Prix ↑</option>
           <option value="pd" data-fr="Prix ↓" data-en="Price ↓" data-ar="السعر ↓">Prix ↓</option>
@@ -2152,7 +2152,7 @@ border-radius: 10px; padding: 14px 16px;
 <!-- ═══════════════════════════════════════════════════════
      CHAT OVERLAY
 ════════════════════════════════════════════════════════ -->
-<div class="chat-overlay" id="chatOverlay" onclick="closeChatOuter(event)">
+<div class="chat-overlay" id="chatOverlay">
   <div class="chat-box">
     <div class="chat-head">
       <div class="chat-av" id="chatAv">K</div>
@@ -2172,7 +2172,7 @@ border-radius: 10px; padding: 14px 16px;
     <div class="chat-msgs" id="chatMsgs"></div>
     <div class="chat-foot">
       <input class="chat-inp" id="chatInp" placeholder="Écrire un message..." onkeypress="if(event.key==='Enter')send()" />
-      <button class="chat-send" onclick="send()">➤</button>
+      <button class="chat-send" id="chatSend">➤</button>
     </div>
   </div>
 </div>
@@ -2180,11 +2180,11 @@ border-radius: 10px; padding: 14px 16px;
 <!-- ═══════════════════════════════════════════════════════
      POST MODAL — "Vendre un article"
 ════════════════════════════════════════════════════════ -->
-<div class="post-overlay" id="postOverlay" onclick="closePostOuter(event)">
+<div class="post-overlay" id="postOverlay">
   <div class="post-box">
     <div class="post-head">
       <div class="post-title" data-fr="Vendre un article" data-en="Sell an item" data-ar="بيع منتج">Vendre un article</div>
-      <button class="post-close" onclick="closePost()">✕</button>
+      <button class="post-close">✕</button>
     </div>
 
     <form id="postForm" onsubmit="event.preventDefault(); submitPost();">
@@ -2277,7 +2277,7 @@ border-radius: 10px; padding: 14px 16px;
 <!-- ═══════════════════════════════════════════════════════
      LIKERS MODAL
 ════════════════════════════════════════════════════════ -->
-<div class="likers-overlay" id="likersOverlay" onclick="closeLikersOuter(event)">
+<div class="likers-overlay" id="likersOverlay">
   <div class="likers-box">
     <div class="likers-head">
       <div>
@@ -2285,7 +2285,7 @@ border-radius: 10px; padding: 14px 16px;
       </div>
       <div style="display:flex;align-items:center;gap:8px">
         <div class="likers-count" id="likersCount">0</div>
-        <button class="likers-close" onclick="closeLikers()">✕</button>
+        <button class="likers-close">✕</button>
       </div>
     </div>
     <div class="likers-item-preview" id="likersItemPreview">
@@ -2302,16 +2302,16 @@ border-radius: 10px; padding: 14px 16px;
 <!-- ═══════════════════════════════════════════════════════
      AUTH MODAL — Login / Signup
 ════════════════════════════════════════════════════════ -->
-<div class="auth-overlay" id="authOverlay" onclick="closeAuthOuter(event)">
+<div class="auth-overlay" id="authOverlay">
   <div class="auth-box">
-    <button class="auth-close" onclick="closeAuth()">✕</button>
+    <button class="auth-close">✕</button>
 
     <div class="auth-logo">chifoune<span class="dot">.</span></div>
     <div class="auth-tagline" id="authTagline" data-fr="La mode seconde main algérienne 🇩🇿" data-en="Algerian second-hand fashion 🇩🇿" data-ar="الموضة المستعملة الجزائرية 🇩🇿">La mode seconde main algérienne 🇩🇿</div>
 
     <div class="auth-tabs">
-      <button class="auth-tab on" id="tabSignup" onclick="switchTab('signup')" data-fr="Créer un compte" data-en="Create account" data-ar="إنشاء حساب">Créer un compte</button>
-      <button class="auth-tab" id="tabLogin" onclick="switchTab('login')" data-fr="Se connecter" data-en="Log in" data-ar="تسجيل الدخول">Se connecter</button>
+      <button class="auth-tab on" id="tabSignup" data-fr="Créer un compte" data-en="Create account" data-ar="إنشاء حساب">Créer un compte</button>
+      <button class="auth-tab" id="tabLogin" data-fr="Se connecter" data-en="Log in" data-ar="تسجيل الدخول">Se connecter</button>
     </div>
 
     <div id="socialBtns">
@@ -2336,13 +2336,13 @@ border-radius: 10px; padding: 14px 16px;
         <span class="social-txt" data-fr="Continuer avec Apple" data-en="Continue with Apple" data-ar="المتابعة مع Apple">Continuer avec Apple</span>
       </button>
 
-      <button class="social-btn phone" onclick="startPhoneAuth()">
+      <button class="social-btn phone">
         <span class="social-ico">📱</span>
         <span class="social-txt" data-fr="Continuer avec numéro de téléphone" data-en="Continue with phone number" data-ar="المتابعة برقم الهاتف">Continuer avec numéro de téléphone</span>
       </button>
 
       <div class="auth-divider" data-fr="ou avec email" data-en="or with email" data-ar="أو بالبريد الإلكتروني">ou avec email</div>
-      <div class="email-toggle" onclick="toggleEmailForm()" id="emailToggle" data-fr="Continuer avec email" data-en="Continue with email" data-ar="المتابعة بالبريد الإلكتروني">Continuer avec email →</div>
+      <div class="email-toggle" id="emailToggle" data-fr="Continuer avec email" data-en="Continue with email" data-ar="المتابعة بالبريد الإلكتروني">Continuer avec email →</div>
     </div>
 
       <!-- ─── PHONE AUTH: Step 1 — enter number ─────────────── -->
@@ -2357,10 +2357,10 @@ border-radius: 10px; padding: 14px 16px;
                  onkeypress="if(event.key==='Enter')sendOTP()" />
         </div>
         <div id="recaptcha-container"></div>
-        <button class="auth-submit" onclick="sendOTP()" id="btnSendOTP">
+        <button class="auth-submit" id="btnSendOTP">
           Envoyer le code SMS
         </button>
-        <div class="email-toggle" onclick="cancelPhoneAuth()" style="margin-top:10px">← Retour</div>
+        <div class="email-toggle" style="margin-top:10px">← Retour</div>
       </div>
 
       <!-- ─── PHONE AUTH: Step 2 — enter OTP ──────────────────── -->
@@ -2376,11 +2376,11 @@ border-radius: 10px; padding: 14px 16px;
           <input class="otp-digit" maxlength="1" type="text" inputmode="numeric" oninput="otpNext(this,4)" />
           <input class="otp-digit" maxlength="1" type="text" inputmode="numeric" oninput="otpNext(this,5)" />
         </div>
-        <button class="auth-submit" onclick="verifyOTP()" id="btnVerifyOTP">
+        <button class="auth-submit" id="btnVerifyOTP">
           Vérifier le code
         </button>
         <div class="phone-resend">
-          Pas reçu ? <span onclick="sendOTP()">Renvoyer</span>
+          Pas reçu ? <span>Renvoyer</span>
         </div>
         <div class="email-toggle" onclick="showPhoneStep(1)" style="margin-top:6px">← Changer le numéro</div>
       </div>
@@ -2391,8 +2391,8 @@ border-radius: 10px; padding: 14px 16px;
       </div>
       <input class="auth-input" type="email" placeholder="Adresse email" id="authEmail" />
       <input class="auth-input" type="password" placeholder="Mot de passe" id="authPass" />
-      <button class="auth-submit" onclick="submitAuth()" id="authSubmitBtn" data-fr="Créer mon compte" data-en="Create my account" data-ar="إنشاء حسابي">Créer mon compte</button>
-      <div class="email-toggle" onclick="toggleEmailForm()" style="margin-top:10px" data-fr="← Retour" data-en="← Back" data-ar="← رجوع">← Retour</div>
+      <button class="auth-submit" id="authSubmitBtn" data-fr="Créer mon compte" data-en="Create my account" data-ar="إنشاء حسابي">Créer mon compte</button>
+      <div class="email-toggle" style="margin-top:10px" data-fr="← Retour" data-en="← Back" data-ar="← رجوع">← Retour</div>
     </div>
 
     <div class="auth-terms" data-fr="En continuant, tu acceptes nos <a>Conditions d'utilisation</a> et notre <a>Politique de confidentialité</a>." data-en="By continuing, you agree to our <a>Terms of use</a> and <a>Privacy policy</a>." data-ar="بالمتابعة، أنت توافق على شروط الاستخدام وسياسة الخصوصية.">
@@ -2408,9 +2408,9 @@ border-radius: 10px; padding: 14px 16px;
 <!-- ═══════════════════════════════════════════════════════
      PRODUCT DETAIL OVERLAY — opened on card click
 ════════════════════════════════════════════════════════ -->
-<div class="detail-overlay" id="detailOverlay" onclick="if(event.target.id==='detailOverlay')closeDetail()">
+<div class="detail-overlay" id="detailOverlay">
   <div class="detail-box">
-    <button class="dt-close" onclick="closeDetail()">✕</button>
+    <button class="dt-close">✕</button>
     <div class="dt-layout">
       <div class="dt-img-wrap" id="dtImgWrap">
         <img id="dtImg" alt="" style="width:100%;height:100%;object-fit:cover;display:none;" />
@@ -2428,7 +2428,7 @@ border-radius: 10px; padding: 14px 16px;
         <button class="dt-btn-contact" id="dtBtnContact">💬 Contacter le vendeur</button>
         <button class="dt-btn-fav" id="dtBtnFav">🤍 Ajouter aux favoris</button>
         <div class="dt-safety">🛡️ Ne payez jamais en dehors de la plateforme. Chifoune ne peut pas garantir les transactions externes.</div>
-        <div class="dt-seller" style="cursor:pointer" onclick="openProfileFromDetail()" id="dtSellerCard">
+        <div class="dt-seller" style="cursor:pointer" id="dtSellerCard">
           <div style="font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--gray);margin-bottom:12px">Vendeur</div>
           <div style="display:flex;align-items:center;gap:10px">
             <div class="dt-seller-av" id="dtSellerAv">V</div>
@@ -2803,7 +2803,7 @@ function _renderSizeChips(arr) {
   inp.value  = '-';
   if (!arr.length) { wrap.innerHTML = '<span style="font-size:12px;color:var(--gray-light)">—</span>'; return; }
   wrap.innerHTML = arr.map(s =>
-    `<span class="size-chip" onclick="_selectSize(this,'${s}')">${s}</span>`
+    `<span class="size-chip" data-size="${s}">${s}</span>`
   ).join('');
 }
 
@@ -2915,26 +2915,40 @@ function _resetPostForm() {
     const imgContent = item.imageUrl
       ? `<img src="${item.imageUrl}" alt="${item.title}" style="width:100%;height:100%;object-fit:cover;" />`
       : `<span style="font-size:52px">👗</span>`;
-    const safeTitle = (item.title||'').replace(/'/g, "\\'");
-    const safeSeller = (item.sellerName||'Vendeur').replace(/'/g, "\\'");
+    const escTitle  = (item.title      || '').replace(/"/g, '&quot;');
+    const escSeller = (item.sellerName || 'Vendeur').replace(/"/g, '&quot;');
 
     return `
-    <div class="card" onclick="openProductDetail('${item.id}')">
+    <div class="card" data-product-id="${item.id}" style="cursor:pointer">
       <div class="card-img">
         ${imgContent}
-        <button class="fav ${isFav?'on':''}" onclick="toggleFav(event,'${item.id}')">
-          ${isFav?'❤️':'🤍'}
+        <button class="fav ${isFav ? 'on' : ''}" data-product-id="${item.id}" aria-label="favori">
+          ${isFav ? '❤️' : '🤍'}
         </button>
       </div>
       <div class="card-body">
-        <div class="card-brand">${item.brand||''}</div>
-        <div class="card-title">${item.title||''}</div>
-        <div class="card-meta">${item.size&&item.size!=='-'?item.size+' · ':''}${item.wilaya||''} · ${item.state||''}</div>
+        <div class="card-brand">${item.brand || ''}</div>
+        <div class="card-title">${item.title || ''}</div>
+        <div class="card-meta">${item.size && item.size !== '-' ? item.size + ' · ' : ''}${item.wilaya || ''} · ${item.state || ''}</div>
         <div class="card-foot">
-          <div class="card-price">${Number(item.price||0).toLocaleString('fr-DZ')} <small>${isAr?'دج':'DA'}</small></div>
+          <div class="card-price">${Number(item.price || 0).toLocaleString('fr-DZ')} <small>${isAr ? 'دج' : 'DA'}</small></div>
           <div style="display:flex;gap:6px;align-items:center">
-            <button style="padding:5px 8px;background:var(--bg);border:1px solid var(--border);border-radius:6px;font-size:11px;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:700;color:var(--gray);" onclick="openLikers(event,'${item.id}','${safeTitle}',${item.likes||0})">❤️ ${item.likes||0}</button>
-            <button class="card-msg" onclick="openChat(event,'${item.id}','${safeTitle}',${item.price||0},'${safeSeller}','${item.sellerId||''}')">💬</button>
+            <button data-action="likers"
+                    data-product-id="${item.id}"
+                    data-title="${escTitle}"
+                    data-likes="${item.likes || 0}"
+                    style="padding:5px 8px;background:var(--bg);border:1px solid var(--border);border-radius:6px;font-size:11px;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:700;color:var(--gray);">
+              ❤️ ${item.likes || 0}
+            </button>
+            <button class="card-msg"
+                    data-action="chat"
+                    data-product-id="${item.id}"
+                    data-title="${escTitle}"
+                    data-price="${item.price || 0}"
+                    data-seller="${escSeller}"
+                    data-seller-id="${item.sellerId || ''}">
+              💬
+            </button>
           </div>
         </div>
       </div>
@@ -3302,21 +3316,21 @@ function closeDetail() {
   const nav = document.getElementById('catNav');
   const all = L==='ar'?'الكل': L==='en'?'All':'Tout';
   const label = c => L==='ar' ? c.ar : L==='en' ? (c.en || c.fr) : c.fr;
-  nav.innerHTML = `<div class="cat-tab ${activeCat==='Tout'?'on':''}" onclick="filterCat('Tout')">${all}</div>`
-    + cats.map(c => `<div class="cat-tab ${activeCat===c.fr?'on':''}" onclick="filterCat('${c.fr}')">${c.ico} ${label(c)}</div>`).join('');
+  nav.innerHTML = `<div class="cat-tab ${activeCat==='Tout'?'on':''}" data-cat="Tout">${all}</div>`
+    + cats.map(c => `<div class="cat-tab ${activeCat===c.fr?'on':''}" data-cat="${c.fr}">${c.ico} ${label(c)}</div>`).join('');
 }
 
 function renderSbCats() {
   const el = document.getElementById('sbCats');
   const all   = L==='ar'?'الكل': L==='en'?'All':'Tout';
   const label = c => L==='ar' ? c.ar : L==='en' ? (c.en || c.fr) : c.fr;
-  el.innerHTML = `<div class="sb-item ${activeCat==='Tout'?'on':''}" onclick="filterCat('Tout')"><span class="sb-ico">🏷️</span><span>${all}</span></div>`
-    + cats.map(c => `<div class="sb-item ${activeCat===c.fr?'on':''}" onclick="filterCat('${c.fr}')"><span class="sb-ico">${c.ico}</span><span>${label(c)}</span></div>`).join('');
+  el.innerHTML = `<div class="sb-item ${activeCat==='Tout'?'on':''}" data-cat="Tout"><span class="sb-ico">🏷️</span><span>${all}</span></div>`
+    + cats.map(c => `<div class="sb-item ${activeCat===c.fr?'on':''}" data-cat="${c.fr}"><span class="sb-ico">${c.ico}</span><span>${label(c)}</span></div>`).join('');
   const sizesEl = document.getElementById('sbSizes');
   if (sizesEl) {
     const allSizes = [...new Set([...clothingSizes, ...shoeSizes])];
     sizesEl.innerHTML = allSizes.map(s =>
-      `<div class="sb-item" onclick="filterSizeFromSidebar('${s}')"><span class="sb-ico">📐</span><span>${s}</span></div>`
+      `<div class="sb-item" data-size="${s}"><span class="sb-ico">📐</span><span>${s}</span></div>`
     ).join('');
   }
 }
@@ -3975,10 +3989,10 @@ function _loadProfileProducts(uid) {
         const img   = item.imageUrl
           ? `<img src="${item.imageUrl}" alt="" style="width:100%;height:100%;object-fit:cover;" />`
           : '<span style="font-size:42px">👗</span>';
-        return `<div class="card" onclick="openProductDetail('${item.id}')">
+        return `<div class="card" data-product-id="${item.id}" style="cursor:pointer">
           <div class="card-img">
             ${img}
-            <button class="fav ${isFav?'on':''}" onclick="toggleFav(event,'${item.id}')">${isFav?'❤️':'🤍'}</button>
+            <button class="fav ${isFav?'on':''}" data-product-id="${item.id}" aria-label="favori">${isFav?'❤️':'🤍'}</button>
           </div>
           <div class="card-body">
             <div class="card-brand">${item.brand||''}</div>
@@ -3999,7 +4013,7 @@ function _loadProfileProducts(uid) {
         document.getElementById('profileListingsCount').textContent = products.length;
         document.getElementById('profileListingsBadge').textContent = products.length;
         document.getElementById('profileGrid').innerHTML = products.length
-          ? products.map(item => `<div class="card" onclick="openProductDetail('${item.id}')">
+          ? products.map(item => `<div class="card" data-product-id="${item.id}" style="cursor:pointer">
               <div class="card-img">${item.imageUrl ? `<img src="${item.imageUrl}" style="width:100%;height:100%;object-fit:cover;" />` : '<span style="font-size:42px">👗</span>'}</div>
               <div class="card-body">
                 <div class="card-brand">${item.brand||''}</div>
@@ -4105,70 +4119,156 @@ function closeProfile() {
   toastT = setTimeout(() => el.classList.remove('show'), 2800);
 }
 
-// ═══ [R] INIT — runs once on page load ══════════════════════
+// ═══ [R] INIT — DOMContentLoaded wires everything ══════════
 
-// Expose all onclick-referenced functions to window explicitly
-// This guarantees they work regardless of script scope or load order
-window.openAuth          = (...a) => openAuth(...a);
-window.closeAuth         = ()    => closeAuth();
-window.openPost          = ()    => openPost();
-window.closePost         = ()    => closePost();
-window.closePostOuter    = (e)   => closePostOuter(e);
-window.lang              = (l)   => lang(l);
-window.search            = ()    => search();
-window.sort              = (v)   => sort(v);
-window.filterCat         = (c)   => filterCat(c);
-window.filterW           = (w)   => filterW(w);
-window.filterState       = (s)   => filterState(s);
-window.filterSizeFromSidebar = (s) => filterSizeFromSidebar(s);
-window.openProductDetail = (id)  => openProductDetail(id);
-window.closeDetail       = ()    => closeDetail();
-window.toggleFav         = (e,id)=> toggleFav(e, id);
-window.openLikers        = (...a)=> openLikers(...a);
-window.closeLikers       = ()    => closeLikers();
-window.closeLikersOuter  = (e)   => closeLikersOuter(e);
-window.openChat          = (...a)=> openChat(...a);
-window.closeChat         = ()    => closeChat();
-window.closeChatOuter    = (e)   => closeChatOuter(e);
-window.send              = ()    => send();
-window.switchTab         = (m)   => switchTab(m);
-window.toggleEmailForm   = ()    => toggleEmailForm();
-window.socialAuth        = (p)   => socialAuth(p);
-window.submitAuth        = ()    => submitAuth();
-window.doLogout          = ()    => doLogout();
-window.toggleNotif       = ()    => toggleNotif();
-window.showFavorites     = ()    => showFavorites();
-window.openMsgPage       = ()    => openMsgPage();
-window.closeMsgPage      = ()    => closeMsgPage();
-window.msgGoBack         = ()    => msgGoBack();
-window.msgpageSend       = ()    => msgpageSend();
-window.openConvChat      = (...a)=> openConvChat(...a);
-window.openProfile       = (id)  => openProfile(id);
-window.closeProfile      = ()    => closeProfile();
-window.openProfileFromDetail = () => openProfileFromDetail();
-window.toggleFollow      = ()    => toggleFollow();
-window.saveProfile       = ()    => saveProfile();
-window.toggleProfileEdit = ()    => toggleProfileEdit();
-window.onCatChange       = (c)   => onCatChange(c);
-window.addPhotos         = (f)   => addPhotos(f);
-window._removePhoto      = (i)   => _removePhoto(i);
-window._selectSize       = (el,s)=> _selectSize(el, s);
-window.startPhoneAuth    = ()    => startPhoneAuth();
-window.cancelPhoneAuth   = ()    => cancelPhoneAuth();
-window.sendOTP           = ()    => sendOTP();
-window.verifyOTP         = ()    => verifyOTP();
-window.otpNext           = (el,i)=> otpNext(el, i);
-window.submitPost        = ()    => submitPost();
-window.showMsgChat       = ()    => showMsgChat();
-window.showConvList      = ()    => showConvList();
+document.addEventListener('DOMContentLoaded', function () {
 
-  // Restore saved language (default: fr)
-  (function() {
-    let saved = 'fr';
-    try { saved = localStorage.getItem('chifoune_lang') || 'fr'; } catch(_) {}
-    if (!['fr','en','ar'].includes(saved)) saved = 'fr';
-    lang(saved);  // applies lang, calls renderCatNav + renderSbCats
-  })();
+  // ── Language pills ─────────────────────────────────────────
+  const on = (id, ev, fn) => { const el = document.getElementById(id); if (el) el.addEventListener(ev, fn); };
+  const onAll = (sel, ev, fn) => document.querySelectorAll(sel).forEach(el => el.addEventListener(ev, fn));
+
+  on('lpill-fr', 'click', () => lang('fr'));
+  on('lpill-en', 'click', () => lang('en'));
+  on('lpill-ar', 'click', () => lang('ar'));
+
+  // ── Navbar ─────────────────────────────────────────────────
+  on('notifTrigger',    'click', toggleNotif);
+  on('msgNavBtn',       'click', openMsgPage);
+  on('btnConnexion',    'click', () => openAuth('login'));
+  on('btnInscription',  'click', () => openAuth('signup'));
+  on('btnLogout',       'click', doLogout);
+  on('btnVendre',       'click', openPost);
+  on('navFavBtn',       'click', showFavorites);
+
+  // ── Search ─────────────────────────────────────────────────
+  on('navQ',   'keypress', e => { if (e.key === 'Enter') search(); });
+  on('heroQ',  'keypress', e => { if (e.key === 'Enter') search(); });
+  on('heroSearchBtn', 'click', search);
+  on('gridSort', 'change', e => sort(e.target.value));
+
+  // ── Promo strip ────────────────────────────────────────────
+  on('promoPubBtn', 'click', openPost);
+
+  // ── Overlay backdrops (click outside to close) ─────────────
+  on('chatOverlay',    'click', e => { if (e.target.id === 'chatOverlay')    closeChat();   });
+  on('postOverlay',    'click', e => { if (e.target.id === 'postOverlay')    closePost();   });
+  on('likersOverlay',  'click', e => { if (e.target.id === 'likersOverlay')  closeLikers(); });
+  on('authOverlay',    'click', e => { if (e.target.id === 'authOverlay')    closeAuth();   });
+  on('detailOverlay',  'click', e => { if (e.target.id === 'detailOverlay')  closeDetail(); });
+
+  // ── Overlay close buttons ──────────────────────────────────
+  onAll('.chat-x',       'click', closeChat);
+  onAll('.post-close',   'click', closePost);
+  onAll('.likers-close', 'click', closeLikers);
+  onAll('.auth-close',   'click', closeAuth);
+  onAll('.dt-close',     'click', closeDetail);
+
+  // ── Chat send ──────────────────────────────────────────────
+  on('chatInp',  'keypress', e => { if (e.key === 'Enter') send(); });
+  on('chatSend', 'click', send);
+
+  // ── Auth modal tabs & email form ───────────────────────────
+  on('tabSignup',    'click', () => switchTab('signup'));
+  on('tabLogin',     'click', () => switchTab('login'));
+  on('emailToggle',  'click', toggleEmailForm);
+  on('authSubmitBtn','click', submitAuth);
+
+  // Social login buttons (by class, since they have no stable id)
+  onAll('.social-btn.google',   'click', () => socialAuth('Google'));
+  onAll('.social-btn.facebook', 'click', () => socialAuth('Facebook'));
+  onAll('.social-btn.apple',    'click', () => socialAuth('Apple'));
+  onAll('.social-btn.phone',    'click', startPhoneAuth);
+
+  // ── Phone auth steps ───────────────────────────────────────
+  on('btnSendOTP',    'click', sendOTP);
+  on('btnVerifyOTP',  'click', verifyOTP);
+  onAll('.otp-digit', 'input', function(e) {
+    const digits = document.querySelectorAll('.otp-digit');
+    const idx = Array.from(digits).indexOf(this);
+    otpNext(this, idx);
+  });
+
+  // ── Post form ──────────────────────────────────────────────
+  on('postSubmitBtn', 'click', e => { e.preventDefault(); submitPost(); });
+  on('pCategory',     'change', e => onCatChange(e.target.value));
+  on('pImage',        'change', e => addPhotos(e.target.files));
+  on('photoAddBtn',   'click', () => document.getElementById('pImage')?.click());
+
+  // ── Msgpage ────────────────────────────────────────────────
+  on('msgpageInp',  'keypress', e => { if (e.key === 'Enter') msgpageSend(); });
+  on('msgpageSendBtn', 'click', msgpageSend);
+  on('msgBackBtn',  'click', msgGoBack);
+
+  // ── Profile overlay ────────────────────────────────────────
+  on('profileEditToggleBtn', 'click', toggleProfileEdit);
+  on('profileFollowBtn',     'click', toggleFollow);
+  on('profileSaveBtn',       'click', saveProfile);
+  on('profileCloseBtn',      'click', closeProfile);
+  on('profileBackBtn',       'click', closeProfile);
+
+  // ── Event delegation: product grid (cards rendered dynamically) ──
+  document.addEventListener('click', function (e) {
+    // Product card → open detail
+    const card = e.target.closest('.card');
+    if (card && card.dataset.productId) {
+      openProductDetail(card.dataset.productId);
+      return;
+    }
+    // Fav button inside card
+    const fav = e.target.closest('.fav');
+    if (fav && fav.dataset.productId) {
+      e.stopPropagation();
+      toggleFav(e, fav.dataset.productId);
+      return;
+    }
+    // Like/likers count button
+    const likeBtn = e.target.closest('[data-action="likers"]');
+    if (likeBtn) {
+      e.stopPropagation();
+      openLikers(e, likeBtn.dataset.productId, likeBtn.dataset.title, Number(likeBtn.dataset.likes));
+      return;
+    }
+    // Chat button on card
+    const chatBtn = e.target.closest('[data-action="chat"]');
+    if (chatBtn) {
+      e.stopPropagation();
+      openChat(e, chatBtn.dataset.productId, chatBtn.dataset.title,
+               Number(chatBtn.dataset.price), chatBtn.dataset.seller, chatBtn.dataset.sellerId);
+      return;
+    }
+    // Sidebar category item
+    const sbItem = e.target.closest('.sb-item[data-cat]');
+    if (sbItem) { filterCat(sbItem.dataset.cat); return; }
+    const sbSize = e.target.closest('.sb-item[data-size]');
+    if (sbSize) { filterSizeFromSidebar(sbSize.dataset.size); return; }
+    const sbState = e.target.closest('.sb-item[data-state]');
+    if (sbState) { filterState(sbState.dataset.state); return; }
+    // Cat nav tab
+    const catTab = e.target.closest('.cat-tab[data-cat]');
+    if (catTab) { filterCat(catTab.dataset.cat); return; }
+    // Size chip
+    const sizeChip = e.target.closest('.size-chip[data-size]');
+    if (sizeChip) { _selectSize(sizeChip, sizeChip.dataset.size); return; }
+    // Photo remove
+    const photoRemove = e.target.closest('[data-action="remove-photo"]');
+    if (photoRemove) { _removePhoto(Number(photoRemove.dataset.idx)); return; }
+    // Photo add
+    const photoAdd = e.target.closest('.photo-add');
+    if (photoAdd) { document.getElementById('pImage')?.click(); return; }
+    // Detail seller → profile
+    const sellerCard = e.target.closest('#dtSellerCard');
+    if (sellerCard) { openProfileFromDetail(); return; }
+    // Msg page close
+    const msgClose = e.target.closest('[data-action="close-msg"]');
+    if (msgClose) { closeMsgPage(); return; }
+  });
+
+  // ── Restore saved language ─────────────────────────────────
+  let saved = 'fr';
+  try { saved = localStorage.getItem('chifoune_lang') || 'fr'; } catch(_) {}
+  if (!['fr','en','ar'].includes(saved)) saved = 'fr';
+  lang(saved);
+});
 </script>
 
 <!-- ═══════════════════════════════════════════════════════
@@ -4179,9 +4279,9 @@ window.showConvList      = ()    => showConvList();
 
   <!-- Top bar — switches between list title and chat header -->
   <div class="msg-topbar">
-    <button class="msg-back" id="msgBackBtn" onclick="msgGoBack()">←</button>
+    <button class="msg-back" id="msgBackBtn">←</button>
     <div class="msg-topbar-title" id="msgTopTitle">Messages</div>
-    <button class="msg-back" onclick="closeMsgPage()" style="margin-left:auto">✕</button>
+    <button class="msg-back" style="margin-left:auto">✕</button>
   </div>
 
   <!-- CONVERSATION LIST -->
@@ -4205,8 +4305,8 @@ window.showConvList      = ()    => showConvList();
     <div class="msgpage-msgs" id="msgpageMsgs"></div>
     <div class="msgpage-foot">
       <input class="msgpage-inp" id="msgpageInp" placeholder="Écrire un message..."
-             onkeypress="if(event.key==='Enter')msgpageSend()" />
-      <button class="msgpage-send" onclick="msgpageSend()">➤</button>
+             />
+      <button class="msgpage-send" id="msgpageSendBtn">➤</button>
     </div>
   </div>
 
@@ -4219,13 +4319,13 @@ window.showConvList      = ()    => showConvList();
 
   <!-- Top bar -->
   <div class="profile-topbar">
-    <button class="profile-back" onclick="closeProfile()">←</button>
+    <button class="profile-back">←</button>
     <div class="profile-topbar-title" id="profileTopName">Profil</div>
     <!-- Edit button — only shown to profile owner -->
     <button class="profile-back" id="profileEditToggleBtn"
             style="display:none;width:auto;padding:0 12px;font-size:12px;font-weight:700;"
-            onclick="toggleProfileEdit()">Modifier</button>
-    <button class="profile-back" onclick="closeProfile()" style="margin-left:auto">✕</button>
+           >Modifier</button>
+    <button class="profile-back" style="margin-left:auto">✕</button>
   </div>
 
   <!-- Hero: avatar, name, bio, stats, follow -->
@@ -4250,7 +4350,7 @@ window.showConvList      = ()    => showConvList();
         <div class="profile-stat-l">Abonnements</div>
       </div>
     </div>
-    <button class="btn-follow" id="profileFollowBtn" style="display:none" onclick="toggleFollow()">
+    <button class="btn-follow" id="profileFollowBtn" style="display:none">
       Suivre
     </button>
   </div>
@@ -4273,7 +4373,7 @@ window.showConvList      = ()    => showConvList();
       <label class="fl-label">Photo de profil (URL)</label>
       <input class="fi" id="editPhoto" type="url" placeholder="https://..." />
     </div>
-    <button class="post-submit" onclick="saveProfile()" style="margin-top:4px">
+    <button class="post-submit" style="margin-top:4px">
       ✓ Enregistrer
     </button>
   </div>
