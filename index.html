@@ -1,0 +1,3642 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chifoune — Mode seconde main en Algérie</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Cairo:wght@400;500;600;700&family=Instrument+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ═══ DESIGN TOKENS — edit colors/sizes here only ══════════ */
+    :root {
+  --black: #0A0A0A;
+  --dark: #1C1C1C;
+  --dark2: #2E2E2E;
+  --gray: #737373;
+  --gray-light: #C8C8C8;
+  --border: #EBEBEB;
+  --bg: #F7F7F7;
+  --white: #FFFFFF;
+  --accent: #FF4D00;
+  --accent-pale: #FFF0EB;
+  --teal: #006B5E;
+  --teal-pale: #E8F5F3;
+  --gold: #B8860B;
+}
+
+/* ═══ RESET & BASE ════════════════════════════════════════ */
+    * { margin:0; padding:0; box-sizing:border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+font-family: 'Instrument Sans', sans-serif;
+background: var(--white);
+color: var(--dark);
+font-size: 14px;
+line-height: 1.5;
+-webkit-font-smoothing: antialiased;
+}
+
+body.rtl { direction: rtl; font-family: 'Cairo', sans-serif; }
+
+/* ═══ [1] NAVBAR ═══════════════════════════════════════════════ */
+.navbar {
+background: var(--white);
+border-bottom: 1px solid var(--border);
+position: sticky;
+top: 0;
+z-index: 100;
+}
+
+.nav-main {
+max-width: 1280px;
+margin: 0 auto;
+padding: 0 24px;
+height: 60px;
+display: flex;
+align-items: center;
+gap: 16px;
+}
+
+.logo {
+font-family: 'Nunito', sans-serif;
+font-size: 24px;
+font-weight: 900;
+color: var(--black);
+letter-spacing: -0.5px;
+cursor: pointer;
+flex-shrink: 0;
+text-decoration: none;
+}
+
+.logo .dot { color: var(--accent); }
+
+.nav-search {
+flex: 1;
+max-width: 480px;
+position: relative;
+}
+
+.nav-search input {
+width: 100%;
+padding: 9px 16px 9px 38px;
+background: var(--bg);
+border: 1.5px solid transparent;
+border-radius: 8px;
+font-size: 13px;
+font-family: 'Instrument Sans', sans-serif;
+color: var(--dark);
+outline: none;
+transition: all 0.2s;
+}
+
+.nav-search input:focus {
+border-color: var(--black);
+background: white;
+}
+
+.nav-search input::placeholder { color: var(--gray-light); }
+
+.search-ico {
+position: absolute;
+left: 12px;
+top: 50%;
+transform: translateY(-50%);
+color: var(--gray);
+font-size: 14px;
+pointer-events: none;
+}
+
+body.rtl .nav-search input { padding: 9px 38px 9px 16px; }
+body.rtl .search-ico { left: auto; right: 12px; }
+
+.nav-actions {
+display: flex;
+align-items: center;
+gap: 8px;
+margin-left: auto;
+}
+
+.lang-pills {
+display: flex;
+border: 1px solid var(--border);
+border-radius: 6px;
+overflow: hidden;
+}
+
+.lpill {
+padding: 5px 11px;
+font-size: 11px;
+font-weight: 700;
+border: none;
+background: transparent;
+cursor: pointer;
+color: var(--gray);
+transition: all 0.15s;
+font-family: 'Instrument Sans', sans-serif;
+}
+
+.lpill.on { background: var(--black); color: white; }
+
+.icon-btn {
+width: 36px; height: 36px;
+border-radius: 8px;
+border: 1px solid var(--border);
+background: white;
+cursor: pointer;
+display: flex; align-items: center; justify-content: center;
+font-size: 15px;
+position: relative;
+transition: border-color 0.2s;
+}
+
+.icon-btn:hover { border-color: var(--black); }
+
+.badge-dot {
+position: absolute;
+top: -3px; right: -3px;
+width: 14px; height: 14px;
+background: var(--accent);
+color: white;
+border-radius: 50%;
+font-size: 8px;
+font-weight: 700;
+display: flex; align-items: center; justify-content: center;
+border: 2px solid white;
+}
+
+.nbtn {
+padding: 8px 16px;
+border-radius: 8px;
+font-size: 13px;
+font-weight: 600;
+cursor: pointer;
+border: none;
+transition: all 0.18s;
+font-family: 'Instrument Sans', sans-serif;
+white-space: nowrap;
+}
+
+.nbtn-outline { background: white; border: 1.5px solid var(--border); color: var(--dark); }
+.nbtn-outline:hover { border-color: var(--black); }
+.nbtn-dark { background: var(--black); color: white; }
+.nbtn-dark:hover { background: var(--dark2); transform: translateY(-1px); }
+
+/* ═══ [2] CATEGORY NAV ════════════════════════════════════════ */
+.cat-nav {
+border-bottom: 1px solid var(--border);
+background: white;
+}
+
+.cat-nav-inner {
+max-width: 1280px;
+margin: 0 auto;
+padding: 0 24px;
+display: flex;
+gap: 0;
+overflow-x: auto;
+scrollbar-width: none;
+}
+
+.cat-nav-inner::-webkit-scrollbar { display: none; }
+
+.cat-tab {
+padding: 12px 18px;
+font-size: 13px;
+font-weight: 600;
+color: var(--gray);
+cursor: pointer;
+border-bottom: 2px solid transparent;
+white-space: nowrap;
+transition: all 0.15s;
+flex-shrink: 0;
+font-family: 'Instrument Sans', sans-serif;
+}
+
+.cat-tab:hover { color: var(--dark); }
+.cat-tab.on { color: var(--black); border-bottom-color: var(--black); }
+
+/* ═══ [3] HERO BANNER ═════════════════════════════════════════ */
+.hero {
+background: var(--black);
+color: white;
+padding: 56px 24px;
+text-align: center;
+position: relative;
+overflow: hidden;
+}
+
+.hero::before {
+content: '';
+position: absolute;
+inset: 0;
+background:
+radial-gradient(ellipse 60% 80% at 20% 50%, rgba(255,77,0,0.12) 0%, transparent 70%),
+radial-gradient(ellipse 50% 70% at 80% 50%, rgba(0,107,94,0.1) 0%, transparent 70%);
+pointer-events: none;
+}
+
+.hero-inner { max-width: 680px; margin: 0 auto; position: relative; }
+
+.hero-eyebrow {
+display: inline-block;
+font-size: 11px;
+font-weight: 700;
+letter-spacing: 1.5px;
+text-transform: uppercase;
+color: var(--accent);
+margin-bottom: 16px;
+}
+
+.hero h1 {
+font-family: 'Nunito', sans-serif;
+font-size: clamp(22px, 3.5vw, 38px);
+font-weight: 800;
+line-height: 1.1;
+letter-spacing: -0.8px;
+margin-bottom: 10px;
+}
+
+.hero h1 em { font-style: normal; color: var(--gray-light); }
+
+.hero-sub {
+font-family: 'Cairo', sans-serif;
+font-size: 16px;
+color: #888;
+margin-bottom: 28px;
+}
+
+.hero-search-wrap {
+display: flex;
+background: white;
+border-radius: 10px;
+overflow: hidden;
+max-width: 540px;
+margin: 0 auto 24px;
+box-shadow: 0 0 0 1px rgba(255,255,255,0.08);
+}
+
+.hero-search-wrap input {
+flex: 1;
+padding: 15px 20px;
+border: none;
+outline: none;
+font-size: 14px;
+font-family: 'Instrument Sans', sans-serif;
+color: var(--dark);
+background: transparent;
+}
+
+.hero-search-wrap select {
+padding: 0 14px;
+border: none;
+border-left: 1px solid var(--border);
+font-size: 13px;
+color: var(--gray);
+font-family: 'Instrument Sans', sans-serif;
+background: var(--bg);
+outline: none;
+cursor: pointer;
+}
+
+body.rtl .hero-search-wrap select { border-left: none; border-right: 1px solid var(--border); }
+
+.hero-search-wrap button {
+padding: 13px 22px;
+background: var(--accent);
+color: white;
+border: none;
+font-size: 13px;
+font-weight: 700;
+cursor: pointer;
+font-family: 'Instrument Sans', sans-serif;
+transition: background 0.2s;
+white-space: nowrap;
+}
+
+.hero-search-wrap button:hover { background: #E04400; }
+
+.hero-pills {
+display: flex;
+gap: 8px;
+justify-content: center;
+flex-wrap: wrap;
+}
+
+.hero-pill {
+padding: 6px 14px;
+background: rgba(255,255,255,0.08);
+border: 1px solid rgba(255,255,255,0.12);
+border-radius: 20px;
+font-size: 12px;
+color: #ccc;
+cursor: pointer;
+transition: all 0.2s;
+}
+
+.hero-pill:hover { background: rgba(255,255,255,0.14); color: white; }
+
+/* ═══ [4] PAGE LAYOUT ═════════════════════════════════════════ */
+.wrap {
+max-width: 1280px;
+margin: 0 auto;
+padding: 28px 24px;
+}
+
+.layout {
+display: grid;
+grid-template-columns: 220px 1fr;
+gap: 24px;
+align-items: start;
+}
+
+/* ═══ [5] SIDEBAR — Filter panels ═════════════════════════════ */
+.sidebar {
+position: sticky;
+top: 108px;
+}
+
+.sidebar-block {
+background: white;
+border: 1px solid var(--border);
+border-radius: 10px;
+overflow: hidden;
+margin-bottom: 12px;
+}
+
+.sb-head {
+padding: 12px 16px;
+font-size: 10px;
+font-weight: 700;
+letter-spacing: 1px;
+text-transform: uppercase;
+color: var(--gray);
+border-bottom: 1px solid var(--border);
+}
+
+.sb-item {
+display: flex;
+align-items: center;
+padding: 9px 16px;
+font-size: 13px;
+color: var(--dark);
+cursor: pointer;
+transition: background 0.12s;
+gap: 10px;
+border-bottom: 1px solid var(--border);
+}
+
+.sb-item:last-child { border-bottom: none; }
+.sb-item:hover { background: var(--bg); }
+.sb-item.on { background: var(--bg); font-weight: 600; color: var(--black); }
+
+.sb-item .sb-ico { font-size: 15px; width: 20px; flex-shrink: 0; }
+.sb-count { margin-left: auto; font-size: 11px; color: var(--gray-light); font-weight: 500; }
+body.rtl .sb-count { margin-left: 0; margin-right: auto; }
+
+.sb-input {
+width: 100%;
+padding: 9px 12px;
+border: 1px solid var(--border);
+border-radius: 7px;
+font-size: 13px;
+font-family: 'Instrument Sans', sans-serif;
+outline: none;
+color: var(--dark);
+background: white;
+transition: border-color 0.2s;
+margin-bottom: 8px;
+}
+
+.sb-input:focus { border-color: var(--black); }
+
+.sb-select {
+width: 100%;
+padding: 9px 12px;
+border: 1px solid var(--border);
+border-radius: 7px;
+font-size: 13px;
+font-family: 'Instrument Sans', sans-serif;
+outline: none;
+color: var(--dark);
+background: white;
+cursor: pointer;
+}
+
+.sb-select:focus { border-color: var(--black); }
+
+.sb-body { padding: 14px 16px; }
+
+.sb-price { display: flex; gap: 6px; align-items: center; margin-bottom: 10px; }
+.sb-price-sep { font-size: 11px; color: var(--gray-light); }
+
+.sb-apply {
+width: 100%;
+padding: 9px;
+background: var(--black);
+color: white;
+border: none;
+border-radius: 7px;
+font-size: 12px;
+font-weight: 600;
+cursor: pointer;
+font-family: 'Instrument Sans', sans-serif;
+transition: background 0.2s;
+}
+
+.sb-apply:hover { background: var(--dark2); }
+
+/* ═══ [6] LISTINGS GRID ═══════════════════════════════════════ */
+.grid-head {
+display: flex;
+align-items: center;
+justify-content: space-between;
+margin-bottom: 18px;
+gap: 10px;
+}
+
+.grid-count { font-size: 13px; color: var(--gray); }
+.grid-count strong { color: var(--black); font-weight: 700; }
+
+.grid-sort {
+padding: 8px 12px;
+border: 1px solid var(--border);
+border-radius: 7px;
+font-size: 12px;
+font-family: 'Instrument Sans', sans-serif;
+color: var(--dark);
+outline: none;
+cursor: pointer;
+background: white;
+}
+
+/*     └─ Product cards */
+.listings {
+display: grid;
+grid-template-columns: repeat(auto-fill, minmax(188px, 1fr));
+gap: 14px;
+}
+
+.card {
+background: white;
+border: 1px solid var(--border);
+border-radius: 10px;
+overflow: hidden;
+cursor: pointer;
+transition: all 0.2s;
+position: relative;
+}
+
+.card:hover {
+border-color: #ccc;
+box-shadow: 0 6px 24px rgba(0,0,0,0.07);
+transform: translateY(-3px);
+}
+
+.card-img {
+aspect-ratio: 3/4;
+background: var(--bg);
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 58px;
+position: relative;
+overflow: hidden;
+}
+
+.card-badge {
+position: absolute;
+top: 8px; left: 8px;
+padding: 3px 7px;
+border-radius: 4px;
+font-size: 9px;
+font-weight: 700;
+letter-spacing: 0.5px;
+text-transform: uppercase;
+z-index: 1;
+}
+
+.badge-new { background: var(--black); color: white; }
+.badge-promo { background: var(--accent); color: white; }
+.badge-nego { background: white; color: var(--dark); border: 1px solid var(--border); }
+
+body.rtl .card-badge { left: auto; right: 8px; }
+
+.fav {
+position: absolute;
+top: 8px; right: 8px;
+width: 28px; height: 28px;
+background: white;
+border-radius: 50%;
+border: 1px solid var(--border);
+cursor: pointer;
+display: flex; align-items: center; justify-content: center;
+font-size: 13px;
+transition: all 0.2s;
+z-index: 1;
+box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+}
+
+.fav:hover { transform: scale(1.12); }
+.fav.on { background: #FFF0F0; border-color: #FFCDD2; }
+body.rtl .fav { right: auto; left: 8px; }
+
+.card-body { padding: 10px 12px 12px; }
+
+.card-brand {
+font-size: 10px;
+font-weight: 700;
+letter-spacing: 0.5px;
+text-transform: uppercase;
+color: var(--gray);
+margin-bottom: 3px;
+}
+
+.card-title {
+font-size: 13px;
+font-weight: 500;
+color: var(--dark);
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
+margin-bottom: 3px;
+}
+
+.card-meta {
+font-size: 11px;
+color: var(--gray-light);
+margin-bottom: 9px;
+}
+
+.card-foot {
+display: flex;
+align-items: center;
+justify-content: space-between;
+}
+
+.card-price {
+font-family: 'Nunito', sans-serif;
+font-size: 16px;
+font-weight: 700;
+color: var(--black);
+}
+
+.card-price small {
+font-size: 10px;
+color: var(--gray);
+font-family: 'Instrument Sans', sans-serif;
+font-weight: 400;
+}
+
+.card-msg {
+padding: 5px 11px;
+background: var(--black);
+color: white;
+border: none;
+border-radius: 5px;
+font-size: 11px;
+font-weight: 600;
+cursor: pointer;
+transition: background 0.15s;
+font-family: 'Instrument Sans', sans-serif;
+}
+
+.card-msg:hover { background: var(--accent); }
+
+/* ═══ [7] PROMO STRIP ═════════════════════════════════════════ */
+.promo-strip {
+background: var(--accent);
+color: white;
+border-radius: 12px;
+padding: 28px 32px;
+display: flex;
+align-items: center;
+justify-content: space-between;
+gap: 20px;
+margin-bottom: 28px;
+}
+
+.promo-text h2 {
+font-family: 'Nunito', sans-serif;
+font-size: 22px;
+font-weight: 800;
+margin-bottom: 4px;
+letter-spacing: -0.3px;
+}
+
+.promo-text p {
+font-family: 'Cairo', sans-serif;
+font-size: 14px;
+opacity: 0.85;
+}
+
+.promo-btn {
+padding: 12px 26px;
+background: white;
+color: var(--accent);
+border: none;
+border-radius: 8px;
+font-size: 13px;
+font-weight: 700;
+cursor: pointer;
+transition: all 0.2s;
+font-family: 'Nunito', sans-serif;
+white-space: nowrap;
+flex-shrink: 0;
+}
+
+.promo-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.15); }
+
+/* ═══ [8] CHAT OVERLAY ════════════════════════════════════════ */
+.chat-overlay {
+display: none;
+position: fixed;
+inset: 0;
+z-index: 300;
+background: rgba(0,0,0,0.35);
+backdrop-filter: blur(4px);
+justify-content: flex-end;
+align-items: flex-end;
+padding: 20px;
+}
+
+.chat-overlay.open { display: flex; }
+
+.chat-box {
+width: 360px;
+height: 500px;
+background: white;
+border-radius: 16px;
+display: flex;
+flex-direction: column;
+overflow: hidden;
+box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+animation: chatIn 0.28s cubic-bezier(0.34,1.56,0.64,1);
+}
+
+@keyframes chatIn {
+from { opacity: 0; transform: translateY(30px) scale(0.96); }
+to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.chat-head {
+padding: 14px 16px;
+border-bottom: 1px solid var(--border);
+display: flex;
+align-items: center;
+gap: 10px;
+flex-shrink: 0;
+}
+
+.chat-av {
+width: 36px; height: 36px;
+background: var(--bg);
+border-radius: 50%;
+display: flex; align-items: center; justify-content: center;
+font-size: 16px;
+font-weight: 700;
+color: var(--dark);
+flex-shrink: 0;
+font-family: 'Nunito', sans-serif;
+border: 1px solid var(--border);
+}
+
+.chat-head-info { flex: 1; min-width: 0; }
+.chat-seller { font-size: 13px; font-weight: 700; color: var(--black); }
+.chat-item-label { font-size: 11px; color: var(--gray); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+.chat-x {
+width: 28px; height: 28px;
+border-radius: 50%;
+border: 1px solid var(--border);
+background: white;
+cursor: pointer;
+display: flex; align-items: center; justify-content: center;
+font-size: 12px;
+color: var(--gray);
+transition: all 0.15s;
+flex-shrink: 0;
+}
+
+.chat-x:hover { background: var(--bg); color: var(--dark); }
+
+.chat-preview {
+margin: 10px 14px;
+background: var(--bg);
+border: 1px solid var(--border);
+border-radius: 8px;
+padding: 9px 12px;
+display: flex;
+align-items: center;
+gap: 10px;
+flex-shrink: 0;
+}
+
+.chat-prev-ico { font-size: 22px; }
+.chat-prev-name { font-size: 12px; font-weight: 600; color: var(--dark); }
+.chat-prev-price { font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 700; color: var(--black); }
+
+.chat-msgs {
+flex: 1;
+overflow-y: auto;
+padding: 14px;
+display: flex;
+flex-direction: column;
+gap: 8px;
+}
+
+.chat-msgs::-webkit-scrollbar { width: 3px; }
+.chat-msgs::-webkit-scrollbar-track { background: transparent; }
+.chat-msgs::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+.bubble-wrap {
+display: flex;
+flex-direction: column;
+}
+
+.bubble-wrap.me { align-items: flex-end; }
+.bubble-wrap.them { align-items: flex-start; }
+
+.bubble {
+max-width: 78%;
+padding: 9px 13px;
+border-radius: 12px;
+font-size: 13px;
+line-height: 1.5;
+}
+
+.bubble.me {
+background: var(--black);
+color: white;
+border-bottom-right-radius: 3px;
+}
+
+.bubble.them {
+background: var(--bg);
+color: var(--dark);
+border: 1px solid var(--border);
+border-bottom-left-radius: 3px;
+}
+
+body.rtl .bubble.me { border-bottom-right-radius: 12px; border-bottom-left-radius: 3px; }
+body.rtl .bubble.them { border-bottom-left-radius: 12px; border-bottom-right-radius: 3px; }
+
+.bubble-time { font-size: 10px; color: var(--gray-light); margin-top: 3px; padding: 0 3px; }
+
+.chat-foot {
+padding: 10px 14px;
+border-top: 1px solid var(--border);
+display: flex;
+gap: 8px;
+flex-shrink: 0;
+}
+
+.chat-inp {
+flex: 1;
+padding: 9px 14px;
+border: 1.5px solid var(--border);
+border-radius: 20px;
+font-size: 13px;
+font-family: 'Instrument Sans', sans-serif;
+outline: none;
+color: var(--dark);
+transition: border-color 0.2s;
+}
+
+.chat-inp:focus { border-color: var(--black); }
+
+.chat-send {
+width: 36px; height: 36px;
+background: var(--black);
+border: none;
+border-radius: 50%;
+color: white;
+cursor: pointer;
+display: flex; align-items: center; justify-content: center;
+font-size: 14px;
+transition: all 0.2s;
+flex-shrink: 0;
+}
+
+.chat-send:hover { background: var(--accent); transform: scale(1.05); }
+
+/* ═══ [9] POST MODAL — "Vendre un article" ════════════════════ */
+.post-overlay {
+display: none;
+position: fixed;
+inset: 0;
+background: rgba(0,0,0,0.45);
+z-index: 400;
+align-items: center;
+justify-content: center;
+padding: 20px;
+backdrop-filter: blur(4px);
+}
+
+.post-overlay.open { display: flex; }
+
+.post-box {
+background: white;
+border-radius: 16px;
+padding: 28px;
+max-width: 500px;
+width: 100%;
+max-height: 90vh;
+overflow-y: auto;
+animation: fadeScale 0.25s ease;
+box-shadow: 0 24px 80px rgba(0,0,0,0.12);
+}
+
+/* ═══ SHARED MODAL ANIMATION (post · likers · auth · detail) ══ */
+    @keyframes fadeScale {
+from { opacity: 0; transform: scale(0.96); }
+to { opacity: 1; transform: scale(1); }
+}
+
+.post-head {
+display: flex;
+align-items: center;
+justify-content: space-between;
+margin-bottom: 22px;
+}
+
+.post-title {
+font-family: 'Nunito', sans-serif;
+font-size: 19px;
+font-weight: 800;
+color: var(--black);
+letter-spacing: -0.3px;
+}
+
+.post-close {
+width: 30px; height: 30px;
+border-radius: 50%;
+border: 1px solid var(--border);
+background: white;
+cursor: pointer;
+font-size: 13px;
+color: var(--gray);
+display: flex; align-items: center; justify-content: center;
+transition: all 0.15s;
+}
+
+.post-close:hover { background: var(--bg); }
+
+.fl { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+.fg { margin-bottom: 14px; }
+
+.fl-label {
+display: block;
+font-size: 10px;
+font-weight: 700;
+text-transform: uppercase;
+letter-spacing: 0.6px;
+color: var(--gray);
+margin-bottom: 5px;
+}
+
+.fi {
+width: 100%;
+padding: 10px 13px;
+border: 1.5px solid var(--border);
+border-radius: 8px;
+font-size: 13px;
+font-family: 'Instrument Sans', sans-serif;
+color: var(--dark);
+outline: none;
+transition: border-color 0.2s;
+background: white;
+}
+
+.fi:focus { border-color: var(--black); }
+textarea.fi { resize: vertical; min-height: 80px; }
+
+.photo-zone {
+border: 2px dashed var(--border);
+border-radius: 10px;
+padding: 24px;
+text-align: center;
+cursor: pointer;
+transition: all 0.2s;
+background: var(--bg);
+margin-bottom: 14px;
+}
+
+.photo-zone:hover { border-color: var(--black); background: white; }
+.pz-ico { font-size: 26px; margin-bottom: 6px; }
+.pz-txt { font-size: 12px; color: var(--gray); }
+.pz-sub { font-size: 11px; color: var(--gray-light); margin-top: 3px; }
+
+.post-submit {
+width: 100%;
+padding: 13px;
+background: var(--black);
+color: white;
+border: none;
+border-radius: 9px;
+font-family: 'Nunito', sans-serif;
+font-size: 14px;
+font-weight: 700;
+cursor: pointer;
+transition: all 0.2s;
+letter-spacing: 0.2px;
+}
+
+.post-submit:hover { background: var(--accent); transform: translateY(-1px); }
+
+/* ═══ [10] LIKERS MODAL ══════════════════════════════════════ */
+.likers-overlay {
+display: none;
+position: fixed;
+inset: 0;
+background: rgba(0,0,0,0.45);
+z-index: 450;
+align-items: center;
+justify-content: center;
+padding: 20px;
+backdrop-filter: blur(4px);
+}
+.likers-overlay.open { display: flex; }
+
+.likers-box {
+background: white;
+border-radius: 18px;
+padding: 24px;
+max-width: 360px;
+width: 100%;
+max-height: 80vh;
+overflow-y: auto;
+animation: fadeScale 0.25s ease;
+box-shadow: 0 24px 80px rgba(0,0,0,0.14);
+}
+
+.likers-head {
+display: flex;
+align-items: center;
+justify-content: space-between;
+margin-bottom: 18px;
+}
+
+.likers-title {
+font-family: 'Nunito', sans-serif;
+font-size: 17px;
+font-weight: 800;
+color: var(--black);
+}
+
+.likers-count {
+background: var(--accent);
+color: white;
+font-size: 11px;
+font-weight: 800;
+padding: 3px 9px;
+border-radius: 20px;
+font-family: 'Nunito', sans-serif;
+}
+
+.likers-item-preview {
+display: flex;
+align-items: center;
+gap: 10px;
+background: var(--bg);
+border-radius: 10px;
+padding: 10px 12px;
+margin-bottom: 16px;
+border: 1px solid var(--border);
+}
+
+.likers-item-ico { font-size: 22px; }
+.likers-item-name { font-size: 13px; font-weight: 700; color: var(--dark); }
+.likers-item-price { font-family: 'Nunito', sans-serif; font-size: 13px; font-weight: 800; color: var(--accent); }
+
+.liker-row {
+display: flex;
+align-items: center;
+gap: 12px;
+padding: 10px 0;
+border-bottom: 1px solid var(--border);
+}
+.liker-row:last-child { border-bottom: none; }
+
+.liker-av {
+width: 38px; height: 38px;
+border-radius: 50%;
+background: var(--bg);
+border: 1px solid var(--border);
+display: flex; align-items: center; justify-content: center;
+font-size: 15px;
+font-weight: 800;
+color: var(--dark);
+font-family: 'Nunito', sans-serif;
+flex-shrink: 0;
+}
+
+.liker-info { flex: 1; }
+.liker-name { font-size: 13px; font-weight: 700; color: var(--dark); }
+.liker-meta { font-size: 11px; color: var(--gray-light); margin-top: 1px; }
+
+.liker-msg {
+padding: 6px 12px;
+background: var(--black);
+color: white;
+border: none;
+border-radius: 6px;
+font-size: 11px;
+font-weight: 700;
+cursor: pointer;
+font-family: 'Nunito', sans-serif;
+transition: background 0.15s;
+white-space: nowrap;
+}
+.liker-msg:hover { background: var(--accent); }
+
+.likers-close {
+width: 28px; height: 28px;
+border-radius: 50%;
+border: 1px solid var(--border);
+background: white;
+cursor: pointer;
+font-size: 12px;
+color: var(--gray);
+display: flex; align-items: center; justify-content: center;
+}
+.likers-close:hover { background: var(--bg); }
+
+/* ═══ [11] AUTH MODAL — Login / Signup ═══════════════════════ */
+.auth-overlay {
+display: none;
+position: fixed;
+inset: 0;
+background: rgba(0,0,0,0.45);
+z-index: 500;
+align-items: center;
+justify-content: center;
+padding: 20px;
+backdrop-filter: blur(6px);
+}
+.auth-overlay.open { display: flex; }
+
+.auth-box {
+background: white;
+border-radius: 20px;
+padding: 32px 28px;
+max-width: 420px;
+width: 100%;
+box-shadow: 0 24px 80px rgba(0,0,0,0.14);
+animation: fadeScale 0.25s ease;
+position: relative;
+}
+
+.auth-logo {
+text-align: center;
+font-family: 'Nunito', sans-serif;
+font-size: 26px;
+font-weight: 900;
+color: var(--black);
+margin-bottom: 6px;
+}
+.auth-logo .dot { color: var(--accent); }
+
+.auth-tagline {
+text-align: center;
+font-size: 13px;
+color: var(--gray);
+margin-bottom: 24px;
+font-family: 'Cairo', sans-serif;
+}
+
+.auth-tabs {
+display: flex;
+background: var(--bg);
+border-radius: 10px;
+padding: 4px;
+margin-bottom: 22px;
+gap: 4px;
+}
+
+.auth-tab {
+flex: 1;
+padding: 9px;
+border: none;
+background: transparent;
+border-radius: 7px;
+font-size: 13px;
+font-weight: 700;
+cursor: pointer;
+color: var(--gray);
+transition: all 0.2s;
+font-family: 'Nunito', sans-serif;
+}
+
+.auth-tab.on {
+background: white;
+color: var(--black);
+box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+}
+
+.social-btn {
+width: 100%;
+padding: 12px 16px;
+border-radius: 10px;
+border: 1.5px solid var(--border);
+background: white;
+display: flex;
+align-items: center;
+gap: 12px;
+font-size: 14px;
+font-weight: 600;
+cursor: pointer;
+transition: all 0.18s;
+margin-bottom: 10px;
+font-family: 'Nunito', sans-serif;
+color: var(--dark);
+}
+
+.social-btn:hover { border-color: var(--black); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,0,0,0.06); }
+
+.social-btn.google { }
+.social-btn.facebook { border-color: #1877F2; color: #1877F2; }
+.social-btn.facebook:hover { background: #F0F6FF; }
+.social-btn.apple { background: var(--black); color: white; border-color: var(--black); }
+.social-btn.apple:hover { background: var(--dark2); }
+.social-btn.phone { border-color: #25D366; color: #128C7E; }
+.social-btn.phone:hover { background: #F0FFF4; }
+
+.social-ico { font-size: 20px; width: 24px; flex-shrink: 0; }
+.social-txt { flex: 1; text-align: left; }
+
+.auth-divider {
+display: flex;
+align-items: center;
+gap: 12px;
+margin: 16px 0;
+color: var(--gray-light);
+font-size: 12px;
+}
+
+.auth-divider::before,
+.auth-divider::after {
+content: '';
+flex: 1;
+height: 1px;
+background: var(--border);
+}
+
+.auth-form { display: none; }
+.auth-form.show { display: block; }
+
+.auth-input {
+width: 100%;
+padding: 12px 14px;
+border: 1.5px solid var(--border);
+border-radius: 10px;
+font-size: 14px;
+font-family: 'Instrument Sans', sans-serif;
+outline: none;
+color: var(--dark);
+margin-bottom: 10px;
+transition: border-color 0.2s;
+}
+.auth-input:focus { border-color: var(--black); }
+
+.auth-submit {
+width: 100%;
+padding: 13px;
+background: var(--black);
+color: white;
+border: none;
+border-radius: 10px;
+font-size: 14px;
+font-weight: 800;
+cursor: pointer;
+font-family: 'Nunito', sans-serif;
+transition: all 0.2s;
+margin-top: 4px;
+}
+.auth-submit:hover { background: var(--accent); transform: translateY(-1px); }
+
+.auth-terms {
+text-align: center;
+font-size: 11px;
+color: var(--gray-light);
+margin-top: 16px;
+line-height: 1.5;
+}
+.auth-terms a { color: var(--gray); text-decoration: underline; cursor: pointer; }
+
+.auth-close {
+position: absolute;
+top: 16px; right: 16px;
+width: 28px; height: 28px;
+border-radius: 50%;
+border: 1px solid var(--border);
+background: white;
+cursor: pointer;
+font-size: 12px;
+color: var(--gray);
+display: flex; align-items: center; justify-content: center;
+transition: all 0.15s;
+}
+.auth-close:hover { background: var(--bg); }
+
+.email-toggle {
+text-align: center;
+font-size: 13px;
+color: var(--gray);
+cursor: pointer;
+margin-top: 8px;
+text-decoration: underline;
+font-weight: 600;
+}
+.email-toggle:hover { color: var(--black); }
+
+/* ═══ [11b] PHONE AUTH PANEL ══════════════════════════════════ */
+.phone-step { display: none; }
+.phone-step.show { display: block; }
+
+.phone-flag-wrap {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+.phone-prefix {
+  width: 72px;
+  padding: 12px 10px;
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  font-size: 14px;
+  font-family: 'Instrument Sans', sans-serif;
+  color: var(--dark);
+  outline: none;
+  text-align: center;
+  background: white;
+  flex-shrink: 0;
+}
+.phone-prefix:focus { border-color: var(--black); }
+
+.otp-row {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+.otp-digit {
+  width: 44px; height: 52px;
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  font-size: 22px;
+  font-weight: 700;
+  font-family: 'Nunito', sans-serif;
+  text-align: center;
+  color: var(--black);
+  outline: none;
+  transition: border-color 0.2s;
+  background: white;
+}
+.otp-digit:focus { border-color: var(--black); }
+
+.phone-resend {
+  text-align: center;
+  font-size: 12px;
+  color: var(--gray-light);
+  margin-top: 8px;
+}
+.phone-resend span {
+  color: var(--gray);
+  cursor: pointer;
+  text-decoration: underline;
+  font-weight: 600;
+}
+.phone-resend span:hover { color: var(--black); }
+
+/* ═══ [11c] MESSAGES PAGE OVERLAY ═════════════════════════════ */
+.msg-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 360;
+  background: var(--bg);
+  flex-direction: column;
+}
+.msg-overlay.open { display: flex; }
+
+.msg-topbar {
+  background: white;
+  border-bottom: 1px solid var(--border);
+  padding: 0 20px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+.msg-topbar-title {
+  font-family: 'Nunito', sans-serif;
+  font-size: 17px;
+  font-weight: 800;
+  color: var(--black);
+  flex: 1;
+}
+.msg-back {
+  width: 32px; height: 32px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: white;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; color: var(--gray);
+  transition: border-color 0.15s;
+}
+.msg-back:hover { border-color: var(--black); color: var(--black); }
+
+/* ── Conversation list ── */
+.conv-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.conv-list.hidden { display: none; }
+.conv-list::-webkit-scrollbar { width: 3px; }
+.conv-list::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+.conv-item {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.conv-item:hover { border-color: #ccc; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+.conv-item.unread { background: #FFF8F6; border-color: #FFD5C8; }
+
+.conv-av {
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  background: var(--black);
+  color: white;
+  font-family: 'Nunito', sans-serif;
+  font-size: 17px; font-weight: 800;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.conv-av.them { background: var(--dark2); }
+
+.conv-info { flex: 1; min-width: 0; }
+.conv-name    { font-size: 13px; font-weight: 700; color: var(--black); margin-bottom: 2px; }
+.conv-preview {
+  font-size: 12px; color: var(--gray);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.conv-item.unread .conv-preview { color: var(--dark); font-weight: 600; }
+
+.conv-meta { text-align: right; flex-shrink: 0; }
+.conv-time  { font-size: 10px; color: var(--gray-light); margin-bottom: 4px; }
+.conv-badge {
+  display: inline-block;
+  background: var(--accent);
+  color: white;
+  font-size: 10px; font-weight: 700;
+  font-family: 'Nunito', sans-serif;
+  padding: 2px 7px;
+  border-radius: 20px;
+  min-width: 20px;
+  text-align: center;
+}
+
+.conv-empty {
+  text-align: center;
+  padding: 60px 24px;
+  color: var(--gray);
+}
+.conv-empty-ico { font-size: 40px; margin-bottom: 12px; }
+.conv-empty-txt { font-size: 14px; }
+
+/* ── In-page chat view (shown inside msg-overlay) ── */
+.msgpage-chat {
+  display: none;
+  flex-direction: column;
+  flex: 1;
+  overflow: hidden;
+}
+.msgpage-chat.open { display: flex; }
+
+.msgpage-msgs {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.msgpage-msgs::-webkit-scrollbar { width: 3px; }
+.msgpage-msgs::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+.msgpage-foot {
+  padding: 12px 16px;
+  border-top: 1px solid var(--border);
+  background: white;
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
+.msgpage-inp {
+  flex: 1;
+  padding: 10px 16px;
+  border: 1.5px solid var(--border);
+  border-radius: 24px;
+  font-size: 13px;
+  font-family: 'Instrument Sans', sans-serif;
+  outline: none; color: var(--dark);
+  transition: border-color 0.2s;
+}
+.msgpage-inp:focus { border-color: var(--black); }
+.msgpage-send {
+  width: 40px; height: 40px;
+  background: var(--black); border: none;
+  border-radius: 50%; color: white; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 15px; transition: all 0.2s; flex-shrink: 0;
+}
+.msgpage-send:hover { background: var(--accent); transform: scale(1.05); }
+
+
+/* ═══ [9b] PHOTO GRID — multi-image upload ════════════════════ */
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 8px;
+  margin-bottom: 10px;
+}
+.photo-thumb {
+  aspect-ratio: 1;
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  display: flex; align-items: center; justify-content: center;
+}
+.photo-thumb img {
+  width: 100%; height: 100%; object-fit: cover;
+}
+.photo-thumb-del {
+  position: absolute; top: 3px; right: 3px;
+  width: 20px; height: 20px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.55); color: white;
+  border: none; cursor: pointer;
+  font-size: 11px; line-height: 1;
+  display: flex; align-items: center; justify-content: center;
+}
+.photo-add {
+  aspect-ratio: 1;
+  border: 2px dashed var(--border);
+  border-radius: 8px;
+  background: var(--bg);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  cursor: pointer; font-size: 20px;
+  color: var(--gray-light);
+  transition: all 0.2s;
+}
+.photo-add:hover { border-color: var(--black); color: var(--dark); background: white; }
+.photo-count { font-size: 10px; margin-top: 3px; font-family: 'Instrument Sans', sans-serif; }
+
+/* Size chip selector in post form */
+.size-chips {
+  display: flex; flex-wrap: wrap; gap: 6px;
+  margin-bottom: 4px;
+}
+.size-chip {
+  padding: 5px 11px;
+  border: 1.5px solid var(--border);
+  border-radius: 6px;
+  font-size: 12px; font-weight: 600;
+  cursor: pointer;
+  font-family: 'Instrument Sans', sans-serif;
+  background: white; color: var(--dark);
+  transition: all 0.15s;
+  user-select: none;
+}
+.size-chip:hover  { border-color: var(--dark); }
+.size-chip.on     { background: var(--black); color: white; border-color: var(--black); }
+
+/* ═══ [12] TOAST — short feedback message ═════════════════════ */
+.toast {
+position: fixed;
+bottom: 20px;
+left: 50%;
+transform: translateX(-50%) translateY(70px);
+background: var(--black);
+color: white;
+padding: 11px 20px;
+border-radius: 8px;
+font-size: 13px;
+font-weight: 500;
+z-index: 500;
+transition: transform 0.28s cubic-bezier(0.34,1.4,0.64,1);
+white-space: nowrap;
+box-shadow: 0 8px 30px rgba(0,0,0,0.18);
+}
+
+.toast.show { transform: translateX(-50%) translateY(0); }
+
+/* ═══ [13] NOTIFICATION DROPDOWN ═════════════════════════════ */
+.notif-drop {
+position: absolute;
+top: 44px; right: 0;
+width: 300px;
+background: white;
+border: 1px solid var(--border);
+border-radius: 12px;
+box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+display: none;
+z-index: 200;
+overflow: hidden;
+}
+
+.notif-drop.open { display: block; }
+.nd-head { padding: 12px 16px; font-size: 12px; font-weight: 700; color: var(--gray); border-bottom: 1px solid var(--border); text-transform: uppercase; letter-spacing: 0.5px; }
+
+.nd-item {
+display: flex;
+gap: 10px;
+padding: 11px 16px;
+border-bottom: 1px solid var(--border);
+cursor: pointer;
+transition: background 0.12s;
+}
+
+.nd-item:last-child { border-bottom: none; }
+.nd-item:hover { background: var(--bg); }
+.nd-item.unread { background: #FFF8F6; }
+.nd-ico { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+.nd-txt { font-size: 12px; color: var(--dark); line-height: 1.45; }
+.nd-txt strong { color: var(--black); }
+.nd-time { font-size: 10px; color: var(--gray-light); margin-top: 2px; }
+
+/* ═══ [14] FOOTER ════════════════════════════════════════════ */
+footer {
+border-top: 1px solid var(--border);
+padding: 36px 24px;
+background: white;
+margin-top: 48px;
+}
+
+.footer-inner {
+max-width: 1280px;
+margin: 0 auto;
+display: flex;
+align-items: center;
+justify-content: space-between;
+gap: 24px;
+flex-wrap: wrap;
+}
+
+.footer-logo {
+font-family: 'Nunito', sans-serif;
+font-size: 18px;
+font-weight: 900;
+color: var(--black);
+}
+
+.footer-logo .dot { color: var(--accent); }
+
+.footer-tagline {
+font-family: 'Cairo', sans-serif;
+font-size: 12px;
+color: var(--gray);
+margin-top: 3px;
+}
+
+.footer-links {
+display: flex;
+gap: 20px;
+flex-wrap: wrap;
+}
+
+.footer-links a {
+font-size: 12px;
+color: var(--gray);
+text-decoration: none;
+transition: color 0.15s;
+}
+
+.footer-links a:hover { color: var(--black); }
+
+.footer-copy {
+font-size: 11px;
+color: var(--gray-light);
+text-align: right;
+}
+
+/* ═══ [15] PRODUCT DETAIL OVERLAY ════════════════════════════ */
+.detail-overlay {
+display: none;
+position: fixed;
+inset: 0;
+z-index: 350;
+background: rgba(0,0,0,0.5);
+backdrop-filter: blur(6px);
+align-items: center;
+justify-content: center;
+padding: 20px;
+}
+.detail-overlay.open { display: flex; }
+
+.detail-box {
+background: white;
+border-radius: 18px;
+width: 100%;
+max-width: 860px;
+max-height: 90vh;
+overflow-y: auto;
+position: relative;
+box-shadow: 0 28px 80px rgba(0,0,0,0.18);
+animation: fadeScale 0.25s ease;
+}
+.detail-box::-webkit-scrollbar { width: 4px; }
+.detail-box::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+
+.dt-close {
+position: absolute;
+top: 14px; right: 14px;
+width: 30px; height: 30px;
+border-radius: 50%;
+border: 1px solid var(--border);
+background: white;
+cursor: pointer;
+font-size: 12px;
+color: var(--gray);
+display: flex; align-items: center; justify-content: center;
+z-index: 10;
+transition: background 0.15s;
+}
+.dt-close:hover { background: var(--bg); }
+
+.dt-layout {
+display: grid;
+grid-template-columns: 1fr 1fr;
+min-height: 500px;
+}
+
+.dt-img-wrap {
+aspect-ratio: 3/4;
+background: var(--bg);
+border-radius: 12px 0 0 12px;
+overflow: hidden;
+display: flex; align-items: center; justify-content: center;
+}
+.dt-img-placeholder { font-size: 72px; }
+
+.dt-info {
+padding: 28px 24px;
+display: flex;
+flex-direction: column;
+gap: 0;
+overflow-y: auto;
+}
+
+.dt-badge {
+padding: 3px 10px;
+border-radius: 20px;
+font-size: 10px;
+font-weight: 700;
+letter-spacing: 0.5px;
+text-transform: uppercase;
+}
+.dt-badge-cat  { background: var(--bg); color: var(--gray); border: 1px solid var(--border); }
+.dt-badge-new  { background: var(--black); color: white; }
+.dt-badge-used { background: var(--bg); color: var(--dark); border: 1px solid var(--border); }
+
+.dt-brand {
+font-size: 10px; font-weight: 700;
+letter-spacing: 1px; text-transform: uppercase;
+color: var(--gray); margin-bottom: 5px;
+}
+.dt-title {
+font-family: 'Nunito', sans-serif;
+font-size: 22px; font-weight: 800;
+color: var(--black); line-height: 1.15;
+letter-spacing: -0.3px; margin-bottom: 12px;
+}
+.dt-price {
+font-family: 'Nunito', sans-serif;
+font-size: 30px; font-weight: 900;
+color: var(--black); letter-spacing: -1px;
+margin-bottom: 12px;
+}
+
+.dt-btn-contact {
+width: 100%;
+padding: 14px;
+background: var(--black); color: white;
+border: none; border-radius: 10px;
+font-family: 'Nunito', sans-serif;
+font-size: 14px; font-weight: 800;
+cursor: pointer; margin-bottom: 8px;
+transition: all 0.2s;
+}
+.dt-btn-contact:hover { background: var(--accent); transform: translateY(-1px); }
+
+.dt-btn-fav {
+width: 100%;
+padding: 12px;
+background: white; color: var(--dark);
+border: 1.5px solid var(--border);
+border-radius: 10px;
+font-family: 'Instrument Sans', sans-serif;
+font-size: 13px; font-weight: 600;
+cursor: pointer; margin-bottom: 16px;
+transition: all 0.2s;
+}
+.dt-btn-fav:hover { border-color: #FFCDD2; background: #FFF0F0; color: #E53935; }
+.dt-btn-fav.dt-fav-on { border-color: #FFCDD2; background: #FFF0F0; color: #E53935; }
+
+.dt-safety {
+font-size: 11px; color: var(--gray);
+background: var(--bg); border-radius: 8px;
+padding: 10px 12px; margin-bottom: 18px;
+line-height: 1.5;
+}
+
+.dt-seller {
+border: 1px solid var(--border);
+border-radius: 10px; padding: 14px 16px;
+margin-bottom: 14px;
+}
+.dt-seller-av {
+width: 38px; height: 38px;
+border-radius: 50%; background: var(--black); color: white;
+font-family: 'Nunito', sans-serif; font-size: 16px; font-weight: 800;
+display: flex; align-items: center; justify-content: center;
+flex-shrink: 0;
+}
+.dt-seller-name { font-size: 13px; font-weight: 700; color: var(--black); }
+.dt-seller-sub  { font-size: 11px; color: var(--gray-light); margin-top: 2px; }
+
+.dt-desc-block {
+border: 1px solid var(--border);
+border-radius: 10px; padding: 14px 16px;
+}
+
+/* ═══ [16] RESPONSIVE BREAKPOINTS ════════════════════════════ */
+@media (max-width: 900px) {
+.layout { grid-template-columns: 1fr; }
+.sidebar { display: none; }
+}
+
+@media (max-width: 600px) {
+.nav-search { display: none; }
+.nbtn-outline { display: none; }
+.hero h1 { font-size: 20px; }
+.listings { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+.promo-strip { flex-direction: column; text-align: center; }
+.chat-box { width: 100%; border-radius: 16px 16px 0 0; }
+.chat-overlay { padding: 0; align-items: flex-end; }
+.footer-inner { flex-direction: column; text-align: center; }
+.footer-copy { text-align: center; }
+}
+</style>
+
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════
+     NAVBAR
+════════════════════════════════════════════════════════ -->
+<nav class="navbar">
+  <div class="nav-main">
+    <a class="logo">chifoune<span class="dot">.</span></a>
+    <div class="nav-search">
+      <span class="search-ico">🔍</span>
+      <input type="text" id="navQ" placeholder="Nike, Zara, robe d'été..." onkeypress="if(event.key==='Enter')search()" />
+    </div>
+    <div class="nav-actions">
+      <div class="lang-pills">
+        <button class="lpill on" onclick="lang('fr')">FR</button>
+        <button class="lpill" onclick="lang('ar')">عر</button>
+      </div>
+      <div style="position:relative">
+        <button class="icon-btn" id="notifTrigger" onclick="toggleNotif()">
+          🔔
+          <div class="badge-dot" style="display:none">0</div>
+        </button>
+        <div class="notif-drop" id="notifDrop">
+          <div class="nd-head" data-fr="Notifications" data-ar="الإشعارات">Notifications</div>
+          <!-- injected by renderNotifList() -->
+          <div id="notifList">
+            <div class="nd-item">
+              <div class="nd-ico">🎉</div>
+              <div><div class="nd-txt" data-fr="Bienvenue ! Publiez votre première annonce gratuitement." data-ar="مرحباً! انشر أول إعلان مجاناً.">Bienvenue ! Publiez votre première annonce gratuitement.</div><div class="nd-time">maintenant</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button class="icon-btn" onclick="showFavorites()">🤍</button>
+      <button class="icon-btn" id="msgNavBtn" onclick="openMsgPage()" style="position:relative">
+        💬
+        <div class="badge-dot" id="msgBadge" style="display:none">0</div>
+      </button>
+      <button class="nbtn nbtn-outline" id="btnConnexion" data-fr="Se connecter" data-ar="دخول" onclick="openAuth('login')">Se connecter</button>
+      <button class="nbtn nbtn-dark" id="btnInscription" onclick="openAuth('signup')" data-fr="S'inscrire" data-ar="تسجيل">S'inscrire</button>
+      <div id="userInfo" style="display:none;align-items:center;gap:8px;">
+        <div style="width:32px;height:32px;border-radius:50%;background:var(--accent);color:white;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;font-family:'Nunito',sans-serif;" id="userAvatar">U</div>
+        <span class="user-name" style="font-size:13px;font-weight:600;color:var(--dark);max-width:100px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;"></span>
+      </div>
+      <button class="nbtn" id="btnLogout" style="display:none;background:var(--bg);border:1px solid var(--border);color:var(--gray);font-size:12px;" onclick="doLogout()">Déconnexion</button>
+      <button class="nbtn" id="btnVendre" style="display:none;background:var(--accent);color:white;margin-left:2px;" data-fr="Vendre" data-ar="بيع" onclick="openPost()">Vendre</button>
+    </div>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════════════════════════════════
+     CATEGORY NAV — rendered by renderCatNav()
+════════════════════════════════════════════════════════ -->
+<div class="cat-nav">
+  <div class="cat-nav-inner" id="catNav"></div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     HERO BANNER
+════════════════════════════════════════════════════════ -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow" data-fr="🇩🇿 MODE SECONDE MAIN" data-ar="🇩🇿 موضة مستعملة">🇩🇿 MODE SECONDE MAIN</div>
+    <h1>Achète & vends tes vêtements<br><em>partout en Algérie</em></h1>
+    <div class="hero-sub" data-fr="ملابس وأحذية — رجال، نساء، أطفال" data-ar="ملابس وأحذية — رجال، نساء، أطفال">ملابس وأحذية — رجال، نساء، أطفال</div>
+    <div class="hero-search-wrap">
+      <input type="text" id="heroQ" placeholder="Nike, Zara, jeans Levi's..." onkeypress="if(event.key==='Enter')search()" />
+      <select id="wilayas" onchange="filterW(this.value)">
+        <option value="" data-fr="Toutes wilayas" data-ar="كل الولايات">Toutes wilayas</option>
+        <option>Adrar</option><option>Chlef</option><option>Laghouat</option><option>Oum El Bouaghi</option>
+        <option>Batna</option><option>Béjaïa</option><option>Biskra</option><option>Béchar</option>
+        <option>Blida</option><option>Bouira</option><option>Tamanrasset</option><option>Tébessa</option>
+        <option>Tlemcen</option><option>Tiaret</option><option>Tizi Ouzou</option><option>Alger</option>
+        <option>Djelfa</option><option>Jijel</option><option>Sétif</option><option>Saïda</option>
+        <option>Skikda</option><option>Sidi Bel Abbès</option><option>Annaba</option><option>Guelma</option>
+        <option>Constantine</option><option>Médéa</option><option>Mostaganem</option><option>M'Sila</option>
+        <option>Mascara</option><option>Ouargla</option><option>Oran</option><option>El Bayadh</option>
+        <option>Illizi</option><option>Bordj Bou Arréridj</option><option>Boumerdès</option><option>El Tarf</option>
+        <option>Tindouf</option><option>Tissemsilt</option><option>El Oued</option><option>Khenchela</option>
+        <option>Souk Ahras</option><option>Tipaza</option><option>Mila</option><option>Aïn Defla</option>
+        <option>Naâma</option><option>Aïn Témouchent</option><option>Ghardaïa</option><option>Relizane</option>
+        <option>Timimoun</option><option>Bordj Badji Mokhtar</option><option>Ouled Djellal</option>
+        <option>Béni Abbès</option><option>In Salah</option><option>In Guezzam</option>
+        <option>Touggourt</option><option>Djanet</option><option>El M'Ghair</option><option>El Meniaa</option>
+      </select>
+      <button onclick="search()" data-fr="Chercher" data-ar="بحث">Chercher</button>
+    </div>
+    <div class="hero-pills">
+      <div class="hero-pill" onclick="filterCat('Femme')">      👗 <span data-fr="Femme"       data-ar="نساء">Femme</span></div>
+      <div class="hero-pill" onclick="filterCat('Homme')">      👔 <span data-fr="Homme"       data-ar="رجال">Homme</span></div>
+      <div class="hero-pill" onclick="filterCat('Enfant')">     🧒 <span data-fr="Enfant"      data-ar="أطفال">Enfant</span></div>
+      <div class="hero-pill" onclick="filterCat('Chaussures')"> 👟 <span data-fr="Chaussures"  data-ar="أحذية">Chaussures</span></div>
+      <div class="hero-pill" onclick="filterCat('Accessoires')">👜 <span data-fr="Accessoires" data-ar="إكسسوارات">Accessoires</span></div>
+      <div class="hero-pill" onclick="filterCat('Beauté')">     🧴 <span data-fr="Beauté"      data-ar="جمال">Beauté</span></div>
+      <div class="hero-pill" onclick="filterCat('Maison')">     🏠 <span data-fr="Maison"      data-ar="منزل">Maison</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     MAIN — Promo strip · Sidebar · Listings grid
+════════════════════════════════════════════════════════ -->
+<div class="wrap">
+
+  <!-- Promo banner -->
+  <div class="promo-strip">
+    <div class="promo-text">
+      <h2 data-fr="Tu as des vêtements à vendre ?" data-ar="لديك ملابس للبيع؟">Tu as des vêtements à vendre ?</h2>
+      <p data-fr="انشر إعلانك مجاناً في أقل من دقيقتين" data-ar="انشر إعلانك مجاناً في أقل من دقيقتين">انشر إعلانك مجاناً في أقل من دقيقتين</p>
+    </div>
+    <button class="promo-btn" data-fr="Publier gratuitement" data-ar="نشر مجاناً" onclick="openPost()">Publier gratuitement</button>
+  </div>
+
+  <div class="layout">
+    <!-- ─── SIDEBAR ─────────────────────────────────────────── -->
+    <aside class="sidebar">
+      <div class="sidebar-block">
+        <div class="sb-head" data-fr="Catégories" data-ar="الفئات">Catégories</div>
+        <div id="sbCats"></div>
+      </div>
+
+      <div class="sidebar-block">
+        <div class="sb-head" data-fr="Wilaya" data-ar="الولاية">Wilaya</div>
+        <div class="sb-body">
+          <select class="sb-select" onchange="filterW(this.value)">
+            <option value="" data-fr="Toutes" data-ar="الكل">Toutes</option>
+            <option>Adrar</option><option>Chlef</option><option>Laghouat</option><option>Oum El Bouaghi</option>
+            <option>Batna</option><option>Béjaïa</option><option>Biskra</option><option>Béchar</option>
+            <option>Blida</option><option>Bouira</option><option>Tamanrasset</option><option>Tébessa</option>
+            <option>Tlemcen</option><option>Tiaret</option><option>Tizi Ouzou</option><option>Alger</option>
+            <option>Djelfa</option><option>Jijel</option><option>Sétif</option><option>Saïda</option>
+            <option>Skikda</option><option>Sidi Bel Abbès</option><option>Annaba</option><option>Guelma</option>
+            <option>Constantine</option><option>Médéa</option><option>Mostaganem</option><option>M'Sila</option>
+            <option>Mascara</option><option>Ouargla</option><option>Oran</option><option>El Bayadh</option>
+            <option>Illizi</option><option>Bordj Bou Arréridj</option><option>Boumerdès</option><option>El Tarf</option>
+            <option>Tindouf</option><option>Tissemsilt</option><option>El Oued</option><option>Khenchela</option>
+            <option>Souk Ahras</option><option>Tipaza</option><option>Mila</option><option>Aïn Defla</option>
+            <option>Naâma</option><option>Aïn Témouchent</option><option>Ghardaïa</option><option>Relizane</option>
+            <option>Timimoun</option><option>Bordj Badji Mokhtar</option><option>Ouled Djellal</option>
+            <option>Béni Abbès</option><option>In Salah</option><option>In Guezzam</option>
+            <option>Touggourt</option><option>Djanet</option><option>El M'Ghair</option><option>El Meniaa</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="sidebar-block">
+        <div class="sb-head" data-fr="Prix (DA)" data-ar="السعر (دج)">Prix (DA)</div>
+        <div class="sb-body">
+          <div class="sb-price">
+            <input class="sb-input" type="number" placeholder="Min" style="margin:0" />
+            <span class="sb-price-sep">–</span>
+            <input class="sb-input" type="number" placeholder="Max" style="margin:0" />
+          </div>
+          <button class="sb-apply" data-fr="Appliquer" data-ar="تطبيق" onclick="showToast('Filtres appliqués ✓')">Appliquer</button>
+        </div>
+      </div>
+
+      <div class="sidebar-block">
+        <div class="sb-head" data-fr="Taille" data-ar="المقاس">Taille</div>
+        <div id="sbSizes"></div>
+      </div>
+
+      <div class="sidebar-block">
+        <div class="sb-head" data-fr="État" data-ar="الحالة">État</div>
+        <div class="sb-item" onclick="filterState('Neuf avec étiquette')"><span class="sb-ico">✨</span><span data-fr="Neuf avec étiquette"  data-ar="جديد بوسم">Neuf avec étiquette</span></div>
+        <div class="sb-item" onclick="filterState('Neuf sans étiquette')"><span class="sb-ico">🆕</span><span data-fr="Neuf sans étiquette" data-ar="جديد بدون وسم">Neuf sans étiquette</span></div>
+        <div class="sb-item" onclick="filterState('Très bon état')">       <span class="sb-ico">⭐</span><span data-fr="Très bon état"        data-ar="جيد جداً">Très bon état</span></div>
+        <div class="sb-item" onclick="filterState('Bon état')">            <span class="sb-ico">👍</span><span data-fr="Bon état"            data-ar="جيد">Bon état</span></div>
+        <div class="sb-item" onclick="filterState('Satisfaisant')">        <span class="sb-ico">✅</span><span data-fr="Satisfaisant"        data-ar="مقبول">Satisfaisant</span></div>
+      </div>
+    </aside>
+
+    <!-- ─── LISTINGS GRID ───────────────────────────────────── -->
+    <div>
+      <div class="grid-head">
+        <div class="grid-count"><strong id="cnt">0</strong> <span data-fr="articles trouvés" data-ar="منتج وجد">articles trouvés</span></div>
+        <select class="grid-sort" onchange="sort(this.value)">
+          <option value="r" data-fr="Plus récents" data-ar="الأحدث">Plus récents</option>
+          <option value="pa" data-fr="Prix ↑" data-ar="السعر ↑">Prix ↑</option>
+          <option value="pd" data-fr="Prix ↓" data-ar="السعر ↓">Prix ↓</option>
+          <option value="pop" data-fr="Popularité" data-ar="الأكثر شعبية">Popularité</option>
+        </select>
+      </div>
+      <div class="listings" id="grid"></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     FOOTER
+════════════════════════════════════════════════════════ -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">chifoune<span class="dot">.</span></div>
+      <div class="footer-tagline">الموضة المستعملة الجزائرية — Mode seconde main 🇩🇿</div>
+    </div>
+    <div class="footer-links">
+      <a href="#" data-fr="À propos" data-ar="من نحن">À propos</a>
+      <a href="#" data-fr="Aide" data-ar="مساعدة">Aide</a>
+      <a href="#" data-fr="Sécurité" data-ar="الأمان">Sécurité</a>
+      <a href="#" data-fr="CGU" data-ar="الشروط">CGU</a>
+      <a href="#" data-fr="Contact" data-ar="تواصل">Contact</a>
+    </div>
+    <div class="footer-copy">© 2025 chifoune.com<br>Tous droits réservés</div>
+  </div>
+</footer>
+
+<!-- ═══════════════════════════════════════════════════════
+     CHAT OVERLAY
+════════════════════════════════════════════════════════ -->
+<div class="chat-overlay" id="chatOverlay" onclick="closeChatOuter(event)">
+  <div class="chat-box">
+    <div class="chat-head">
+      <div class="chat-av" id="chatAv">K</div>
+      <div class="chat-head-info">
+        <div class="chat-seller" id="chatSeller">Vendeur</div>
+        <div class="chat-item-label" id="chatLabel">Article</div>
+      </div>
+      <button class="chat-x" onclick="closeChat()">✕</button>
+    </div>
+    <div class="chat-preview" id="chatPreview">
+      <div class="chat-prev-ico" id="chatIco">👗</div>
+      <div>
+        <div class="chat-prev-name" id="chatPrevName">Article</div>
+        <div class="chat-prev-price" id="chatPrevPrice">0 DA</div>
+      </div>
+    </div>
+    <div class="chat-msgs" id="chatMsgs"></div>
+    <div class="chat-foot">
+      <input class="chat-inp" id="chatInp" placeholder="Écrire un message..." onkeypress="if(event.key==='Enter')send()" />
+      <button class="chat-send" onclick="send()">➤</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     POST MODAL — "Vendre un article"
+════════════════════════════════════════════════════════ -->
+<div class="post-overlay" id="postOverlay" onclick="closePostOuter(event)">
+  <div class="post-box">
+    <div class="post-head">
+      <div class="post-title" data-fr="Vendre un article" data-ar="بيع منتج">Vendre un article</div>
+      <button class="post-close" onclick="closePost()">✕</button>
+    </div>
+
+    <form id="postForm" onsubmit="event.preventDefault(); submitPost();">
+
+      <div class="fg">
+        <label class="fl-label">Titre de l'annonce *</label>
+        <input class="fi" id="pTitle" type="text" placeholder="Ex: Robe Zara fleurie, taille M..." required />
+      </div>
+
+      <div class="fl">
+        <div class="fg">
+          <label class="fl-label">Catégorie *</label>
+          <select class="fi" id="pCategory" required onchange="onCatChange(this.value)">
+            <option value="Femme">👗 Femme</option>
+            <option value="Homme">👔 Homme</option>
+            <option value="Enfant">🧒 Enfant</option>
+            <option value="Chaussures">👟 Chaussures</option>
+            <option value="Accessoires">👜 Accessoires</option>
+            <option value="Beauté">🧴 Beauté</option>
+            <option value="Maison">🏠 Maison</option>
+          </select>
+        </div>
+        <div class="fg" id="pSubCatWrap">
+          <label class="fl-label">Sous-catégorie</label>
+          <select class="fi" id="pSubCategory"></select>
+        </div>
+      </div>
+
+      <div class="fg">
+        <label class="fl-label">Marque *</label>
+        <input class="fi" id="pBrand" type="text" placeholder="Zara, Nike, H&M, Uniqlo..." required />
+      </div>
+
+      <div class="fl">
+        <div class="fg">
+          <label class="fl-label">Taille <span id="pSizeHint" style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--gray-light)"></span></label>
+          <div class="size-chips" id="pSizeChips"></div>
+          <input type="hidden" id="pSize" value="-" />
+        </div>
+        <div class="fg">
+          <label class="fl-label">État *</label>
+          <select class="fi" id="pState">
+            <option value="Neuf avec étiquette">✨ Neuf avec étiquette</option>
+            <option value="Neuf sans étiquette">🆕 Neuf sans étiquette</option>
+            <option value="Très bon état">⭐ Très bon état</option>
+            <option value="Bon état">👍 Bon état</option>
+            <option value="Satisfaisant">✅ Satisfaisant</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="fl">
+        <div class="fg">
+          <label class="fl-label">Prix (DA) *</label>
+          <input class="fi" id="pPrice" type="number" placeholder="Ex: 2500" min="0" required />
+        </div>
+        <div class="fg">
+          <label class="fl-label">Wilaya</label>
+          <select class="fi" id="pWilaya">
+            <option>Alger</option><option>Oran</option><option>Constantine</option>
+            <option>Annaba</option><option>Blida</option><option>Tizi Ouzou</option>
+            <option>Sétif</option><option>Béjaïa</option><option>Tlemcen</option><option>Batna</option>
+            <option>Boumerdès</option><option>Tipaza</option><option>Médéa</option><option>Bouira</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="fg">
+        <label class="fl-label">Description</label>
+        <textarea class="fi" id="pDesc" placeholder="Décris l'article, la matière, les éventuels défauts..."></textarea>
+      </div>
+
+      <div class="fg">
+        <label class="fl-label">Photos * <span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--gray-light)">(1 minimum, 10 maximum)</span></label>
+        <div class="photo-grid" id="photoGrid">
+          <!-- thumbnails injected by addPhotos() -->
+          <div class="photo-add" onclick="document.getElementById('pImage').click()">
+            <span>📸</span>
+            <span class="photo-count" id="photoCount">0 / 10</span>
+          </div>
+        </div>
+        <input type="file" id="pImage" accept="image/*" multiple style="display:none;" onchange="addPhotos(this.files)" />
+      </div>
+
+      <button class="post-submit" type="submit" id="postSubmitBtn">✓ Publier gratuitement</button>
+    </form>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     LIKERS MODAL
+════════════════════════════════════════════════════════ -->
+<div class="likers-overlay" id="likersOverlay" onclick="closeLikersOuter(event)">
+  <div class="likers-box">
+    <div class="likers-head">
+      <div>
+        <div class="likers-title" id="likersTitleText" data-fr="Personnes qui aiment" data-ar="من أعجبهم هذا">Personnes qui aiment</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px">
+        <div class="likers-count" id="likersCount">0</div>
+        <button class="likers-close" onclick="closeLikers()">✕</button>
+      </div>
+    </div>
+    <div class="likers-item-preview" id="likersItemPreview">
+      <div class="likers-item-ico" id="likersIco">👗</div>
+      <div>
+        <div class="likers-item-name" id="likersItemName">Article</div>
+        <div class="likers-item-price" id="likersItemPrice">0 DA</div>
+      </div>
+    </div>
+    <div id="likersList"></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     AUTH MODAL — Login / Signup
+════════════════════════════════════════════════════════ -->
+<div class="auth-overlay" id="authOverlay" onclick="closeAuthOuter(event)">
+  <div class="auth-box">
+    <button class="auth-close" onclick="closeAuth()">✕</button>
+
+    <div class="auth-logo">chifoune<span class="dot">.</span></div>
+    <div class="auth-tagline" id="authTagline">الموضة المستعملة الجزائرية 🇩🇿</div>
+
+    <div class="auth-tabs">
+      <button class="auth-tab on" id="tabSignup" onclick="switchTab('signup')" data-fr="Créer un compte" data-ar="إنشاء حساب">Créer un compte</button>
+      <button class="auth-tab" id="tabLogin" onclick="switchTab('login')" data-fr="Se connecter" data-ar="تسجيل الدخول">Se connecter</button>
+    </div>
+
+    <div id="socialBtns">
+      <button class="social-btn google" onclick="socialAuth('Google')">
+        <span class="social-ico">
+          <svg width="20" height="20" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+        </span>
+        <span class="social-txt" data-fr="Continuer avec Google" data-ar="المتابعة مع Google">Continuer avec Google</span>
+      </button>
+
+      <button class="social-btn facebook" onclick="socialAuth('Facebook')">
+        <span class="social-ico">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="#1877F2"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+        </span>
+        <span class="social-txt" data-fr="Continuer avec Facebook" data-ar="المتابعة مع Facebook">Continuer avec Facebook</span>
+      </button>
+
+      <button class="social-btn apple" onclick="socialAuth('Apple')">
+        <span class="social-ico">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+        </span>
+        <span class="social-txt" data-fr="Continuer avec Apple" data-ar="المتابعة مع Apple">Continuer avec Apple</span>
+      </button>
+
+      <button class="social-btn phone" onclick="startPhoneAuth()">
+        <span class="social-ico">📱</span>
+        <span class="social-txt" data-fr="Continuer avec numéro de téléphone" data-ar="المتابعة برقم الهاتف">Continuer avec numéro de téléphone</span>
+      </button>
+
+      <div class="auth-divider" data-fr="ou avec email" data-ar="أو بالبريد الإلكتروني">ou avec email</div>
+      <div class="email-toggle" onclick="toggleEmailForm()" id="emailToggle" data-fr="Continuer avec email" data-ar="المتابعة بالبريد الإلكتروني">Continuer avec email →</div>
+    </div>
+
+      <!-- ─── PHONE AUTH: Step 1 — enter number ─────────────── -->
+      <div class="phone-step" id="phoneStep1">
+        <div class="phone-flag-wrap">
+          <input class="phone-prefix auth-input" id="phonePrefix"
+                 type="text" value="+213"
+                 style="width:72px;text-align:center;flex-shrink:0;margin-bottom:0;padding:12px 6px;" />
+          <input class="auth-input" id="phoneNumber"
+                 type="tel" placeholder="0555 123 456"
+                 style="flex:1;margin-bottom:0;"
+                 onkeypress="if(event.key==='Enter')sendOTP()" />
+        </div>
+        <div id="recaptcha-container"></div>
+        <button class="auth-submit" onclick="sendOTP()" id="btnSendOTP">
+          Envoyer le code SMS
+        </button>
+        <div class="email-toggle" onclick="cancelPhoneAuth()" style="margin-top:10px">← Retour</div>
+      </div>
+
+      <!-- ─── PHONE AUTH: Step 2 — enter OTP ──────────────────── -->
+      <div class="phone-step" id="phoneStep2">
+        <p style="text-align:center;font-size:13px;color:var(--gray);margin-bottom:14px">
+          Code envoyé au <strong id="phoneSentTo"></strong>
+        </p>
+        <div class="otp-row" id="otpRow">
+          <input class="otp-digit" maxlength="1" type="text" inputmode="numeric" oninput="otpNext(this,0)" />
+          <input class="otp-digit" maxlength="1" type="text" inputmode="numeric" oninput="otpNext(this,1)" />
+          <input class="otp-digit" maxlength="1" type="text" inputmode="numeric" oninput="otpNext(this,2)" />
+          <input class="otp-digit" maxlength="1" type="text" inputmode="numeric" oninput="otpNext(this,3)" />
+          <input class="otp-digit" maxlength="1" type="text" inputmode="numeric" oninput="otpNext(this,4)" />
+          <input class="otp-digit" maxlength="1" type="text" inputmode="numeric" oninput="otpNext(this,5)" />
+        </div>
+        <button class="auth-submit" onclick="verifyOTP()" id="btnVerifyOTP">
+          Vérifier le code
+        </button>
+        <div class="phone-resend">
+          Pas reçu ? <span onclick="sendOTP()">Renvoyer</span>
+        </div>
+        <div class="email-toggle" onclick="showPhoneStep(1)" style="margin-top:6px">← Changer le numéro</div>
+      </div>
+
+    <div class="auth-form" id="emailForm">
+      <div id="signupFields">
+        <input class="auth-input" type="text" placeholder="Prénom et nom" id="authName" />
+      </div>
+      <input class="auth-input" type="email" placeholder="Adresse email" id="authEmail" />
+      <input class="auth-input" type="password" placeholder="Mot de passe" id="authPass" />
+      <button class="auth-submit" onclick="submitAuth()" id="authSubmitBtn" data-fr="Créer mon compte" data-ar="إنشاء حسابي">Créer mon compte</button>
+      <div class="email-toggle" onclick="toggleEmailForm()" style="margin-top:10px" data-fr="← Retour" data-ar="← رجوع">← Retour</div>
+    </div>
+
+    <div class="auth-terms" data-fr="En continuant, tu acceptes nos <a>Conditions d'utilisation</a> et notre <a>Politique de confidentialité</a>." data-ar="بالمتابعة، أنت توافق على شروط الاستخدام وسياسة الخصوصية.">
+      En continuant, tu acceptes nos <a>Conditions d'utilisation</a> et notre <a>Politique de confidentialité</a>.
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     TOAST
+════════════════════════════════════════════════════════ -->
+<div class="toast" id="toast"></div>
+<!-- ═══════════════════════════════════════════════════════
+     PRODUCT DETAIL OVERLAY — opened on card click
+════════════════════════════════════════════════════════ -->
+<div class="detail-overlay" id="detailOverlay" onclick="if(event.target.id==='detailOverlay')closeDetail()">
+  <div class="detail-box">
+    <button class="dt-close" onclick="closeDetail()">✕</button>
+    <div class="dt-layout">
+      <div class="dt-img-wrap" id="dtImgWrap">
+        <img id="dtImg" alt="" style="width:100%;height:100%;object-fit:cover;display:none;" />
+        <div class="dt-img-placeholder">👗</div>
+      </div>
+      <div class="dt-info">
+        <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px">
+          <span class="dt-badge dt-badge-cat" id="dtCat"></span>
+          <span class="dt-badge" id="dtState"></span>
+        </div>
+        <div class="dt-brand" id="dtBrand"></div>
+        <div class="dt-title" id="dtTitle"></div>
+        <div class="dt-price" id="dtPrice"></div>
+        <div style="display:flex;gap:14px;flex-wrap:wrap;margin-bottom:20px" id="dtMeta"></div>
+        <button class="dt-btn-contact" id="dtBtnContact">💬 Contacter le vendeur</button>
+        <button class="dt-btn-fav" id="dtBtnFav">🤍 Ajouter aux favoris</button>
+        <div class="dt-safety">🛡️ Ne payez jamais en dehors de la plateforme. Chifoune ne peut pas garantir les transactions externes.</div>
+        <div class="dt-seller">
+          <div style="font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--gray);margin-bottom:12px">Vendeur</div>
+          <div style="display:flex;align-items:center;gap:10px">
+            <div class="dt-seller-av" id="dtSellerAv">V</div>
+            <div>
+              <div class="dt-seller-name" id="dtSellerName"></div>
+              <div class="dt-seller-sub" id="dtSellerSub"></div>
+            </div>
+          </div>
+        </div>
+        <div class="dt-desc-block">
+          <div style="font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--gray);margin-bottom:10px">Description</div>
+          <div id="dtDesc" style="font-size:13px;line-height:1.7;white-space:pre-wrap"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore-compat.js"></script>
+
+<script>
+// ═══ [A] FIREBASE CONFIG — replace with your project values ═══
+  const firebaseConfig = {
+  apiKey: "AIzaSyBJfzlv7ZxRWtwBWODLlJWHDSMiu5qisxU",
+  authDomain: "chifoune-e0e52.firebaseapp.com",
+  databaseURL: "https://chifoune-e0e52-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "chifoune-e0e52",
+  storageBucket: "chifoune-e0e52.firebasestorage.app",
+  messagingSenderId: "429650296358",
+  appId: "1:429650296358:web:650afbef475af522f9b0e7"
+};
+
+firebase.initializeApp(firebaseConfig);
+const auth = firebase.auth();
+const db = firebase.firestore();
+
+// ═══ [B] GLOBAL STATE ════════════════════════════════════════
+  let L = 'fr';
+let currentUser = null;
+let activeCat = 'Tout';
+let activeWilaya = '';
+let activeSort = 'r';
+let activeState = '';          // active condition filter
+let userFavorites = [];
+let toastT;
+let authMode = 'signup';
+let emailFormVisible    = false;
+let phoneConfirmResult  = null;   // Firebase phone auth confirmation object
+let recaptchaVerifier   = null;   // Firebase reCAPTCHA verifier instance
+let unsubscribeProducts = null;
+let unsubscribeChat = null;
+let unsubscribeNotifs = null;   // real-time listener for incoming messages
+let currentChatProductId = null;
+let currentChatSellerId = null;
+let unreadCount = 0;            // live unread message count
+let unsubscribeConvs = null;    // listener for conversation list
+let unsubscribeMsgPage = null;  // listener for open in-page chat
+let activeChatId = null;        // chatId currently open in msgpage
+let activeChatSellerId = null;  // sellerId for active msgpage chat
+let convUnreadMap = {};         // chatId → unread count map
+
+const cats = [
+  { ico:'👗', fr:'Femme',       ar:'نساء' },
+  { ico:'👔', fr:'Homme',       ar:'رجال' },
+  { ico:'🧒', fr:'Enfant',      ar:'أطفال' },
+  { ico:'👟', fr:'Chaussures',  ar:'أحذية' },
+  { ico:'👜', fr:'Accessoires', ar:'إكسسوارات' },
+  { ico:'🧴', fr:'Beauté',      ar:'جمال' },
+  { ico:'🏠', fr:'Maison',      ar:'منزل' },
+];
+
+// Subcategories per main category
+const subCats = {
+  'Femme':       ['Robes','Hauts','Pantalons','Jupes','Manteaux','Vestes','Lingerie','Maillots de bain','Pyjamas'],
+  'Homme':       ['T-shirts','Chemises','Pantalons','Jeans','Vestes','Manteaux','Costumes','Sous-vêtements'],
+  'Enfant':      ['Bébé 0-2 ans','2-5 ans','6-10 ans','11-16 ans','Scolaire'],
+  'Chaussures':  ['Baskets','Sandales','Escarpins','Bottes','Mocassins','Chaussures de sport','Tongs'],
+  'Accessoires': ['Sacs','Ceintures','Bijoux','Montres','Lunettes','Écharpes','Chapeaux','Portefeuilles'],
+  'Beauté':      ['Parfums','Maquillage','Soin visage','Soin corps','Cheveux'],
+  'Maison':      ['Linge de maison','Décoration','Vaisselle'],
+};
+
+// Sizes per category group
+const clothingSizes = ['XXS','XS','S','M','L','XL','XXL','XXXL','34','36','38','40','42','44','46','48','50','52'];
+const shoeSizes     = ['35','36','37','38','39','40','41','42','43','44','45','46','47'];
+const sizes = clothingSizes; // kept for backward compat with renderSbCats
+
+// ═══ [C] AUTH — Google, Email, Logout ══════════════════════
+  async function createUserProfile(user) {
+  const ref = db.collection('users').doc(user.uid);
+  const snap = await ref.get();
+  if (!snap.exists) {
+    await ref.set({
+      uid: user.uid,
+      name: user.displayName || user.email,
+      email: user.email,
+      photoURL: user.photoURL || '',
+      role: 'buyer',
+      favorites: [],
+      createdAt: firebase.firestore.FieldValue.serverTimestamp()
+    });
+  }
+}
+
+async function loginGoogle() {
+  try {
+    const provider = new firebase.auth.GoogleAuthProvider();
+    const result = await auth.signInWithPopup(provider);
+    await createUserProfile(result.user);
+    closeAuth();
+    showToast('✅ Connecté avec Google !');
+  } catch(e) {
+    showToast('❌ ' + (e.message || 'Erreur connexion Google'));
+  }
+}
+
+async function loginEmail() {
+  const email = document.getElementById('authEmail').value.trim();
+  const pass = document.getElementById('authPass').value;
+  const nameEl = document.getElementById('authName');
+  const name = nameEl ? nameEl.value.trim() : '';
+  if (!email || !pass) return showToast('Remplis tous les champs');
+  try {
+    if (authMode === 'signup') {
+      const result = await auth.createUserWithEmailAndPassword(email, pass);
+      await db.collection('users').doc(result.user.uid).set({
+        uid: result.user.uid,
+        name: name || email.split('@')[0],
+        email,
+        photoURL: '',
+        role: 'buyer',
+        favorites: [],
+        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+      });
+      closeAuth();
+      showToast('✅ Compte créé avec succès !');
+    } else {
+      await auth.signInWithEmailAndPassword(email, pass);
+      closeAuth();
+      showToast('✅ Connexion réussie !');
+    }
+  } catch(e) {
+    const msgs = {
+      'auth/email-already-in-use': 'Email déjà utilisé',
+      'auth/wrong-password': 'Mot de passe incorrect',
+      'auth/user-not-found': 'Compte introuvable',
+      'auth/weak-password': 'Mot de passe trop court (6 min)',
+      'auth/invalid-email': 'Email invalide',
+    };
+    showToast('❌ ' + (msgs[e.code] || e.message));
+  }
+}
+
+async function doLogout() {
+  await auth.signOut();
+  currentUser = null;
+  userFavorites = [];
+  updateNavAuth(null);
+  renderGrid([]);
+  showToast('À bientôt ! 👋');
+}
+
+auth.onAuthStateChanged(async (user) => {
+  currentUser = user;
+  updateNavAuth(user);
+  if (user) {
+    const snap = await db.collection('users').doc(user.uid).get();
+    if (snap.exists) userFavorites = snap.data().favorites || [];
+    startNotifListener(user.uid);
+  } else {
+    if (unsubscribeNotifs) { unsubscribeNotifs(); unsubscribeNotifs = null; }
+    unreadCount = 0;
+    updateBadge(0);
+  }
+  loadProducts();
+});
+
+function updateNavAuth(user) {
+  const btnLogin   = document.getElementById('btnConnexion');
+  const btnSignup  = document.getElementById('btnInscription');
+  const btnSell    = document.getElementById('btnVendre');
+  const btnLogout  = document.getElementById('btnLogout');
+  const userInfo   = document.getElementById('userInfo');
+
+  if (user) {
+    if (btnLogin)  btnLogin.style.display  = 'none';
+    if (btnSignup) btnSignup.style.display = 'none';
+    if (btnLogout) btnLogout.style.display = 'flex';
+    if (btnSell)   btnSell.style.display   = 'flex';
+    if (userInfo) {
+      userInfo.style.display = 'flex';
+      const nameEl = userInfo.querySelector('.user-name');
+      if (nameEl) nameEl.textContent = user.displayName || user.email.split('@')[0];
+    }
+  } else {
+    if (btnLogin)  btnLogin.style.display  = 'flex';
+    if (btnSignup) btnSignup.style.display = 'flex';
+    if (btnLogout) btnLogout.style.display = 'none';
+    if (btnSell)   btnSell.style.display   = 'none';
+    if (userInfo)  userInfo.style.display  = 'none';
+  }
+}
+
+// ═══ [D] PRODUCT CREATION — base64 image, no Storage needed ═
+  async function submitPost() {
+  if (!currentUser) { closePost(); openAuth('login'); return showToast('Connecte-toi d\'abord !'); }
+
+  const title       = document.getElementById('pTitle').value.trim();
+  const price       = document.getElementById('pPrice').value;
+  const desc        = document.getElementById('pDesc').value.trim();
+  const brand       = document.getElementById('pBrand').value.trim();
+  const category    = document.getElementById('pCategory').value;
+  const subCategory = document.getElementById('pSubCategory').value;
+  const wilaya      = document.getElementById('pWilaya').value;
+  const size        = document.getElementById('pSize').value;
+  const state       = document.getElementById('pState').value;
+
+  // Multi-image: use _imageFiles global array set by addPhotos()
+  if (!title || !price || !brand) return showToast('Remplis les champs obligatoires *');
+  if (!_imageFiles.length)        return showToast('Ajoute au moins une photo *');
+
+  const btn = document.getElementById('postSubmitBtn');
+  btn.textContent = 'Publication en cours...';
+  btn.disabled    = true;
+
+  try {
+    // Compress all images to base64 — no Firebase Storage needed
+    const imageUrls = await Promise.all(_imageFiles.map(f => compressImage(f, 800, 0.75)));
+
+    await db.collection('products').add({
+      title, price: Number(price), description: desc,
+      brand: brand.toUpperCase(), category, subCategory, wilaya, size, state,
+      imageUrl:  imageUrls[0],   // first image = cover (backward compatible)
+      imageUrls,                 // all images
+      sellerId:    currentUser.uid,
+      sellerName:  currentUser.displayName || currentUser.email,
+      sellerPhoto: currentUser.photoURL || '',
+      likes: 0, likedBy: [],
+      createdAt: firebase.firestore.FieldValue.serverTimestamp()
+    });
+
+    closePost();
+    _resetPostForm();
+    showToast('✅ Annonce publiée !');
+  } catch(e) {
+    console.error(e);
+    showToast('❌ Erreur: ' + e.message);
+  } finally {
+    btn.textContent = '✓ Publier gratuitement';
+    btn.disabled    = false;
+  }
+}
+
+// Resize + compress image to base64 (avoids Firebase Storage entirely)
+// ═══ [E] IMAGE COMPRESSION — resize to base64 JPEG ═════════
+  function compressImage(file, maxPx, quality) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onerror = () => reject(new Error('Lecture du fichier échouée'));
+    reader.onload = (e) => {
+      const img = new Image();
+      img.onerror = () => reject(new Error('Image invalide'));
+      img.onload = () => {
+        let w = img.width, h = img.height;
+        if (w > maxPx || h > maxPx) {
+          if (w > h) { h = Math.round(h * maxPx / w); w = maxPx; }
+          else       { w = Math.round(w * maxPx / h); h = maxPx; }
+        }
+        const canvas = document.createElement('canvas');
+        canvas.width = w; canvas.height = h;
+        canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+        const base64 = canvas.toDataURL('image/jpeg', quality);
+        if (base64.length > 900000) {
+          return reject(new Error('Photo trop lourde — choisis une image plus petite.'));
+        }
+        resolve(base64);
+      };
+      img.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
+// ═══ [D2] POST FORM HELPERS ══════════════════════════════════
+
+let _imageFiles = [];  // holds File objects for multi-image upload
+
+/** Called when category changes — update subcategory list + size chips */
+function onCatChange(cat) {
+  // Subcategory
+  const sub = document.getElementById('pSubCategory');
+  const subs = subCats[cat] || [];
+  sub.innerHTML = subs.map(s => `<option value="${s}">${s}</option>`).join('');
+  document.getElementById('pSubCatWrap').style.display = subs.length ? 'block' : 'none';
+
+  // Size chips
+  const isShoe = cat === 'Chaussures';
+  const sizeArr = isShoe ? shoeSizes : (cat === 'Accessoires' || cat === 'Beauté' || cat === 'Maison') ? [] : clothingSizes;
+  _renderSizeChips(sizeArr);
+  document.getElementById('pSizeHint').textContent = isShoe ? '(pointure)' : sizeArr.length ? '(vêtement)' : '';
+}
+
+/** Render clickable size chips and wire up selection */
+function _renderSizeChips(arr) {
+  const wrap = document.getElementById('pSizeChips');
+  const inp  = document.getElementById('pSize');
+  inp.value  = '-';
+  if (!arr.length) { wrap.innerHTML = '<span style="font-size:12px;color:var(--gray-light)">—</span>'; return; }
+  wrap.innerHTML = arr.map(s =>
+    `<span class="size-chip" onclick="_selectSize(this,'${s}')">${s}</span>`
+  ).join('');
+}
+
+/** Toggle selected size chip */
+function _selectSize(el, s) {
+  document.querySelectorAll('.size-chip').forEach(c => c.classList.remove('on'));
+  el.classList.add('on');
+  document.getElementById('pSize').value = s;
+}
+
+/** Handle multi-image file selection (max 10) */
+function addPhotos(files) {
+  const remaining = 10 - _imageFiles.length;
+  const toAdd = Array.from(files).slice(0, remaining);
+  _imageFiles.push(...toAdd);
+  _renderPhotoGrid();
+  // Reset input so same file can be re-selected if deleted
+  document.getElementById('pImage').value = '';
+}
+
+/** Render the photo grid thumbnails */
+function _renderPhotoGrid() {
+  const grid  = document.getElementById('photoGrid');
+  const count = document.getElementById('photoCount');
+  count.textContent = `${_imageFiles.length} / 10`;
+
+  // Build thumbnail HTML
+  let html = _imageFiles.map((f, i) => {
+    const url = URL.createObjectURL(f);
+    return `<div class="photo-thumb">
+      <img src="${url}" />
+      <button type="button" class="photo-thumb-del" onclick="_removePhoto(${i})">✕</button>
+    </div>`;
+  }).join('');
+
+  // Add "+" slot if under 10
+  if (_imageFiles.length < 10) {
+    html += `<div class="photo-add" onclick="document.getElementById('pImage').click()">
+      <span>📸</span>
+      <span class="photo-count" id="photoCount">${_imageFiles.length} / 10</span>
+    </div>`;
+  }
+
+  grid.innerHTML = html;
+}
+
+/** Remove a photo by index */
+function _removePhoto(i) {
+  _imageFiles.splice(i, 1);
+  _renderPhotoGrid();
+}
+
+/** Reset the entire post form to initial state */
+function _resetPostForm() {
+  document.getElementById('postForm').reset();
+  _imageFiles = [];
+  _renderPhotoGrid();
+  // Reset size chips
+  document.querySelectorAll('.size-chip').forEach(c => c.classList.remove('on'));
+  document.getElementById('pSize').value = '-';
+  // Re-init category (triggers subcats + size chips)
+  onCatChange('Femme');
+}
+
+// ═══ [F] PRODUCT LISTING — Firestore load + render cards ═════
+  function loadProducts() {
+  if (unsubscribeProducts) unsubscribeProducts();
+
+  let q = db.collection('products');
+  const sortMap = { r:['createdAt','desc'], old:['createdAt','asc'], pa:['price','asc'], pd:['price','desc'] };
+  const [sf, sd] = sortMap[activeSort] || ['createdAt','desc'];
+  q = q.orderBy(sf, sd);
+
+  if (activeCat !== 'Tout') q = q.where('category', '==', activeCat);
+  if (activeWilaya)           q = q.where('wilaya',   '==', activeWilaya);
+  if (activeState)            q = q.where('state',    '==', activeState);
+
+  unsubscribeProducts = q.onSnapshot((snap) => {
+    const products = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+    renderGrid(products);
+  }, (err) => {
+    console.warn('Firestore query error (may need index):', err.message);
+    db.collection('products').orderBy('createdAt','desc').get().then(snap => {
+      let products = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+      if (activeCat !== 'Tout') products = products.filter(p => p.category === activeCat);
+      if (activeWilaya) products = products.filter(p => p.wilaya === activeWilaya);
+      renderGrid(products);
+    });
+  });
+}
+
+// ═══ [G] RENDER — inject product cards into #grid ══════════
+  function renderGrid(products) {
+  const grid = document.getElementById('grid');
+  if (!grid) return;
+  const isAr = L === 'ar';
+  document.getElementById('cnt').textContent = products.length;
+
+  if (products.length === 0) {
+    grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:48px;color:var(--gray)">
+      <div style="font-size:40px;margin-bottom:12px">👗</div>
+      <div style="font-size:14px">${isAr ? 'لا توجد منتجات بعد' : 'Aucun article pour l\'instant — sois le premier à vendre !'}</div>
+    </div>`;
+    return;
+  }
+
+  grid.innerHTML = products.map(item => {
+    const isFav = userFavorites.includes(item.id);
+    const imgContent = item.imageUrl
+      ? `<img src="${item.imageUrl}" alt="${item.title}" style="width:100%;height:100%;object-fit:cover;" />`
+      : `<span style="font-size:52px">👗</span>`;
+    const safeTitle = (item.title||'').replace(/'/g, "\\'");
+    const safeSeller = (item.sellerName||'Vendeur').replace(/'/g, "\\'");
+
+    return `
+    <div class="card" onclick="openProductDetail('${item.id}')">
+      <div class="card-img">
+        ${imgContent}
+        <button class="fav ${isFav?'on':''}" onclick="toggleFav(event,'${item.id}')">
+          ${isFav?'❤️':'🤍'}
+        </button>
+      </div>
+      <div class="card-body">
+        <div class="card-brand">${item.brand||''}</div>
+        <div class="card-title">${item.title||''}</div>
+        <div class="card-meta">${item.size&&item.size!=='-'?item.size+' · ':''}${item.wilaya||''} · ${item.state||''}</div>
+        <div class="card-foot">
+          <div class="card-price">${Number(item.price||0).toLocaleString('fr-DZ')} <small>${isAr?'دج':'DA'}</small></div>
+          <div style="display:flex;gap:6px;align-items:center">
+            <button style="padding:5px 8px;background:var(--bg);border:1px solid var(--border);border-radius:6px;font-size:11px;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:700;color:var(--gray);" onclick="openLikers(event,'${item.id}','${safeTitle}',${item.likes||0})">❤️ ${item.likes||0}</button>
+            <button class="card-msg" onclick="openChat(event,'${item.id}','${safeTitle}',${item.price||0},'${safeSeller}','${item.sellerId||''}')">💬</button>
+          </div>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// ═══ [H] FAVORITES ══════════════════════════════════════════
+  async function toggleFav(e, productId) {
+  e.stopPropagation();
+  if (!currentUser) { openAuth('login'); return showToast('Connecte-toi pour ajouter aux favoris'); }
+
+  const userRef = db.collection('users').doc(currentUser.uid);
+  const isFav = userFavorites.includes(productId);
+
+  if (isFav) {
+    userFavorites = userFavorites.filter(id => id !== productId);
+    await userRef.update({ favorites: firebase.firestore.FieldValue.arrayRemove(productId) });
+    showToast('Retiré des favoris');
+  } else {
+    userFavorites.push(productId);
+    await userRef.update({ favorites: firebase.firestore.FieldValue.arrayUnion(productId) });
+    showToast('❤️ Ajouté aux favoris');
+  }
+  loadProducts();
+}
+
+async function showFavorites() {
+  if (!currentUser) return openAuth('login');
+  if (userFavorites.length === 0) return showToast('Aucun favori pour l\'instant ❤️');
+
+  if (unsubscribeProducts) { unsubscribeProducts(); unsubscribeProducts = null; }
+  const grid = document.getElementById('grid');
+  grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:24px;color:var(--gray)">Chargement...</div>`;
+
+  const prods = [];
+  for (const id of userFavorites) {
+    const snap = await db.collection('products').doc(id).get();
+    if (snap.exists) prods.push({ id: snap.id, ...snap.data() });
+  }
+  renderGrid(prods);
+  showToast(`❤️ ${prods.length} favori(s)`);
+}
+
+// ═══ [I] LIKERS MODAL ═══════════════════════════════════════
+  async function openLikers(e, productId, title, likesCount) {
+  e.stopPropagation();
+  document.getElementById('likersItemName').textContent = title;
+  document.getElementById('likersCount').textContent = likesCount;
+  document.getElementById('likersList').innerHTML = `<div style="text-align:center;padding:20px;color:var(--gray)">Chargement...</div>`;
+  document.getElementById('likersOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+
+  const snap = await db.collection('products').doc(productId).get();
+  if (!snap.exists) return;
+  const p = snap.data();
+  document.getElementById('likersItemPrice').textContent = Number(p.price||0).toLocaleString() + ' DA';
+
+  const likedBy = p.likedBy || [];
+  if (likedBy.length === 0) {
+    document.getElementById('likersList').innerHTML = `<div style="text-align:center;padding:24px;color:var(--gray);font-size:13px">Pas encore de likes 🤍</div>`;
+    return;
+  }
+
+  const rows = [];
+  for (const uid of likedBy.slice(0, 20)) {
+    const uSnap = await db.collection('users').doc(uid).get();
+    if (uSnap.exists) {
+      const u = uSnap.data();
+      rows.push(`
+        <div class="liker-row">
+          <div class="liker-av">${(u.name||'?').charAt(0).toUpperCase()}</div>
+          <div class="liker-info">
+            <div class="liker-name">${u.name||'Utilisateur'}</div>
+            <div class="liker-meta">Algérie</div>
+          </div>
+        </div>`);
+    }
+  }
+  document.getElementById('likersList').innerHTML = rows.join('') || `<div style="text-align:center;padding:24px;color:var(--gray)">Aucun utilisateur trouvé</div>`;
+}
+
+function closeLikers() {
+  document.getElementById('likersOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function closeLikersOuter(e) { if(e.target.id==='likersOverlay') closeLikers(); }
+
+// ═══ [J] CHAT ═══════════════════════════════════════════════
+  function openChat(e, productId, title, price, sellerName, sellerId) {
+  e.stopPropagation();
+  if (!currentUser) { openAuth('login'); return showToast('Connecte-toi pour envoyer un message'); }
+  if (currentUser.uid === sellerId) return showToast('C\'est ton propre article !');
+
+  currentChatProductId = productId;
+  currentChatSellerId = sellerId;
+
+  document.getElementById('chatAv').textContent = (sellerName||'V').charAt(0).toUpperCase();
+  document.getElementById('chatSeller').textContent = sellerName||'Vendeur';
+  document.getElementById('chatLabel').textContent = title;
+  document.getElementById('chatIco').textContent = '👗';
+  document.getElementById('chatPrevName').textContent = title;
+  document.getElementById('chatPrevPrice').textContent = Number(price).toLocaleString() + ' DA';
+
+  const chatId = [currentUser.uid, sellerId].sort().join('_') + '_' + productId;
+  if (unsubscribeChat) unsubscribeChat();
+
+  unsubscribeChat = db.collection('chats').doc(chatId).collection('messages')
+    .orderBy('createdAt','asc')
+    .onSnapshot(snap => {
+      const el = document.getElementById('chatMsgs');
+      if (snap.empty) {
+        el.innerHTML = `<div style="text-align:center;padding:16px;color:var(--gray);font-size:12px">Commence la conversation 👋</div>`;
+        return;
+      }
+      el.innerHTML = snap.docs.map(d => {
+        const m = d.data();
+        const isMe = m.senderId === currentUser.uid;
+        const t = m.createdAt ? m.createdAt.toDate().toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'}) : '';
+        return `<div class="bubble-wrap ${isMe?'me':'them'}">
+          <div class="bubble ${isMe?'me':'them'}">${m.text}</div>
+          <div class="bubble-time">${t}</div>
+        </div>`;
+      }).join('');
+      el.scrollTop = el.scrollHeight;
+    });
+
+  document.getElementById('chatOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+async function send() {
+  const inp = document.getElementById('chatInp');
+  const text = inp.value.trim();
+  if (!text || !currentUser || !currentChatSellerId) return;
+  inp.value = '';
+  const chatId = [currentUser.uid, currentChatSellerId].sort().join('_') + '_' + currentChatProductId;
+  await db.collection('chats').doc(chatId).collection('messages').add({
+    text,
+    senderId:      currentUser.uid,
+    senderName:    currentUser.displayName || currentUser.email,
+    recipientId:   currentChatSellerId,
+    recipientName: document.getElementById('chatSeller').textContent || 'Utilisateur',
+    read:          false,
+    createdAt:     firebase.firestore.FieldValue.serverTimestamp()
+  });
+}
+
+function closeChat() {
+  document.getElementById('chatOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+  if (unsubscribeChat) { unsubscribeChat(); unsubscribeChat = null; }
+}
+function closeChatOuter(e) { if(e.target.id==='chatOverlay') closeChat(); }
+
+// ═══ [K] FILTERS & SORT ════════════════════════════════════
+  function filterCat(cat) {
+  activeCat = cat;
+  renderCatNav();
+  renderSbCats();
+  loadProducts();
+}
+
+function filterW(w)     { activeWilaya = w; loadProducts(); }
+function filterState(s) {
+  activeState = activeState === s ? '' : s;  // toggle
+  // Highlight active state row
+  document.querySelectorAll('.sb-item').forEach(el => {
+    const span = el.querySelector('span:last-child');
+    if (span) el.classList.toggle('on', span.dataset.fr === activeState);
+  });
+  loadProducts();
+}
+function sort(v) { activeSort = v; loadProducts(); }
+
+let activeSize = '';
+function filterSizeFromSidebar(s) {
+  activeSize = activeSize === s ? '' : s;
+  document.querySelectorAll('#sbSizes .sb-item').forEach(el => {
+    el.classList.toggle('on', el.querySelector('span:last-child')?.textContent === activeSize);
+  });
+  // Client-side filter only (no compound index needed)
+  if (unsubscribeProducts) { unsubscribeProducts(); unsubscribeProducts = null; }
+  db.collection('products').orderBy('createdAt','desc').get().then(snap => {
+    let products = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+    if (activeCat !== 'Tout') products = products.filter(p => p.category === activeCat);
+    if (activeWilaya)         products = products.filter(p => p.wilaya   === activeWilaya);
+    if (activeState)          products = products.filter(p => p.state    === activeState);
+    if (activeSize)           products = products.filter(p => p.size     === activeSize);
+    renderGrid(products);
+  });
+}
+
+function search() {
+  const q = (document.getElementById('heroQ').value || document.getElementById('navQ').value).toLowerCase().trim();
+  if (!q) return loadProducts();
+  if (unsubscribeProducts) { unsubscribeProducts(); unsubscribeProducts = null; }
+  db.collection('products').orderBy('createdAt','desc').get().then(snap => {
+    let products = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+    products = products.filter(p =>
+      (p.title||'').toLowerCase().includes(q) ||
+      (p.brand||'').toLowerCase().includes(q) ||
+      (p.description||'').toLowerCase().includes(q)
+    );
+    renderGrid(products);
+    if (!products.length) showToast('Aucun résultat pour "' + q + '"');
+  });
+}
+
+// ═══ [L] PRODUCT DETAIL OVERLAY ════════════════════════════
+  async function openProductDetail(productId) {
+  const snap = await db.collection('products').doc(productId).get();
+  if (!snap.exists) return showToast('Article introuvable');
+  const p = { id: snap.id, ...snap.data() };
+  showProductDetail(p);
+}
+
+function showProductDetail(p) {
+  document.getElementById('detailOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+
+  const imgEl   = document.getElementById('dtImg');
+  const imgWrap = document.getElementById('dtImgWrap');
+  const imgs    = (p.imageUrls && p.imageUrls.length) ? p.imageUrls : (p.imageUrl ? [p.imageUrl] : []);
+
+  if (imgs.length) {
+    imgEl.src = imgs[0];
+    imgEl.style.display = 'block';
+    imgWrap.querySelector('.dt-img-placeholder').style.display = 'none';
+    // Inject thumbnail strip if multiple images
+    let strip = document.getElementById('dtImgStrip');
+    if (!strip) {
+      strip = document.createElement('div');
+      strip.id = 'dtImgStrip';
+      strip.style.cssText = 'display:flex;gap:6px;padding:8px;overflow-x:auto;background:var(--bg);flex-shrink:0;';
+      imgWrap.after(strip);
+    }
+    strip.style.display = imgs.length > 1 ? 'flex' : 'none';
+    strip.innerHTML = imgs.map((url, i) =>
+      `<img src="${url}" onclick="document.getElementById('dtImg').src='${url}'"
+            style="width:52px;height:52px;object-fit:cover;border-radius:6px;cursor:pointer;
+                   border:2px solid ${i===0?'var(--black)':'var(--border)'};flex-shrink:0;"
+            onmouseover="this.style.borderColor='var(--black)'"
+            onmouseout="this.style.borderColor='${i===0?'var(--black)':'var(--border)'}'"/>`
+    ).join('');
+  } else {
+    imgEl.style.display = 'none';
+    imgWrap.querySelector('.dt-img-placeholder').style.display = 'flex';
+    const strip = document.getElementById('dtImgStrip');
+    if (strip) strip.style.display = 'none';
+  }
+
+  document.getElementById('dtCat').textContent = p.category || '';
+  const stateEl = document.getElementById('dtState');
+  stateEl.textContent = p.state || '';
+  stateEl.className = 'dt-badge ' + ((p.state||'').toLowerCase().includes('neuf') ? 'dt-badge-new' : 'dt-badge-used');
+
+  document.getElementById('dtBrand').textContent = p.brand || '';
+  document.getElementById('dtTitle').textContent = p.title || 'Sans titre';
+  document.getElementById('dtPrice').innerHTML =
+    `${Number(p.price||0).toLocaleString('fr-DZ')} <span style="font-size:13px;color:var(--gray);font-weight:400">DA</span>`;
+
+  const meta = [];
+  if (p.size && p.size !== '-') meta.push(`📐 <strong>${p.size}</strong>`);
+  if (p.wilaya)                 meta.push(`📍 <strong>${p.wilaya}</strong>`);
+  if (p.likes !== undefined)    meta.push(`❤️ <strong>${p.likes}</strong>`);
+  document.getElementById('dtMeta').innerHTML = meta.map(m =>
+    `<span style="font-size:12px;color:var(--gray);display:flex;align-items:center;gap:4px">${m}</span>`
+  ).join('');
+
+  document.getElementById('dtSellerAv').textContent   = (p.sellerName||'V').charAt(0).toUpperCase();
+  document.getElementById('dtSellerName').textContent = p.sellerName || 'Vendeur';
+  document.getElementById('dtSellerSub').textContent  = p.wilaya || 'Algérie';
+
+  const descEl = document.getElementById('dtDesc');
+  if (p.description && p.description.trim()) {
+    descEl.textContent = p.description;
+    descEl.style.color = 'var(--dark)';
+    descEl.style.fontStyle = 'normal';
+  } else {
+    descEl.textContent = 'Aucune description fournie.';
+    descEl.style.color = 'var(--gray-light)';
+    descEl.style.fontStyle = 'italic';
+  }
+
+  document.getElementById('dtBtnContact').onclick = () =>
+    openChat({ stopPropagation:()=>{} }, p.id, p.title, p.price, p.sellerName, p.sellerId);
+
+  const favBtn = document.getElementById('dtBtnFav');
+  const isFav  = userFavorites.includes(p.id);
+  favBtn.innerHTML = isFav ? '❤️ Dans vos favoris' : '🤍 Ajouter aux favoris';
+  favBtn.classList.toggle('dt-fav-on', isFav);
+  favBtn.onclick = () => toggleFav({ stopPropagation:()=>{} }, p.id);
+}
+
+function closeDetail() {
+  document.getElementById('detailOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// ═══ [M] LANGUAGE SWITCHER ══════════════════════════════════
+  function lang(l) {
+  L = l;
+  document.body.classList.toggle('rtl', l === 'ar');
+  document.querySelectorAll('.lpill').forEach(b => b.classList.toggle('on', (l==='fr'&&b.textContent==='FR')||(l==='ar'&&b.textContent==='عر')));
+  document.querySelectorAll('[data-fr]').forEach(el => {
+    const v = el.getAttribute('data-'+l);
+    if(v && el.children.length === 0) el.textContent = v;
+  });
+  renderCatNav();
+  renderSbCats();
+}
+
+// ═══ [N] UI RENDERERS — category nav + sidebar ══════════════
+  function renderCatNav() {
+  const nav = document.getElementById('catNav');
+  const all = L==='ar'?'الكل':'Tout';
+  nav.innerHTML = `<div class="cat-tab ${activeCat==='Tout'?'on':''}" onclick="filterCat('Tout')">${all}</div>`
+    + cats.map(c => `<div class="cat-tab ${activeCat===c.fr?'on':''}" onclick="filterCat('${c.fr}')">${c.ico} ${L==='ar'?c.ar:c.fr}</div>`).join('');
+}
+
+function renderSbCats() {
+  const el = document.getElementById('sbCats');
+  const all = L==='ar'?'الكل':'Tout';
+  el.innerHTML = `<div class="sb-item ${activeCat==='Tout'?'on':''}" onclick="filterCat('Tout')"><span class="sb-ico">🏷️</span><span>${all}</span></div>`
+    + cats.map(c => `<div class="sb-item ${activeCat===c.fr?'on':''}" onclick="filterCat('${c.fr}')"><span class="sb-ico">${c.ico}</span><span>${L==='ar'?c.ar:c.fr}</span></div>`).join('');
+  const sizesEl = document.getElementById('sbSizes');
+  if (sizesEl) {
+    const allSizes = [...new Set([...clothingSizes, ...shoeSizes])];
+    sizesEl.innerHTML = allSizes.map(s =>
+      `<div class="sb-item" onclick="filterSizeFromSidebar('${s}')"><span class="sb-ico">📐</span><span>${s}</span></div>`
+    ).join('');
+  }
+}
+
+// ═══ [O] MODAL OPEN / CLOSE HELPERS ════════════════════════
+  function openPost() {
+  if (!currentUser) { openAuth('login'); return showToast('Connecte-toi pour vendre'); }
+  _imageFiles = [];
+  onCatChange('Femme');   // init subcats + size chips for default category
+  _renderPhotoGrid();
+  document.getElementById('postOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closePost() {
+  document.getElementById('postOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function closePostOuter(e) { if(e.target.id==='postOverlay') closePost(); }
+
+function openAuth(mode) {
+  authMode         = mode || 'signup';
+  emailFormVisible = false;
+  // Reset all panels to default state
+  document.getElementById('emailForm').classList.remove('show');
+  document.getElementById('socialBtns').style.display = 'block';
+  document.getElementById('phoneStep1').classList.remove('show');
+  document.getElementById('phoneStep2').classList.remove('show');
+  switchTab(authMode);
+  document.getElementById('authOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeAuth() {
+  document.getElementById('authOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function closeAuthOuter(e) { if(e.target.id==='authOverlay') closeAuth(); }
+
+function switchTab(mode) {
+  authMode = mode;
+  document.getElementById('tabSignup').classList.toggle('on', mode==='signup');
+  document.getElementById('tabLogin').classList.toggle('on', mode==='login');
+  const sf = document.getElementById('signupFields');
+  if(sf) sf.style.display = mode==='signup' ? 'block' : 'none';
+  const btn = document.getElementById('authSubmitBtn');
+  if(btn) btn.textContent = mode==='signup' ? 'Créer mon compte' : 'Se connecter';
+}
+
+function toggleEmailForm() {
+  emailFormVisible = !emailFormVisible;
+  document.getElementById('emailForm').classList.toggle('show', emailFormVisible);
+  document.getElementById('socialBtns').style.display = emailFormVisible ? 'none' : 'block';
+}
+
+function socialAuth(provider) {
+  if (provider === 'Google')   { loginGoogle(); return; }
+  if (provider === 'Facebook') { showToast('Facebook — bientôt disponible !'); return; }
+  if (provider === 'Apple')    { showToast('Apple — bientôt disponible !'); return; }
+  showToast(`${provider} — bientôt disponible !`);
+}
+
+function submitAuth() { loginEmail(); }
+// ═══ [C2] PHONE AUTH ══════════════════════════════════════════
+
+/** Show phone flow: hide social buttons, show step N */
+function startPhoneAuth() {
+  document.getElementById('socialBtns').style.display = 'none';
+  document.getElementById('emailForm').classList.remove('show');
+  showPhoneStep(1);
+}
+
+function showPhoneStep(n) {
+  document.getElementById('phoneStep1').classList.toggle('show', n === 1);
+  document.getElementById('phoneStep2').classList.toggle('show', n === 2);
+}
+
+function cancelPhoneAuth() {
+  showPhoneStep(0);
+  document.getElementById('socialBtns').style.display = 'block';
+  if (recaptchaVerifier) {
+    try { recaptchaVerifier.clear(); } catch(_) {}
+    recaptchaVerifier = null;
+  }
+}
+
+async function sendOTP() {
+  const prefix = document.getElementById('phonePrefix').value.trim();
+  const number = document.getElementById('phoneNumber').value.trim().replace(/\s/g, '');
+  if (!number) return showToast('Entre ton numéro de téléphone');
+
+  const fullPhone = prefix + number;
+  const btn = document.getElementById('btnSendOTP');
+  btn.textContent = 'Envoi en cours...';
+  btn.disabled    = true;
+
+  try {
+    if (recaptchaVerifier) {
+      try { recaptchaVerifier.clear(); } catch(_) {}
+    }
+    recaptchaVerifier = new firebase.auth.RecaptchaVerifier(
+      'recaptcha-container',
+      { size: 'invisible' }
+    );
+    phoneConfirmResult = await auth.signInWithPhoneNumber(fullPhone, recaptchaVerifier);
+    document.getElementById('phoneSentTo').textContent = fullPhone;
+    document.querySelectorAll('.otp-digit').forEach(i => i.value = '');
+    showPhoneStep(2);
+    setTimeout(() => document.querySelector('.otp-digit')?.focus(), 100);
+  } catch(e) {
+    const msgs = {
+      'auth/invalid-phone-number': 'Numéro de téléphone invalide',
+      'auth/too-many-requests':    'Trop de tentatives — réessaie plus tard',
+      'auth/quota-exceeded':       'Quota SMS dépassé — réessaie plus tard',
+    };
+    showToast('❌ ' + (msgs[e.code] || e.message));
+    if (recaptchaVerifier) {
+      try { recaptchaVerifier.clear(); } catch(_) {}
+      recaptchaVerifier = null;
+    }
+  } finally {
+    btn.textContent = 'Envoyer le code SMS';
+    btn.disabled    = false;
+  }
+}
+
+async function verifyOTP() {
+  const digits = [...document.querySelectorAll('.otp-digit')].map(i => i.value).join('');
+  if (digits.length !== 6) return showToast('Entre les 6 chiffres du code');
+
+  const btn = document.getElementById('btnVerifyOTP');
+  btn.textContent = 'Vérification...';
+  btn.disabled    = true;
+
+  try {
+    const result = await phoneConfirmResult.confirm(digits);
+    await createUserProfile(result.user);
+    closeAuth();
+    showToast('✅ Connecté par SMS !');
+  } catch(e) {
+    const msgs = {
+      'auth/invalid-verification-code': 'Code incorrect',
+      'auth/code-expired':              'Code expiré — demande un nouveau',
+    };
+    showToast('❌ ' + (msgs[e.code] || e.message));
+  } finally {
+    btn.textContent = 'Vérifier le code';
+    btn.disabled    = false;
+  }
+}
+
+/** Auto-advance OTP cursor and auto-submit when all 6 filled */
+function otpNext(input, index) {
+  input.value = input.value.replace(/\D/g, '');
+  const digits = document.querySelectorAll('.otp-digit');
+  if (input.value && index < 5) digits[index + 1].focus();
+  if ([...digits].every(d => d.value)) verifyOTP();
+}
+
+
+// ═══ [P] NOTIFICATIONS DROPDOWN ════════════════════════════
+function toggleNotif() {
+  document.getElementById('notifDrop').classList.toggle('open');
+  // Mark all as read when dropdown is opened
+  if (document.getElementById('notifDrop').classList.contains('open')) {
+    unreadCount = 0;
+    updateBadge(0);
+    document.querySelectorAll('#notifList .nd-item.unread').forEach(el => el.classList.remove('unread'));
+  }
+}
+
+/** Update the red badge number on the bell icon */
+function updateBadge(n) {
+  const b = document.querySelector('.badge-dot');
+  if (!b) return;
+  if (n <= 0) { b.style.display = 'none'; return; }
+  b.style.display = 'flex';
+  b.textContent   = n > 9 ? '9+' : n;
+}
+
+/** Render incoming message notifications into the dropdown */
+function renderNotifList(messages) {
+  const list = document.getElementById('notifList');
+  if (!list) return;
+  if (!messages.length) {
+    list.innerHTML = '<div class="nd-item"><div class="nd-ico">🎉</div><div><div class="nd-txt">Bienvenue ! Publiez votre première annonce gratuitement.</div><div class="nd-time">maintenant</div></div></div>';
+    return;
+  }
+  list.innerHTML = messages.slice(0, 10).map((m, i) => {
+    const isUnread = i < unreadCount;
+    const initial  = (m.senderName || 'U').charAt(0).toUpperCase();
+    const preview  = m.text.length > 40 ? m.text.slice(0, 40) + '…' : m.text;
+    const t        = m.createdAt ? m.createdAt.toDate().toLocaleTimeString('fr-FR', {hour:'2-digit', minute:'2-digit'}) : '';
+    return `<div class="nd-item ${isUnread ? 'unread' : ''}" onclick="toggleNotif()">
+      <div class="nd-ico">💬</div>
+      <div>
+        <div class="nd-txt"><strong>${initial}</strong> ${preview}</div>
+        <div class="nd-time">${t}</div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+/**
+ * Listen for messages addressed TO the current user across all chats.
+ * Uses a collectionGroup query on "messages" where recipientId === uid.
+ * Falls back gracefully if index is not ready.
+ */
+function startNotifListener(uid) {
+  if (unsubscribeNotifs) { unsubscribeNotifs(); unsubscribeNotifs = null; }
+
+  unsubscribeNotifs = db.collectionGroup('messages')
+    .where('recipientId', '==', uid)
+    .orderBy('createdAt', 'desc')
+    .limit(20)
+    .onSnapshot(snap => {
+      const msgs = snap.docs.map(d => ({ ...d.data(), _chatId: d.ref.parent.parent.id }));
+
+      // Count truly new unread messages added since last snapshot
+      const added = snap.docChanges().filter(c => c.type === 'added' && c.doc.data().read === false);
+      if (added.length > 0 && !document.getElementById('notifDrop').classList.contains('open')) {
+        unreadCount += added.length;
+        updateBadge(unreadCount);
+      }
+
+      // 💬 badge = total unread received
+      const totalUnread = msgs.filter(m => m.read === false).length;
+      updateMsgBadge(totalUnread);
+
+      renderNotifList(msgs);
+    }, (err) => {
+      // collectionGroup index missing — log once, degrade gracefully
+      console.warn('Notif listener needs Firestore index:', err.message);
+    });
+}
+
+/** Update the 💬 badge on the messages nav button */
+function updateMsgBadge(n) {
+  const b = document.getElementById('msgBadge');
+  if (!b) return;
+  if (n <= 0) { b.style.display = 'none'; return; }
+  b.style.display = 'flex';
+  b.textContent   = n > 9 ? '9+' : n;
+}
+
+document.addEventListener('click', e => {
+  const btn = document.getElementById('notifTrigger');
+  const drop = document.getElementById('notifDrop');
+  if(btn && drop && !btn.contains(e.target) && !drop.contains(e.target)) drop.classList.remove('open');
+});
+
+// ═══ [P2] MESSAGES PAGE ══════════════════════════════════════
+
+/** Open the messages page overlay */
+function openMsgPage() {
+  if (!currentUser) { openAuth('login'); return showToast('Connecte-toi pour voir tes messages'); }
+  document.getElementById('msgOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  // Reset to list view
+  showConvList();
+  loadConversations(currentUser.uid);
+}
+
+/** Close the messages page overlay entirely */
+function closeMsgPage() {
+  document.getElementById('msgOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+  if (unsubscribeMsgPage) { unsubscribeMsgPage(); unsubscribeMsgPage = null; }
+  if (unsubscribeConvs)   { unsubscribeConvs();   unsubscribeConvs   = null; }
+  activeChatId       = null;
+  activeChatSellerId = null;
+  // Reset view state
+  document.getElementById('convList').classList.remove('hidden');
+  document.getElementById('msgpageChat').classList.remove('open');
+  document.getElementById('msgTopTitle').textContent = 'Messages';
+}
+
+/** Back button: if in chat view go back to list, else close */
+function msgGoBack() {
+  const chat = document.getElementById('msgpageChat');
+  if (chat.classList.contains('open')) {
+    showConvList();
+    if (unsubscribeMsgPage) { unsubscribeMsgPage(); unsubscribeMsgPage = null; }
+  } else {
+    closeMsgPage();
+  }
+}
+
+/** Show the conversation list panel */
+function showConvList() {
+  document.getElementById('convList').classList.remove('hidden');
+  document.getElementById('msgpageChat').classList.remove('open');
+  document.getElementById('msgTopTitle').textContent = 'Messages';
+}
+
+/** Show the in-page chat panel */
+function showMsgChat() {
+  document.getElementById('convList').classList.add('hidden');
+  document.getElementById('msgpageChat').classList.add('open');
+}
+
+/**
+ * Load all conversations for the current user.
+ * Strategy: query top-level chats collection for docs where the
+ * chatId contains the user's uid (both as sender and recipient).
+ */
+async function loadConversations(uid) {
+  const list = document.getElementById('convList');
+  list.innerHTML = '<div style="text-align:center;padding:40px;color:var(--gray)">Chargement...</div>';
+
+  // Tear down any previous real-time listener
+  if (unsubscribeConvs) { unsubscribeConvs(); unsubscribeConvs = null; }
+
+  try {
+    // Query last message in every chat where this user is sender OR recipient
+    // We use collectionGroup and deduplicate by parent chatId
+    const [sentSnap, recvSnap] = await Promise.all([
+      db.collectionGroup('messages').where('senderId',    '==', uid).orderBy('createdAt','desc').limit(50).get(),
+      db.collectionGroup('messages').where('recipientId', '==', uid).orderBy('createdAt','desc').limit(50).get(),
+    ]);
+
+    // Merge into a map: chatId → latest message doc
+    const chatMap = {};
+    const processSnap = (snap) => {
+      snap.docs.forEach(d => {
+        const chatId = d.ref.parent.parent.id;
+        if (!chatMap[chatId] || d.data().createdAt > chatMap[chatId].data().createdAt) {
+          chatMap[chatId] = d;
+        }
+      });
+    };
+    processSnap(sentSnap);
+    processSnap(recvSnap);
+
+    const chatIds = Object.keys(chatMap);
+    if (!chatIds.length) {
+      list.innerHTML = `<div class="conv-empty">
+        <div class="conv-empty-ico">💬</div>
+        <div class="conv-empty-txt">Aucune conversation pour l'instant</div>
+      </div>`;
+      return;
+    }
+
+    // Build conversation data for each unique chatId
+    const convData = await Promise.all(chatIds.map(async chatId => {
+      const lastMsg  = chatMap[chatId].data();
+      const isMe     = lastMsg.senderId === uid;
+      const otherUid  = isMe ? (lastMsg.recipientId   || '') : (lastMsg.senderId    || '');
+      const otherName = isMe ? (lastMsg.recipientName || lastMsg.senderName || 'Utilisateur')
+                              : (lastMsg.senderName   || 'Utilisateur');
+
+      // Count unread messages sent TO me not yet read
+      let unread = 0;
+      try {
+        const uSnap = await db.collection('chats').doc(chatId)
+          .collection('messages')
+          .where('recipientId', '==', uid)
+          .where('read', '==', false)
+          .get();
+        unread = uSnap.size;
+      } catch(_) {}
+
+      return { chatId, otherName, otherUid, lastText: lastMsg.text || '',
+               lastTime: lastMsg.createdAt, isMe, unread };
+    }));
+
+    // Sort newest first
+    convData.sort((a, b) => {
+      const ta = a.lastTime ? a.lastTime.toMillis() : 0;
+      const tb = b.lastTime ? b.lastTime.toMillis() : 0;
+      return tb - ta;
+    });
+
+    _renderConvList(convData);
+
+    // Real-time updates: re-render when any new message arrives
+    unsubscribeConvs = db.collectionGroup('messages')
+      .where('recipientId', '==', uid)
+      .orderBy('createdAt', 'desc')
+      .limit(1)
+      .onSnapshot(() => {
+        // Re-load (debounced) on any new message
+        if (document.getElementById('msgOverlay').classList.contains('open')) {
+          loadConversations(uid);
+        }
+      }, () => {});
+
+  } catch(e) {
+    list.innerHTML = `<div class="conv-empty">
+      <div class="conv-empty-ico">⚠️</div>
+      <div class="conv-empty-txt">Erreur de chargement</div>
+    </div>`;
+    console.error('loadConversations:', e);
+  }
+}
+
+function _renderConvList(convData) {
+  const list = document.getElementById('convList');
+  list.innerHTML = convData.map(c => {
+    const initial = (c.otherName || '?').charAt(0).toUpperCase();
+    const preview = c.isMe ? `Vous : ${c.lastText}` : c.lastText;
+    const timeStr = c.lastTime
+      ? c.lastTime.toDate().toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })
+      : '';
+    const safeName = c.otherName.replace(/\/g,'\\').replace(/'/g,"\'");
+    return `<div class="conv-item ${c.unread > 0 ? 'unread' : ''}"
+                 onclick="openConvChat('${c.chatId}','${safeName}','${c.otherUid}')">
+      <div class="conv-av them">${initial}</div>
+      <div class="conv-info">
+        <div class="conv-name">${c.otherName}</div>
+        <div class="conv-preview">${preview}</div>
+      </div>
+      <div class="conv-meta">
+        <div class="conv-time">${timeStr}</div>
+        ${c.unread > 0 ? `<span class="conv-badge">${c.unread}</span>` : ''}
+      </div>
+    </div>`;
+  }).join('') || `<div class="conv-empty"><div class="conv-empty-ico">💬</div><div class="conv-empty-txt">Aucune conversation pour l'instant</div></div>`;
+}
+
+/**
+ * Open a specific conversation in the in-page chat view.
+ */
+function openConvChat(chatId, otherName, otherUid) {
+  activeChatId       = chatId;
+  activeChatSellerId = otherUid;
+
+  // Update topbar
+  document.getElementById('msgTopTitle').textContent = otherName;
+
+  // chatId format: uid1_uid2_productId
+  // Firebase UIDs have no underscores, so we can safely find the 3rd segment
+  const uidPart   = chatId.lastIndexOf('_');
+  const productId = uidPart >= 0 ? chatId.slice(uidPart + 1) : '';
+
+  // Clear product preview (will populate if product exists)
+  document.getElementById('msgpageIco').textContent      = '👗';
+  document.getElementById('msgpageProdName').textContent = 'Conversation';
+  document.getElementById('msgpageProdPrice').textContent = '';
+
+  // Optionally load product info
+  if (productId && productId.length > 5) {
+    db.collection('products').doc(productId).get().then(snap => {
+      if (snap.exists) {
+        const p = snap.data();
+        document.getElementById('msgpageProdName').textContent  = p.title  || '';
+        document.getElementById('msgpageProdPrice').textContent = p.price
+          ? Number(p.price).toLocaleString('fr-DZ') + ' DA' : '';
+      }
+    }).catch(() => {});
+  }
+
+  showMsgChat();
+
+  // Subscribe to messages
+  if (unsubscribeMsgPage) unsubscribeMsgPage();
+  const msgsEl = document.getElementById('msgpageMsgs');
+  msgsEl.innerHTML = '<div style="text-align:center;padding:16px;color:var(--gray);font-size:12px">Chargement...</div>';
+
+  unsubscribeMsgPage = db.collection('chats').doc(chatId)
+    .collection('messages')
+    .orderBy('createdAt', 'asc')
+    .onSnapshot(snap => {
+      if (snap.empty) {
+        msgsEl.innerHTML = '<div style="text-align:center;padding:16px;color:var(--gray);font-size:12px">Commence la conversation 👋</div>';
+        return;
+      }
+      msgsEl.innerHTML = snap.docs.map(d => {
+        const m    = d.data();
+        const isMe = m.senderId === currentUser.uid;
+        const t    = m.createdAt
+          ? m.createdAt.toDate().toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })
+          : '';
+        return `<div class="bubble-wrap ${isMe ? 'me' : 'them'}">
+          <div class="bubble ${isMe ? 'me' : 'them'}">${m.text}</div>
+          <div class="bubble-time">${t}</div>
+        </div>`;
+      }).join('');
+      msgsEl.scrollTop = msgsEl.scrollHeight;
+
+      // Mark messages as read and update badge immediately
+      let markedAny = false;
+      snap.docs.forEach(d => {
+        const m = d.data();
+        if (m.recipientId === currentUser.uid && m.read === false) {
+          d.ref.update({ read: true }).catch(() => {});
+          markedAny = true;
+        }
+      });
+      if (markedAny) {
+        unreadCount = Math.max(0, unreadCount - 1);
+        updateBadge(unreadCount);
+      }
+    });
+}
+
+/** Send from the in-page chat input */
+async function msgpageSend() {
+  const inp  = document.getElementById('msgpageInp');
+  const text = inp.value.trim();
+  if (!text || !currentUser || !activeChatId) return;
+  inp.value = '';
+  await db.collection('chats').doc(activeChatId).collection('messages').add({
+    text,
+    senderId:      currentUser.uid,
+    senderName:    currentUser.displayName || currentUser.email,
+    recipientId:   activeChatSellerId,
+    recipientName: document.getElementById('msgTopTitle').textContent || 'Utilisateur',
+    read:          false,
+    createdAt:     firebase.firestore.FieldValue.serverTimestamp()
+  });
+}
+
+// ═══ [Q] TOAST ══════════════════════════════════════════════
+  function showToast(msg) {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.classList.add('show');
+  clearTimeout(toastT);
+  toastT = setTimeout(() => el.classList.remove('show'), 2800);
+}
+
+// ═══ [R] INIT — runs once on page load ══════════════════════
+  renderCatNav();
+  renderSbCats();
+</script>
+
+<!-- ═══════════════════════════════════════════════════════
+     MESSAGES PAGE OVERLAY
+     Full-screen overlay: conversation list + in-page chat
+════════════════════════════════════════════════════════ -->
+<div class="msg-overlay" id="msgOverlay">
+
+  <!-- Top bar — switches between list title and chat header -->
+  <div class="msg-topbar">
+    <button class="msg-back" id="msgBackBtn" onclick="msgGoBack()">←</button>
+    <div class="msg-topbar-title" id="msgTopTitle">Messages</div>
+    <button class="msg-back" onclick="closeMsgPage()" style="margin-left:auto">✕</button>
+  </div>
+
+  <!-- CONVERSATION LIST -->
+  <div class="conv-list" id="convList">
+    <div class="conv-empty">
+      <div class="conv-empty-ico">💬</div>
+      <div class="conv-empty-txt">Aucune conversation pour l'instant</div>
+    </div>
+  </div>
+
+  <!-- IN-PAGE CHAT (shown when a conversation is tapped) -->
+  <div class="msgpage-chat" id="msgpageChat">
+    <!-- product mini-preview bar -->
+    <div style="background:var(--bg);border-bottom:1px solid var(--border);padding:10px 16px;display:flex;align-items:center;gap:10px;flex-shrink:0;" id="msgpagePreview">
+      <div style="font-size:20px" id="msgpageIco">👗</div>
+      <div>
+        <div style="font-size:12px;font-weight:600;color:var(--dark)" id="msgpageProdName"></div>
+        <div style="font-size:12px;font-family:'Nunito',sans-serif;font-weight:700;color:var(--black)" id="msgpageProdPrice"></div>
+      </div>
+    </div>
+    <div class="msgpage-msgs" id="msgpageMsgs"></div>
+    <div class="msgpage-foot">
+      <input class="msgpage-inp" id="msgpageInp" placeholder="Écrire un message..."
+             onkeypress="if(event.key==='Enter')msgpageSend()" />
+      <button class="msgpage-send" onclick="msgpageSend()">➤</button>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>
