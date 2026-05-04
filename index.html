@@ -2464,9 +2464,35 @@ border-radius: 10px; padding: 14px 16px;
   appId: "1:429650296358:web:650afbef475af522f9b0e7"
 };
 
-firebase.initializeApp(firebaseConfig);
-const auth = firebase.auth();
-const db = firebase.firestore();
+let auth, db;
+try {
+  firebase.initializeApp(firebaseConfig);
+  auth = firebase.auth();
+  db   = firebase.firestore();
+} catch(e) {
+  console.error('Firebase failed to initialise:', e);
+  // Minimal stubs so onclick handlers don't throw if Firebase CDN is blocked
+  const _noSnap = { docs: [], docChanges: () => [], empty: true, size: 0 };
+  const _col = () => ({
+    doc: () => ({ get: () => Promise.resolve({ exists: false, data: ()=>({}) }),
+                  set: () => Promise.resolve(), update: () => Promise.resolve(),
+                  collection: () => _col() }),
+    add: () => Promise.resolve({ id: 'offline' }),
+    where: function(){ return this; }, orderBy: function(){ return this; },
+    limit: function(){ return this; },
+    get: () => Promise.resolve(_noSnap),
+    onSnapshot: (cb, _err) => { try { cb(_noSnap); } catch(x){} return ()=>{}; }
+  });
+  auth = { onAuthStateChanged: cb => { cb(null); return ()=>{}; },
+           signOut: () => Promise.resolve(),
+           signInWithPopup: () => Promise.reject(new Error('Offline')),
+           createUserWithEmailAndPassword: () => Promise.reject(new Error('Offline')),
+           signInWithEmailAndPassword: () => Promise.reject(new Error('Offline')),
+           RecaptchaVerifier: function(){} };
+  db   = { collection: _col, collectionGroup: _col,
+           batch: () => ({ set:()=>{}, update:()=>{}, delete:()=>{}, commit:()=>Promise.resolve() }),
+           FieldValue: { serverTimestamp: ()=>null, arrayUnion: ()=>[], arrayRemove: ()=>[], increment: n=>n } };
+}
 
 // ═══ [B] GLOBAL STATE ════════════════════════════════════════
   let L = 'fr';
@@ -4080,6 +4106,62 @@ function closeProfile() {
 }
 
 // ═══ [R] INIT — runs once on page load ══════════════════════
+
+// Expose all onclick-referenced functions to window explicitly
+// This guarantees they work regardless of script scope or load order
+window.openAuth          = (...a) => openAuth(...a);
+window.closeAuth         = ()    => closeAuth();
+window.openPost          = ()    => openPost();
+window.closePost         = ()    => closePost();
+window.closePostOuter    = (e)   => closePostOuter(e);
+window.lang              = (l)   => lang(l);
+window.search            = ()    => search();
+window.sort              = (v)   => sort(v);
+window.filterCat         = (c)   => filterCat(c);
+window.filterW           = (w)   => filterW(w);
+window.filterState       = (s)   => filterState(s);
+window.filterSizeFromSidebar = (s) => filterSizeFromSidebar(s);
+window.openProductDetail = (id)  => openProductDetail(id);
+window.closeDetail       = ()    => closeDetail();
+window.toggleFav         = (e,id)=> toggleFav(e, id);
+window.openLikers        = (...a)=> openLikers(...a);
+window.closeLikers       = ()    => closeLikers();
+window.closeLikersOuter  = (e)   => closeLikersOuter(e);
+window.openChat          = (...a)=> openChat(...a);
+window.closeChat         = ()    => closeChat();
+window.closeChatOuter    = (e)   => closeChatOuter(e);
+window.send              = ()    => send();
+window.switchTab         = (m)   => switchTab(m);
+window.toggleEmailForm   = ()    => toggleEmailForm();
+window.socialAuth        = (p)   => socialAuth(p);
+window.submitAuth        = ()    => submitAuth();
+window.doLogout          = ()    => doLogout();
+window.toggleNotif       = ()    => toggleNotif();
+window.showFavorites     = ()    => showFavorites();
+window.openMsgPage       = ()    => openMsgPage();
+window.closeMsgPage      = ()    => closeMsgPage();
+window.msgGoBack         = ()    => msgGoBack();
+window.msgpageSend       = ()    => msgpageSend();
+window.openConvChat      = (...a)=> openConvChat(...a);
+window.openProfile       = (id)  => openProfile(id);
+window.closeProfile      = ()    => closeProfile();
+window.openProfileFromDetail = () => openProfileFromDetail();
+window.toggleFollow      = ()    => toggleFollow();
+window.saveProfile       = ()    => saveProfile();
+window.toggleProfileEdit = ()    => toggleProfileEdit();
+window.onCatChange       = (c)   => onCatChange(c);
+window.addPhotos         = (f)   => addPhotos(f);
+window._removePhoto      = (i)   => _removePhoto(i);
+window._selectSize       = (el,s)=> _selectSize(el, s);
+window.startPhoneAuth    = ()    => startPhoneAuth();
+window.cancelPhoneAuth   = ()    => cancelPhoneAuth();
+window.sendOTP           = ()    => sendOTP();
+window.verifyOTP         = ()    => verifyOTP();
+window.otpNext           = (el,i)=> otpNext(el, i);
+window.submitPost        = ()    => submitPost();
+window.showMsgChat       = ()    => showMsgChat();
+window.showConvList      = ()    => showConvList();
+
   // Restore saved language (default: fr)
   (function() {
     let saved = 'fr';
