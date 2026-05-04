@@ -1251,7 +1251,68 @@ text-decoration: underline;
 font-weight: 600;
 }
 .email-toggle:hover { color: var(--black); }
+/* ═══ [11b] PHONE AUTH PANEL ══════════════════════════════════ */
+/* Step indicator shown inside phone auth flow */
+.phone-step {
+  display: none;
+}
+.phone-step.show { display: block; }
 
+.phone-flag-wrap {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+.phone-prefix {
+  width: 72px;
+  padding: 12px 10px;
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  font-size: 14px;
+  font-family: 'Instrument Sans', sans-serif;
+  color: var(--dark);
+  outline: none;
+  text-align: center;
+  background: white;
+  flex-shrink: 0;
+}
+.phone-prefix:focus { border-color: var(--black); }
+
+.otp-row {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+.otp-digit {
+  width: 44px; height: 52px;
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  font-size: 22px;
+  font-weight: 700;
+  font-family: 'Nunito', sans-serif;
+  text-align: center;
+  color: var(--black);
+  outline: none;
+  transition: border-color 0.2s;
+  background: white;
+}
+.otp-digit:focus { border-color: var(--black); }
+
+.phone-resend {
+  text-align: center;
+  font-size: 12px;
+  color: var(--gray-light);
+  margin-top: 8px;
+}
+.phone-resend span {
+  color: var(--gray);
+  cursor: pointer;
+  text-decoration: underline;
+  font-weight: 600;
+}
+.phone-resend span:hover { color: var(--black); }
+    
 /* ═══ [12] TOAST — short feedback message ═════════════════════ */
 .toast {
 position: fixed;
