@@ -251,21 +251,15 @@ margin-bottom: 16px;
 
 .hero h1 {
 font-family: 'Nunito', sans-serif;
-font-size: clamp(22px, 3.5vw, 38px);
+font-size: clamp(18px, 2.6vw, 28px);
 font-weight: 800;
-line-height: 1.1;
-letter-spacing: -0.8px;
+line-height: 1.15;
+letter-spacing: -0.5px;
 margin-bottom: 10px;
 }
 
 .hero h1 em { font-style: normal; color: var(--gray-light); }
 
-.hero-sub {
-font-family: 'Cairo', sans-serif;
-font-size: 16px;
-color: #888;
-margin-bottom: 28px;
-}
 
 .hero-search-wrap {
 display: flex;
@@ -1789,6 +1783,160 @@ border: 1px solid var(--border);
 border-radius: 10px; padding: 14px 16px;
 }
 
+/* ═══ [15b] USER PROFILE OVERLAY ══════════════════════════════ */
+.profile-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 370;
+  background: var(--bg);
+  flex-direction: column;
+  overflow-y: auto;
+}
+.profile-overlay.open { display: flex; }
+
+.profile-topbar {
+  background: white;
+  border-bottom: 1px solid var(--border);
+  padding: 0 20px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+.profile-topbar-title {
+  font-family: 'Nunito', sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--black);
+  flex: 1;
+}
+.profile-back {
+  width: 32px; height: 32px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: white;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; color: var(--gray);
+  transition: border-color 0.15s;
+  flex-shrink: 0;
+}
+.profile-back:hover { border-color: var(--black); color: var(--black); }
+
+/* Hero cover + avatar */
+.profile-hero {
+  background: var(--black);
+  padding: 32px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  position: relative;
+}
+.profile-av-wrap { position: relative; }
+.profile-av {
+  width: 80px; height: 80px;
+  border-radius: 50%;
+  background: var(--dark2);
+  border: 3px solid white;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Nunito', sans-serif;
+  font-size: 32px; font-weight: 900;
+  color: white;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.profile-av img { width: 100%; height: 100%; object-fit: cover; }
+
+.profile-name {
+  font-family: 'Nunito', sans-serif;
+  font-size: 20px; font-weight: 900;
+  color: white; text-align: center;
+}
+.profile-location {
+  font-size: 12px; color: #aaa;
+  display: flex; align-items: center; gap: 4px;
+}
+.profile-bio {
+  font-size: 13px; color: #ccc;
+  text-align: center; max-width: 420px;
+  line-height: 1.5;
+}
+
+/* Stats row */
+.profile-stats {
+  display: flex;
+  gap: 0;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  padding-top: 16px;
+  width: 100%;
+  max-width: 320px;
+  justify-content: space-around;
+}
+.profile-stat { text-align: center; }
+.profile-stat-n {
+  font-family: 'Nunito', sans-serif;
+  font-size: 20px; font-weight: 900; color: white;
+}
+.profile-stat-l { font-size: 11px; color: #888; margin-top: 2px; }
+
+/* Follow button */
+.btn-follow {
+  padding: 10px 28px;
+  border-radius: 8px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 13px; font-weight: 800;
+  cursor: pointer;
+  border: 2px solid white;
+  background: transparent; color: white;
+  transition: all 0.2s;
+  letter-spacing: 0.3px;
+}
+.btn-follow:hover    { background: white; color: var(--black); }
+.btn-follow.following { background: white; color: var(--black); }
+
+/* Edit profile form */
+.profile-edit-form {
+  background: white;
+  border-radius: 14px;
+  margin: 16px;
+  padding: 20px;
+  border: 1px solid var(--border);
+}
+.profile-edit-form .fg { margin-bottom: 12px; }
+.profile-edit-form .fl-label {
+  display: block;
+  font-size: 10px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.6px;
+  color: var(--gray); margin-bottom: 5px;
+}
+
+/* Listings grid inside profile */
+.profile-listings-wrap {
+  padding: 16px;
+}
+.profile-section-head {
+  font-family: 'Nunito', sans-serif;
+  font-size: 15px; font-weight: 800;
+  color: var(--black);
+  margin-bottom: 14px;
+  display: flex; align-items: center; gap: 8px;
+}
+.profile-section-count {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  font-size: 11px; font-weight: 700;
+  font-family: 'Instrument Sans', sans-serif;
+  color: var(--gray);
+  padding: 2px 8px;
+}
+
 /* ═══ [16] RESPONSIVE BREAKPOINTS ════════════════════════════ */
 @media (max-width: 900px) {
 .layout { grid-template-columns: 1fr; }
@@ -1823,8 +1971,9 @@ border-radius: 10px; padding: 14px 16px;
     </div>
     <div class="nav-actions">
       <div class="lang-pills">
-        <button class="lpill on" onclick="lang('fr')">FR</button>
-        <button class="lpill" onclick="lang('ar')">عر</button>
+        <button class="lpill on" id="lpill-fr" onclick="lang('fr')">FR</button>
+        <button class="lpill"    id="lpill-en" onclick="lang('en')">EN</button>
+        <button class="lpill"    id="lpill-ar" onclick="lang('ar')">عر</button>
       </div>
       <div style="position:relative">
         <button class="icon-btn" id="notifTrigger" onclick="toggleNotif()">
@@ -1832,12 +1981,12 @@ border-radius: 10px; padding: 14px 16px;
           <div class="badge-dot" style="display:none">0</div>
         </button>
         <div class="notif-drop" id="notifDrop">
-          <div class="nd-head" data-fr="Notifications" data-ar="الإشعارات">Notifications</div>
+          <div class="nd-head" data-fr="Notifications" data-en="Notifications" data-ar="الإشعارات">Notifications</div>
           <!-- injected by renderNotifList() -->
           <div id="notifList">
             <div class="nd-item">
               <div class="nd-ico">🎉</div>
-              <div><div class="nd-txt" data-fr="Bienvenue ! Publiez votre première annonce gratuitement." data-ar="مرحباً! انشر أول إعلان مجاناً.">Bienvenue ! Publiez votre première annonce gratuitement.</div><div class="nd-time">maintenant</div></div>
+              <div><div class="nd-txt" data-fr="Bienvenue ! Publiez votre première annonce gratuitement." data-en="Welcome! Post your first listing for free." data-ar="مرحباً! انشر أول إعلان مجاناً.">Bienvenue ! Publiez votre première annonce gratuitement.</div><div class="nd-time">maintenant</div></div>
             </div>
           </div>
         </div>
@@ -1847,14 +1996,14 @@ border-radius: 10px; padding: 14px 16px;
         💬
         <div class="badge-dot" id="msgBadge" style="display:none">0</div>
       </button>
-      <button class="nbtn nbtn-outline" id="btnConnexion" data-fr="Se connecter" data-ar="دخول" onclick="openAuth('login')">Se connecter</button>
-      <button class="nbtn nbtn-dark" id="btnInscription" onclick="openAuth('signup')" data-fr="S'inscrire" data-ar="تسجيل">S'inscrire</button>
+      <button class="nbtn nbtn-outline" id="btnConnexion" data-fr="Se connecter" data-en="Log in" data-ar="دخول" onclick="openAuth('login')">Se connecter</button>
+      <button class="nbtn nbtn-dark" id="btnInscription" onclick="openAuth('signup')" data-fr="S'inscrire" data-en="Sign up" data-ar="تسجيل">S'inscrire</button>
       <div id="userInfo" style="display:none;align-items:center;gap:8px;">
         <div style="width:32px;height:32px;border-radius:50%;background:var(--accent);color:white;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;font-family:'Nunito',sans-serif;" id="userAvatar">U</div>
         <span class="user-name" style="font-size:13px;font-weight:600;color:var(--dark);max-width:100px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;"></span>
       </div>
       <button class="nbtn" id="btnLogout" style="display:none;background:var(--bg);border:1px solid var(--border);color:var(--gray);font-size:12px;" onclick="doLogout()">Déconnexion</button>
-      <button class="nbtn" id="btnVendre" style="display:none;background:var(--accent);color:white;margin-left:2px;" data-fr="Vendre" data-ar="بيع" onclick="openPost()">Vendre</button>
+      <button class="nbtn" id="btnVendre" style="display:none;background:var(--accent);color:white;margin-left:2px;" data-fr="Vendre" data-en="Sell" data-ar="بيع" onclick="openPost()">Vendre</button>
     </div>
   </div>
 </nav>
@@ -1871,39 +2020,21 @@ border-radius: 10px; padding: 14px 16px;
 ════════════════════════════════════════════════════════ -->
 <div class="hero">
   <div class="hero-inner">
-    <div class="hero-eyebrow" data-fr="🇩🇿 MODE SECONDE MAIN" data-ar="🇩🇿 موضة مستعملة">🇩🇿 MODE SECONDE MAIN</div>
-    <h1>Achète & vends tes vêtements<br><em>partout en Algérie</em></h1>
-    <div class="hero-sub" data-fr="ملابس وأحذية — رجال، نساء، أطفال" data-ar="ملابس وأحذية — رجال، نساء، أطفال">ملابس وأحذية — رجال، نساء، أطفال</div>
-    <div class="hero-search-wrap">
+    <h1 data-fr="Achète &amp; vends tes vêtements<br><em>partout en Algérie</em>" data-en="Buy &amp; sell your clothes<br><em>across Algeria</em>" data-ar="اشترِ وبِع ملابسك<br><em>في كل أنحاء الجزائر</em>">Achète &amp; vends tes vêtements<br><em>partout en Algérie</em></h1>
+    <div class="hero-search-wrap" style="margin-top:20px">
       <input type="text" id="heroQ" placeholder="Nike, Zara, jeans Levi's..." onkeypress="if(event.key==='Enter')search()" />
-      <select id="wilayas" onchange="filterW(this.value)">
-        <option value="" data-fr="Toutes wilayas" data-ar="كل الولايات">Toutes wilayas</option>
-        <option>Adrar</option><option>Chlef</option><option>Laghouat</option><option>Oum El Bouaghi</option>
-        <option>Batna</option><option>Béjaïa</option><option>Biskra</option><option>Béchar</option>
-        <option>Blida</option><option>Bouira</option><option>Tamanrasset</option><option>Tébessa</option>
-        <option>Tlemcen</option><option>Tiaret</option><option>Tizi Ouzou</option><option>Alger</option>
-        <option>Djelfa</option><option>Jijel</option><option>Sétif</option><option>Saïda</option>
-        <option>Skikda</option><option>Sidi Bel Abbès</option><option>Annaba</option><option>Guelma</option>
-        <option>Constantine</option><option>Médéa</option><option>Mostaganem</option><option>M'Sila</option>
-        <option>Mascara</option><option>Ouargla</option><option>Oran</option><option>El Bayadh</option>
-        <option>Illizi</option><option>Bordj Bou Arréridj</option><option>Boumerdès</option><option>El Tarf</option>
-        <option>Tindouf</option><option>Tissemsilt</option><option>El Oued</option><option>Khenchela</option>
-        <option>Souk Ahras</option><option>Tipaza</option><option>Mila</option><option>Aïn Defla</option>
-        <option>Naâma</option><option>Aïn Témouchent</option><option>Ghardaïa</option><option>Relizane</option>
-        <option>Timimoun</option><option>Bordj Badji Mokhtar</option><option>Ouled Djellal</option>
-        <option>Béni Abbès</option><option>In Salah</option><option>In Guezzam</option>
-        <option>Touggourt</option><option>Djanet</option><option>El M'Ghair</option><option>El Meniaa</option>
-      </select>
-      <button onclick="search()" data-fr="Chercher" data-ar="بحث">Chercher</button>
+      <!-- wilayas select hidden — kept for filterW() compatibility -->
+      <select id="wilayas" onchange="filterW(this.value)" style="display:none"></select>
+      <button onclick="search()" data-fr="Chercher" data-en="Search" data-ar="بحث">Chercher</button>
     </div>
     <div class="hero-pills">
-      <div class="hero-pill" onclick="filterCat('Femme')">      👗 <span data-fr="Femme"       data-ar="نساء">Femme</span></div>
-      <div class="hero-pill" onclick="filterCat('Homme')">      👔 <span data-fr="Homme"       data-ar="رجال">Homme</span></div>
-      <div class="hero-pill" onclick="filterCat('Enfant')">     🧒 <span data-fr="Enfant"      data-ar="أطفال">Enfant</span></div>
-      <div class="hero-pill" onclick="filterCat('Chaussures')"> 👟 <span data-fr="Chaussures"  data-ar="أحذية">Chaussures</span></div>
-      <div class="hero-pill" onclick="filterCat('Accessoires')">👜 <span data-fr="Accessoires" data-ar="إكسسوارات">Accessoires</span></div>
-      <div class="hero-pill" onclick="filterCat('Beauté')">     🧴 <span data-fr="Beauté"      data-ar="جمال">Beauté</span></div>
-      <div class="hero-pill" onclick="filterCat('Maison')">     🏠 <span data-fr="Maison"      data-ar="منزل">Maison</span></div>
+      <div class="hero-pill" onclick="filterCat('Femme')">      👗 <span data-fr="Femme" data-en="Women"       data-ar="نساء">Femme</span></div>
+      <div class="hero-pill" onclick="filterCat('Homme')">      👔 <span data-fr="Homme" data-en="Men"       data-ar="رجال">Homme</span></div>
+      <div class="hero-pill" onclick="filterCat('Enfant')">     🧒 <span data-fr="Enfant" data-en="Kids"      data-ar="أطفال">Enfant</span></div>
+      <div class="hero-pill" onclick="filterCat('Chaussures')"> 👟 <span data-fr="Chaussures" data-en="Shoes"  data-ar="أحذية">Chaussures</span></div>
+      <div class="hero-pill" onclick="filterCat('Accessoires')">👜 <span data-fr="Accessoires" data-en="Accessories" data-ar="إكسسوارات">Accessoires</span></div>
+      <div class="hero-pill" onclick="filterCat('Beauté')">     🧴 <span data-fr="Beauté" data-en="Beauty"      data-ar="جمال">Beauté</span></div>
+      <div class="hero-pill" onclick="filterCat('Maison')">     🏠 <span data-fr="Maison" data-en="Home"      data-ar="منزل">Maison</span></div>
     </div>
   </div>
 </div>
@@ -1916,25 +2047,25 @@ border-radius: 10px; padding: 14px 16px;
   <!-- Promo banner -->
   <div class="promo-strip">
     <div class="promo-text">
-      <h2 data-fr="Tu as des vêtements à vendre ?" data-ar="لديك ملابس للبيع؟">Tu as des vêtements à vendre ?</h2>
-      <p data-fr="انشر إعلانك مجاناً في أقل من دقيقتين" data-ar="انشر إعلانك مجاناً في أقل من دقيقتين">انشر إعلانك مجاناً في أقل من دقيقتين</p>
+      <h2 data-fr="Tu as des vêtements à vendre ?" data-en="Got clothes to sell?" data-ar="لديك ملابس للبيع؟">Tu as des vêtements à vendre ?</h2>
+      <p data-fr="انشر إعلانك مجاناً في أقل من دقيقتين" data-en="Post your listing for free in under 2 minutes" data-ar="انشر إعلانك مجاناً في أقل من دقيقتين">انشر إعلانك مجاناً في أقل من دقيقتين</p>
     </div>
-    <button class="promo-btn" data-fr="Publier gratuitement" data-ar="نشر مجاناً" onclick="openPost()">Publier gratuitement</button>
+    <button class="promo-btn" data-fr="Publier gratuitement" data-en="List for free" data-ar="نشر مجاناً" onclick="openPost()">Publier gratuitement</button>
   </div>
 
   <div class="layout">
     <!-- ─── SIDEBAR ─────────────────────────────────────────── -->
     <aside class="sidebar">
       <div class="sidebar-block">
-        <div class="sb-head" data-fr="Catégories" data-ar="الفئات">Catégories</div>
+        <div class="sb-head" data-fr="Catégories" data-en="Categories" data-ar="الفئات">Catégories</div>
         <div id="sbCats"></div>
       </div>
 
       <div class="sidebar-block">
-        <div class="sb-head" data-fr="Wilaya" data-ar="الولاية">Wilaya</div>
+        <div class="sb-head" data-fr="Wilaya" data-en="Wilaya" data-ar="الولاية">Wilaya</div>
         <div class="sb-body">
           <select class="sb-select" onchange="filterW(this.value)">
-            <option value="" data-fr="Toutes" data-ar="الكل">Toutes</option>
+            <option value="" data-fr="Toutes" data-en="All" data-ar="الكل">Toutes</option>
             <option>Adrar</option><option>Chlef</option><option>Laghouat</option><option>Oum El Bouaghi</option>
             <option>Batna</option><option>Béjaïa</option><option>Biskra</option><option>Béchar</option>
             <option>Blida</option><option>Bouira</option><option>Tamanrasset</option><option>Tébessa</option>
@@ -1955,41 +2086,41 @@ border-radius: 10px; padding: 14px 16px;
       </div>
 
       <div class="sidebar-block">
-        <div class="sb-head" data-fr="Prix (DA)" data-ar="السعر (دج)">Prix (DA)</div>
+        <div class="sb-head" data-fr="Prix (DA)" data-en="Price (DA)" data-ar="السعر (دج)">Prix (DA)</div>
         <div class="sb-body">
           <div class="sb-price">
             <input class="sb-input" type="number" placeholder="Min" style="margin:0" />
             <span class="sb-price-sep">–</span>
             <input class="sb-input" type="number" placeholder="Max" style="margin:0" />
           </div>
-          <button class="sb-apply" data-fr="Appliquer" data-ar="تطبيق" onclick="showToast('Filtres appliqués ✓')">Appliquer</button>
+          <button class="sb-apply" data-fr="Appliquer" data-en="Apply" data-ar="تطبيق" onclick="showToast('Filtres appliqués ✓')">Appliquer</button>
         </div>
       </div>
 
       <div class="sidebar-block">
-        <div class="sb-head" data-fr="Taille" data-ar="المقاس">Taille</div>
+        <div class="sb-head" data-fr="Taille" data-en="Size" data-ar="المقاس">Taille</div>
         <div id="sbSizes"></div>
       </div>
 
       <div class="sidebar-block">
-        <div class="sb-head" data-fr="État" data-ar="الحالة">État</div>
-        <div class="sb-item" onclick="filterState('Neuf avec étiquette')"><span class="sb-ico">✨</span><span data-fr="Neuf avec étiquette"  data-ar="جديد بوسم">Neuf avec étiquette</span></div>
-        <div class="sb-item" onclick="filterState('Neuf sans étiquette')"><span class="sb-ico">🆕</span><span data-fr="Neuf sans étiquette" data-ar="جديد بدون وسم">Neuf sans étiquette</span></div>
-        <div class="sb-item" onclick="filterState('Très bon état')">       <span class="sb-ico">⭐</span><span data-fr="Très bon état"        data-ar="جيد جداً">Très bon état</span></div>
-        <div class="sb-item" onclick="filterState('Bon état')">            <span class="sb-ico">👍</span><span data-fr="Bon état"            data-ar="جيد">Bon état</span></div>
-        <div class="sb-item" onclick="filterState('Satisfaisant')">        <span class="sb-ico">✅</span><span data-fr="Satisfaisant"        data-ar="مقبول">Satisfaisant</span></div>
+        <div class="sb-head" data-fr="État" data-en="Condition" data-ar="الحالة">État</div>
+        <div class="sb-item" onclick="filterState('Neuf avec étiquette')"><span class="sb-ico">✨</span><span data-fr="Neuf avec étiquette" data-en="New with tags"  data-ar="جديد بوسم">Neuf avec étiquette</span></div>
+        <div class="sb-item" onclick="filterState('Neuf sans étiquette')"><span class="sb-ico">🆕</span><span data-fr="Neuf sans étiquette" data-en="New without tags" data-ar="جديد بدون وسم">Neuf sans étiquette</span></div>
+        <div class="sb-item" onclick="filterState('Très bon état')">       <span class="sb-ico">⭐</span><span data-fr="Très bon état" data-en="Very good"        data-ar="جيد جداً">Très bon état</span></div>
+        <div class="sb-item" onclick="filterState('Bon état')">            <span class="sb-ico">👍</span><span data-fr="Bon état" data-en="Good"            data-ar="جيد">Bon état</span></div>
+        <div class="sb-item" onclick="filterState('Satisfaisant')">        <span class="sb-ico">✅</span><span data-fr="Satisfaisant" data-en="Satisfactory"        data-ar="مقبول">Satisfaisant</span></div>
       </div>
     </aside>
 
     <!-- ─── LISTINGS GRID ───────────────────────────────────── -->
     <div>
       <div class="grid-head">
-        <div class="grid-count"><strong id="cnt">0</strong> <span data-fr="articles trouvés" data-ar="منتج وجد">articles trouvés</span></div>
+        <div class="grid-count"><strong id="cnt">0</strong> <span data-fr="articles trouvés" data-en="items found" data-ar="منتج وجد">articles trouvés</span></div>
         <select class="grid-sort" onchange="sort(this.value)">
-          <option value="r" data-fr="Plus récents" data-ar="الأحدث">Plus récents</option>
-          <option value="pa" data-fr="Prix ↑" data-ar="السعر ↑">Prix ↑</option>
-          <option value="pd" data-fr="Prix ↓" data-ar="السعر ↓">Prix ↓</option>
-          <option value="pop" data-fr="Popularité" data-ar="الأكثر شعبية">Popularité</option>
+          <option value="r" data-fr="Plus récents" data-en="Newest" data-ar="الأحدث">Plus récents</option>
+          <option value="pa" data-fr="Prix ↑" data-en="Price ↑" data-ar="السعر ↑">Prix ↑</option>
+          <option value="pd" data-fr="Prix ↓" data-en="Price ↓" data-ar="السعر ↓">Prix ↓</option>
+          <option value="pop" data-fr="Popularité" data-en="Popularity" data-ar="الأكثر شعبية">Popularité</option>
         </select>
       </div>
       <div class="listings" id="grid"></div>
@@ -2008,11 +2139,11 @@ border-radius: 10px; padding: 14px 16px;
       <div class="footer-tagline">الموضة المستعملة الجزائرية — Mode seconde main 🇩🇿</div>
     </div>
     <div class="footer-links">
-      <a href="#" data-fr="À propos" data-ar="من نحن">À propos</a>
-      <a href="#" data-fr="Aide" data-ar="مساعدة">Aide</a>
-      <a href="#" data-fr="Sécurité" data-ar="الأمان">Sécurité</a>
-      <a href="#" data-fr="CGU" data-ar="الشروط">CGU</a>
-      <a href="#" data-fr="Contact" data-ar="تواصل">Contact</a>
+      <a href="#" data-fr="À propos" data-en="About" data-ar="من نحن">À propos</a>
+      <a href="#" data-fr="Aide" data-en="Help" data-ar="مساعدة">Aide</a>
+      <a href="#" data-fr="Sécurité" data-en="Safety" data-ar="الأمان">Sécurité</a>
+      <a href="#" data-fr="CGU" data-en="Terms" data-ar="الشروط">CGU</a>
+      <a href="#" data-fr="Contact" data-en="Contact" data-ar="تواصل">Contact</a>
     </div>
     <div class="footer-copy">© 2025 chifoune.com<br>Tous droits réservés</div>
   </div>
@@ -2052,7 +2183,7 @@ border-radius: 10px; padding: 14px 16px;
 <div class="post-overlay" id="postOverlay" onclick="closePostOuter(event)">
   <div class="post-box">
     <div class="post-head">
-      <div class="post-title" data-fr="Vendre un article" data-ar="بيع منتج">Vendre un article</div>
+      <div class="post-title" data-fr="Vendre un article" data-en="Sell an item" data-ar="بيع منتج">Vendre un article</div>
       <button class="post-close" onclick="closePost()">✕</button>
     </div>
 
@@ -2150,7 +2281,7 @@ border-radius: 10px; padding: 14px 16px;
   <div class="likers-box">
     <div class="likers-head">
       <div>
-        <div class="likers-title" id="likersTitleText" data-fr="Personnes qui aiment" data-ar="من أعجبهم هذا">Personnes qui aiment</div>
+        <div class="likers-title" id="likersTitleText" data-fr="Personnes qui aiment" data-en="People who liked" data-ar="من أعجبهم هذا">Personnes qui aiment</div>
       </div>
       <div style="display:flex;align-items:center;gap:8px">
         <div class="likers-count" id="likersCount">0</div>
@@ -2176,11 +2307,11 @@ border-radius: 10px; padding: 14px 16px;
     <button class="auth-close" onclick="closeAuth()">✕</button>
 
     <div class="auth-logo">chifoune<span class="dot">.</span></div>
-    <div class="auth-tagline" id="authTagline">الموضة المستعملة الجزائرية 🇩🇿</div>
+    <div class="auth-tagline" id="authTagline" data-fr="La mode seconde main algérienne 🇩🇿" data-en="Algerian second-hand fashion 🇩🇿" data-ar="الموضة المستعملة الجزائرية 🇩🇿">La mode seconde main algérienne 🇩🇿</div>
 
     <div class="auth-tabs">
-      <button class="auth-tab on" id="tabSignup" onclick="switchTab('signup')" data-fr="Créer un compte" data-ar="إنشاء حساب">Créer un compte</button>
-      <button class="auth-tab" id="tabLogin" onclick="switchTab('login')" data-fr="Se connecter" data-ar="تسجيل الدخول">Se connecter</button>
+      <button class="auth-tab on" id="tabSignup" onclick="switchTab('signup')" data-fr="Créer un compte" data-en="Create account" data-ar="إنشاء حساب">Créer un compte</button>
+      <button class="auth-tab" id="tabLogin" onclick="switchTab('login')" data-fr="Se connecter" data-en="Log in" data-ar="تسجيل الدخول">Se connecter</button>
     </div>
 
     <div id="socialBtns">
@@ -2188,30 +2319,30 @@ border-radius: 10px; padding: 14px 16px;
         <span class="social-ico">
           <svg width="20" height="20" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
         </span>
-        <span class="social-txt" data-fr="Continuer avec Google" data-ar="المتابعة مع Google">Continuer avec Google</span>
+        <span class="social-txt" data-fr="Continuer avec Google" data-en="Continue with Google" data-ar="المتابعة مع Google">Continuer avec Google</span>
       </button>
 
       <button class="social-btn facebook" onclick="socialAuth('Facebook')">
         <span class="social-ico">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="#1877F2"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
         </span>
-        <span class="social-txt" data-fr="Continuer avec Facebook" data-ar="المتابعة مع Facebook">Continuer avec Facebook</span>
+        <span class="social-txt" data-fr="Continuer avec Facebook" data-en="Continue with Facebook" data-ar="المتابعة مع Facebook">Continuer avec Facebook</span>
       </button>
 
       <button class="social-btn apple" onclick="socialAuth('Apple')">
         <span class="social-ico">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
         </span>
-        <span class="social-txt" data-fr="Continuer avec Apple" data-ar="المتابعة مع Apple">Continuer avec Apple</span>
+        <span class="social-txt" data-fr="Continuer avec Apple" data-en="Continue with Apple" data-ar="المتابعة مع Apple">Continuer avec Apple</span>
       </button>
 
       <button class="social-btn phone" onclick="startPhoneAuth()">
         <span class="social-ico">📱</span>
-        <span class="social-txt" data-fr="Continuer avec numéro de téléphone" data-ar="المتابعة برقم الهاتف">Continuer avec numéro de téléphone</span>
+        <span class="social-txt" data-fr="Continuer avec numéro de téléphone" data-en="Continue with phone number" data-ar="المتابعة برقم الهاتف">Continuer avec numéro de téléphone</span>
       </button>
 
-      <div class="auth-divider" data-fr="ou avec email" data-ar="أو بالبريد الإلكتروني">ou avec email</div>
-      <div class="email-toggle" onclick="toggleEmailForm()" id="emailToggle" data-fr="Continuer avec email" data-ar="المتابعة بالبريد الإلكتروني">Continuer avec email →</div>
+      <div class="auth-divider" data-fr="ou avec email" data-en="or with email" data-ar="أو بالبريد الإلكتروني">ou avec email</div>
+      <div class="email-toggle" onclick="toggleEmailForm()" id="emailToggle" data-fr="Continuer avec email" data-en="Continue with email" data-ar="المتابعة بالبريد الإلكتروني">Continuer avec email →</div>
     </div>
 
       <!-- ─── PHONE AUTH: Step 1 — enter number ─────────────── -->
@@ -2260,11 +2391,11 @@ border-radius: 10px; padding: 14px 16px;
       </div>
       <input class="auth-input" type="email" placeholder="Adresse email" id="authEmail" />
       <input class="auth-input" type="password" placeholder="Mot de passe" id="authPass" />
-      <button class="auth-submit" onclick="submitAuth()" id="authSubmitBtn" data-fr="Créer mon compte" data-ar="إنشاء حسابي">Créer mon compte</button>
-      <div class="email-toggle" onclick="toggleEmailForm()" style="margin-top:10px" data-fr="← Retour" data-ar="← رجوع">← Retour</div>
+      <button class="auth-submit" onclick="submitAuth()" id="authSubmitBtn" data-fr="Créer mon compte" data-en="Create my account" data-ar="إنشاء حسابي">Créer mon compte</button>
+      <div class="email-toggle" onclick="toggleEmailForm()" style="margin-top:10px" data-fr="← Retour" data-en="← Back" data-ar="← رجوع">← Retour</div>
     </div>
 
-    <div class="auth-terms" data-fr="En continuant, tu acceptes nos <a>Conditions d'utilisation</a> et notre <a>Politique de confidentialité</a>." data-ar="بالمتابعة، أنت توافق على شروط الاستخدام وسياسة الخصوصية.">
+    <div class="auth-terms" data-fr="En continuant, tu acceptes nos <a>Conditions d'utilisation</a> et notre <a>Politique de confidentialité</a>." data-en="By continuing, you agree to our <a>Terms of use</a> and <a>Privacy policy</a>." data-ar="بالمتابعة، أنت توافق على شروط الاستخدام وسياسة الخصوصية.">
       En continuant, tu acceptes nos <a>Conditions d'utilisation</a> et notre <a>Politique de confidentialité</a>.
     </div>
   </div>
@@ -2297,14 +2428,15 @@ border-radius: 10px; padding: 14px 16px;
         <button class="dt-btn-contact" id="dtBtnContact">💬 Contacter le vendeur</button>
         <button class="dt-btn-fav" id="dtBtnFav">🤍 Ajouter aux favoris</button>
         <div class="dt-safety">🛡️ Ne payez jamais en dehors de la plateforme. Chifoune ne peut pas garantir les transactions externes.</div>
-        <div class="dt-seller">
+        <div class="dt-seller" style="cursor:pointer" onclick="openProfileFromDetail()" id="dtSellerCard">
           <div style="font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--gray);margin-bottom:12px">Vendeur</div>
           <div style="display:flex;align-items:center;gap:10px">
             <div class="dt-seller-av" id="dtSellerAv">V</div>
-            <div>
+            <div style="flex:1">
               <div class="dt-seller-name" id="dtSellerName"></div>
               <div class="dt-seller-sub" id="dtSellerSub"></div>
             </div>
+            <div style="font-size:12px;color:var(--gray-light)">Voir le profil →</div>
           </div>
         </div>
         <div class="dt-desc-block">
@@ -2359,24 +2491,52 @@ let unsubscribeConvs = null;    // listener for conversation list
 let unsubscribeMsgPage = null;  // listener for open in-page chat
 let activeChatId = null;        // chatId currently open in msgpage
 let activeChatSellerId = null;  // sellerId for active msgpage chat
+let profileUserId      = null;  // uid of user currently viewed in profile overlay
+let unsubscribeProfile = null;  // Firestore listener for profile products
 let convUnreadMap = {};         // chatId → unread count map
 
 const cats = [
-  { ico:'👗', fr:'Femme',       ar:'نساء' },
-  { ico:'👔', fr:'Homme',       ar:'رجال' },
-  { ico:'🧒', fr:'Enfant',      ar:'أطفال' },
-  { ico:'👟', fr:'Chaussures',  ar:'أحذية' },
-  { ico:'👜', fr:'Accessoires', ar:'إكسسوارات' },
-  { ico:'🧴', fr:'Beauté',      ar:'جمال' },
-  { ico:'🏠', fr:'Maison',      ar:'منزل' },
+  { ico:'👗', fr:'Femme',       en:'Women',       ar:'نساء' },
+  { ico:'👔', fr:'Homme',       en:'Men',         ar:'رجال' },
+  { ico:'🧒', fr:'Enfant',      en:'Kids',        ar:'أطفال' },
+  { ico:'👟', fr:'Chaussures',  en:'Shoes',       ar:'أحذية' },
+  { ico:'👜', fr:'Accessoires', en:'Accessories', ar:'إكسسوارات' },
+  { ico:'🧴', fr:'Beauté',      en:'Beauty',      ar:'جمال' },
+  { ico:'🏠', fr:'Maison',      en:'Home',        ar:'منزل' },
 ];
 
 // Subcategories per main category
 const subCats = {
-  'Femme':       ['Robes','Hauts','Pantalons','Jupes','Manteaux','Vestes','Lingerie','Maillots de bain','Pyjamas'],
+  'Femme':       [
+    'Robes',
+    'Jupes & Shorts',
+    'Jeans',
+    'Pantalons',
+    'Vestes',
+    'Manteaux',
+    'Tops & T-shirts',
+    'Sweats / Hoodies',
+    'Pyjamas',
+    'Lingerie',
+    'Sport',
+    'Maillots de bain',
+  ],
   'Homme':       ['T-shirts','Chemises','Pantalons','Jeans','Vestes','Manteaux','Costumes','Sous-vêtements'],
   'Enfant':      ['Bébé 0-2 ans','2-5 ans','6-10 ans','11-16 ans','Scolaire'],
-  'Chaussures':  ['Baskets','Sandales','Escarpins','Bottes','Mocassins','Chaussures de sport','Tongs'],
+  'Chaussures':  [
+    'Baskets',
+    'Mocassins',
+    'Sandales',
+    'Tongs / Slides',
+    'Chaussures à lacets',
+    'Chaussures de sport',
+    'Ballerines',
+    'Bottes',
+    'Espadrilles',
+    'Talons hauts',
+    'Mary Jane / Babies',
+    'Chaussons / Pantoufles',
+  ],
   'Accessoires': ['Sacs','Ceintures','Bijoux','Montres','Lunettes','Écharpes','Chapeaux','Portefeuilles'],
   'Beauté':      ['Parfums','Maquillage','Soin visage','Soin corps','Cheveux'],
   'Maison':      ['Linge de maison','Décoration','Vaisselle'],
@@ -2393,12 +2553,16 @@ const sizes = clothingSizes; // kept for backward compat with renderSbCats
   const snap = await ref.get();
   if (!snap.exists) {
     await ref.set({
-      uid: user.uid,
-      name: user.displayName || user.email,
-      email: user.email,
-      photoURL: user.photoURL || '',
-      role: 'buyer',
+      uid:       user.uid,
+      name:      user.displayName || user.email,
+      email:     user.email,
+      photoURL:  user.photoURL || '',
+      role:      'buyer',
       favorites: [],
+      bio:       '',
+      city:      '',
+      followersCount:  0,
+      followingCount:  0,
       createdAt: firebase.firestore.FieldValue.serverTimestamp()
     });
   }
@@ -2426,12 +2590,16 @@ async function loginEmail() {
     if (authMode === 'signup') {
       const result = await auth.createUserWithEmailAndPassword(email, pass);
       await db.collection('users').doc(result.user.uid).set({
-        uid: result.user.uid,
-        name: name || email.split('@')[0],
+        uid:      result.user.uid,
+        name:     name || email.split('@')[0],
         email,
         photoURL: '',
-        role: 'buyer',
+        role:     'buyer',
         favorites: [],
+        bio:       '',
+        city:      '',
+        followersCount:  0,
+        followingCount:  0,
         createdAt: firebase.firestore.FieldValue.serverTimestamp()
       });
       closeAuth();
@@ -3014,6 +3182,8 @@ function showProductDetail(p) {
   document.getElementById('dtSellerAv').textContent   = (p.sellerName||'V').charAt(0).toUpperCase();
   document.getElementById('dtSellerName').textContent = p.sellerName || 'Vendeur';
   document.getElementById('dtSellerSub').textContent  = p.wilaya || 'Algérie';
+  // Store sellerId so seller card click opens their profile
+  document.getElementById('dtSellerCard').dataset.sellerId = p.sellerId || '';
 
   const descEl = document.getElementById('dtDesc');
   if (p.description && p.description.trim()) {
@@ -3044,12 +3214,59 @@ function closeDetail() {
 // ═══ [M] LANGUAGE SWITCHER ══════════════════════════════════
   function lang(l) {
   L = l;
+  // Persist selection
+  try { localStorage.setItem('chifoune_lang', l); } catch(_) {}
+
+  // RTL toggle (Arabic only)
   document.body.classList.toggle('rtl', l === 'ar');
-  document.querySelectorAll('.lpill').forEach(b => b.classList.toggle('on', (l==='fr'&&b.textContent==='FR')||(l==='ar'&&b.textContent==='عر')));
-  document.querySelectorAll('[data-fr]').forEach(el => {
-    const v = el.getAttribute('data-'+l);
-    if(v && el.children.length === 0) el.textContent = v;
+
+  // Font: Cairo for AR, Instrument Sans for FR/EN
+  document.body.style.fontFamily = l === 'ar' ? "'Cairo', sans-serif" : "'Instrument Sans', sans-serif";
+
+  // Highlight active pill
+  ['fr','en','ar'].forEach(code => {
+    const btn = document.getElementById('lpill-' + code);
+    if (btn) btn.classList.toggle('on', code === l);
   });
+
+  // Translate all elements with data-fr (base) attribute
+  document.querySelectorAll('[data-fr]').forEach(el => {
+    const v = el.getAttribute('data-' + l) || el.getAttribute('data-fr');
+    if (!v) return;
+    // For elements with children (e.g. auth-terms with <a> tags), use innerHTML
+    if (el.children.length > 0 || v.includes('<')) {
+      el.innerHTML = v;
+    } else {
+      el.textContent = v;
+    }
+  });
+
+  // Hero h1 needs innerHTML (has <br> and <em>)
+  const h1 = document.querySelector('.hero h1');
+  if (h1) {
+    const v = h1.getAttribute('data-' + l) || h1.getAttribute('data-fr');
+    if (v) h1.innerHTML = v;
+  }
+
+  // Placeholders
+  const placeholders = {
+    fr: { heroQ: "Nike, Zara, jeans Levi's...", navQ: "Nike, Zara, robe d'été...", pTitle: "Ex: Robe Zara fleurie, taille M...", pDesc: "Décris l'article, les défauts éventuels...", pBrand: "Zara, Nike, H&M, Uniqlo..." },
+    en: { heroQ: "Nike, Zara, Levi's jeans...",  navQ: "Nike, Zara, summer dress...", pTitle: "E.g. Floral Zara dress, size M...", pDesc: "Describe the item, any flaws...", pBrand: "Zara, Nike, H&M, Uniqlo..." },
+    ar: { heroQ: "نايك، زارا، جينز ليفيس...",   navQ: "نايك، زارا، فستان صيفي...", pTitle: "مثال: فستان زارا منقوش، مقاس M...", pDesc: "صف المنتج، أي عيوب...", pBrand: "زارا، نايك، H&M..." },
+  };
+  const ph = placeholders[l] || placeholders.fr;
+  ['heroQ','navQ','pTitle','pDesc','pBrand'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.placeholder = ph[id];
+  });
+
+  // Chat input placeholder
+  const chatInp = document.getElementById('chatInp');
+  if (chatInp) chatInp.placeholder = l==='ar' ? 'اكتب رسالة...' : l==='en' ? 'Write a message...' : 'Écrire un message...';
+  const mpInp = document.getElementById('msgpageInp');
+  if (mpInp) mpInp.placeholder = l==='ar' ? 'اكتب رسالة...' : l==='en' ? 'Write a message...' : 'Écrire un message...';
+
+  // Re-render dynamic sections
   renderCatNav();
   renderSbCats();
 }
@@ -3057,16 +3274,18 @@ function closeDetail() {
 // ═══ [N] UI RENDERERS — category nav + sidebar ══════════════
   function renderCatNav() {
   const nav = document.getElementById('catNav');
-  const all = L==='ar'?'الكل':'Tout';
+  const all = L==='ar'?'الكل': L==='en'?'All':'Tout';
+  const label = c => L==='ar' ? c.ar : L==='en' ? (c.en || c.fr) : c.fr;
   nav.innerHTML = `<div class="cat-tab ${activeCat==='Tout'?'on':''}" onclick="filterCat('Tout')">${all}</div>`
-    + cats.map(c => `<div class="cat-tab ${activeCat===c.fr?'on':''}" onclick="filterCat('${c.fr}')">${c.ico} ${L==='ar'?c.ar:c.fr}</div>`).join('');
+    + cats.map(c => `<div class="cat-tab ${activeCat===c.fr?'on':''}" onclick="filterCat('${c.fr}')">${c.ico} ${label(c)}</div>`).join('');
 }
 
 function renderSbCats() {
   const el = document.getElementById('sbCats');
-  const all = L==='ar'?'الكل':'Tout';
+  const all   = L==='ar'?'الكل': L==='en'?'All':'Tout';
+  const label = c => L==='ar' ? c.ar : L==='en' ? (c.en || c.fr) : c.fr;
   el.innerHTML = `<div class="sb-item ${activeCat==='Tout'?'on':''}" onclick="filterCat('Tout')"><span class="sb-ico">🏷️</span><span>${all}</span></div>`
-    + cats.map(c => `<div class="sb-item ${activeCat===c.fr?'on':''}" onclick="filterCat('${c.fr}')"><span class="sb-ico">${c.ico}</span><span>${L==='ar'?c.ar:c.fr}</span></div>`).join('');
+    + cats.map(c => `<div class="sb-item ${activeCat===c.fr?'on':''}" onclick="filterCat('${c.fr}')"><span class="sb-ico">${c.ico}</span><span>${label(c)}</span></div>`).join('');
   const sizesEl = document.getElementById('sbSizes');
   if (sizesEl) {
     const allSizes = [...new Set([...clothingSizes, ...shoeSizes])];
@@ -3326,10 +3545,12 @@ document.addEventListener('click', e => {
 /** Open the messages page overlay */
 function openMsgPage() {
   if (!currentUser) { openAuth('login'); return showToast('Connecte-toi pour voir tes messages'); }
+  // Reset view state BEFORE opening overlay
+  document.getElementById('convList').classList.remove('hidden');
+  document.getElementById('msgpageChat').classList.remove('open');
+  document.getElementById('msgTopTitle').textContent = 'Messages';
   document.getElementById('msgOverlay').classList.add('open');
   document.body.style.overflow = 'hidden';
-  // Reset to list view
-  showConvList();
   loadConversations(currentUser.uid);
 }
 
@@ -3383,117 +3604,128 @@ async function loadConversations(uid) {
   // Tear down any previous real-time listener
   if (unsubscribeConvs) { unsubscribeConvs(); unsubscribeConvs = null; }
 
-  try {
-    // Query last message in every chat where this user is sender OR recipient
-    // We use collectionGroup and deduplicate by parent chatId
-    const [sentSnap, recvSnap] = await Promise.all([
-      db.collectionGroup('messages').where('senderId',    '==', uid).orderBy('createdAt','desc').limit(50).get(),
-      db.collectionGroup('messages').where('recipientId', '==', uid).orderBy('createdAt','desc').limit(50).get(),
-    ]);
-
-    // Merge into a map: chatId → latest message doc
-    const chatMap = {};
-    const processSnap = (snap) => {
-      snap.docs.forEach(d => {
-        const chatId = d.ref.parent.parent.id;
-        if (!chatMap[chatId] || d.data().createdAt > chatMap[chatId].data().createdAt) {
-          chatMap[chatId] = d;
-        }
-      });
-    };
-    processSnap(sentSnap);
-    processSnap(recvSnap);
-
-    const chatIds = Object.keys(chatMap);
-    if (!chatIds.length) {
-      list.innerHTML = `<div class="conv-empty">
-        <div class="conv-empty-ico">💬</div>
-        <div class="conv-empty-txt">Aucune conversation pour l'instant</div>
-      </div>`;
-      return;
-    }
-
-    // Build conversation data for each unique chatId
-    const convData = await Promise.all(chatIds.map(async chatId => {
-      const lastMsg  = chatMap[chatId].data();
-      const isMe     = lastMsg.senderId === uid;
-      const otherUid  = isMe ? (lastMsg.recipientId   || '') : (lastMsg.senderId    || '');
+  // Helper: build convData from a chatId→lastMsgDoc map
+  async function _buildConvData(chatMap, uid) {
+    const convData = await Promise.all(Object.keys(chatMap).map(async chatId => {
+      const lastMsg   = chatMap[chatId].data ? chatMap[chatId].data() : chatMap[chatId];
+      const isMe      = lastMsg.senderId === uid;
+      const otherUid  = isMe ? (lastMsg.recipientId   || '') : (lastMsg.senderId || '');
       const otherName = isMe ? (lastMsg.recipientName || lastMsg.senderName || 'Utilisateur')
                               : (lastMsg.senderName   || 'Utilisateur');
-
-      // Count unread messages sent TO me not yet read
       let unread = 0;
       try {
         const uSnap = await db.collection('chats').doc(chatId)
-          .collection('messages')
-          .where('recipientId', '==', uid)
-          .where('read', '==', false)
-          .get();
+          .collection('messages').where('recipientId','==',uid).where('read','==',false).get();
         unread = uSnap.size;
       } catch(_) {}
-
       return { chatId, otherName, otherUid, lastText: lastMsg.text || '',
                lastTime: lastMsg.createdAt, isMe, unread };
     }));
+    convData.sort((a,b) => (b.lastTime ? b.lastTime.toMillis() : 0) - (a.lastTime ? a.lastTime.toMillis() : 0));
+    return convData;
+  }
 
-    // Sort newest first
-    convData.sort((a, b) => {
-      const ta = a.lastTime ? a.lastTime.toMillis() : 0;
-      const tb = b.lastTime ? b.lastTime.toMillis() : 0;
-      return tb - ta;
-    });
+  try {
+    // PRIMARY: collectionGroup queries (requires Firestore indexes)
+    let chatMap = {};
+    let indexMissing = false;
 
+    try {
+      const [sentSnap, recvSnap] = await Promise.all([
+        db.collectionGroup('messages').where('senderId',    '==', uid).orderBy('createdAt','desc').limit(50).get(),
+        db.collectionGroup('messages').where('recipientId', '==', uid).orderBy('createdAt','desc').limit(50).get(),
+      ]);
+      [sentSnap, recvSnap].forEach(snap => {
+        snap.docs.forEach(d => {
+          const chatId = d.ref.parent.parent.id;
+          const existing = chatMap[chatId];
+          if (!existing || (d.data().createdAt && existing.data().createdAt &&
+              d.data().createdAt.toMillis() > existing.data().createdAt.toMillis())) {
+            chatMap[chatId] = d;
+          }
+        });
+      });
+    } catch(indexErr) {
+      // Index not ready — fall back to direct chats collection scan
+      console.warn('collectionGroup index missing, using fallback:', indexErr.code || indexErr.message);
+      indexMissing = true;
+    }
+
+    // FALLBACK: scan chats collection, filter by uid in chatId string
+    if (indexMissing || !Object.keys(chatMap).length) {
+      const allChats = await db.collection('chats').get();
+      const myChats  = allChats.docs.filter(d => d.id.includes(uid));
+      chatMap = {};
+      await Promise.all(myChats.map(async chatDoc => {
+        const msgSnap = await db.collection('chats').doc(chatDoc.id)
+          .collection('messages').orderBy('createdAt','desc').limit(1).get();
+        if (!msgSnap.empty) chatMap[chatDoc.id] = msgSnap.docs[0];
+      }));
+    }
+
+    if (!Object.keys(chatMap).length) {
+      list.innerHTML = '<div class="conv-empty"><div class="conv-empty-ico">💬</div><div class="conv-empty-txt">Aucune conversation pour l'instant</div></div>';
+      return;
+    }
+
+    const convData = await _buildConvData(chatMap, uid);
     _renderConvList(convData);
 
-    // Real-time updates: re-render when any new message arrives
+    // Real-time: re-render when a new message arrives (best-effort)
     unsubscribeConvs = db.collectionGroup('messages')
       .where('recipientId', '==', uid)
-      .orderBy('createdAt', 'desc')
-      .limit(1)
+      .orderBy('createdAt', 'desc').limit(1)
       .onSnapshot(() => {
-        // Re-load (debounced) on any new message
-        if (document.getElementById('msgOverlay').classList.contains('open')) {
-          loadConversations(uid);
-        }
+        if (document.getElementById('msgOverlay').classList.contains('open')) loadConversations(uid);
       }, () => {});
 
   } catch(e) {
-    list.innerHTML = `<div class="conv-empty">
-      <div class="conv-empty-ico">⚠️</div>
-      <div class="conv-empty-txt">Erreur de chargement</div>
-    </div>`;
+    list.innerHTML = '<div class="conv-empty"><div class="conv-empty-ico">⚠️</div><div class="conv-empty-txt">Erreur de chargement</div></div>';
     console.error('loadConversations:', e);
   }
 }
 
 function _renderConvList(convData) {
   const list = document.getElementById('convList');
-  list.innerHTML = convData.map(c => {
+  // Ensure list is visible (hidden class may remain from previous chat view)
+  list.classList.remove('hidden');
+
+  if (!convData.length) {
+    list.innerHTML = '<div class="conv-empty"><div class="conv-empty-ico">💬</div><div class="conv-empty-txt">Aucune conversation pour l\'instant</div></div>';
+    return;
+  }
+
+  list.innerHTML = convData.map((c, i) => {
     const initial = (c.otherName || '?').charAt(0).toUpperCase();
-    const preview = c.isMe ? `Vous : ${c.lastText}` : c.lastText;
+    const preview = c.isMe ? 'Vous\u00a0: ' + c.lastText : c.lastText;
     const timeStr = c.lastTime
       ? c.lastTime.toDate().toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })
       : '';
-    const safeName = c.otherName.replace(/\/g,'\\').replace(/'/g,"\'");
-    return `<div class="conv-item ${c.unread > 0 ? 'unread' : ''}"
-                 onclick="openConvChat('${c.chatId}','${safeName}','${c.otherUid}')">
-      <div class="conv-av them">${initial}</div>
-      <div class="conv-info">
-        <div class="conv-name">${c.otherName}</div>
-        <div class="conv-preview">${preview}</div>
-      </div>
-      <div class="conv-meta">
-        <div class="conv-time">${timeStr}</div>
-        ${c.unread > 0 ? `<span class="conv-badge">${c.unread}</span>` : ''}
-      </div>
-    </div>`;
-  }).join('') || `<div class="conv-empty"><div class="conv-empty-ico">💬</div><div class="conv-empty-txt">Aucune conversation pour l'instant</div></div>`;
+    return '<div class="conv-item ' + (c.unread > 0 ? 'unread' : '') + '" data-idx="' + i + '" style="cursor:pointer">'
+      + '<div class="conv-av them">' + initial + '</div>'
+      + '<div class="conv-info">'
+        + '<div class="conv-name">'    + c.otherName + '</div>'
+        + '<div class="conv-preview">' + preview     + '</div>'
+      + '</div>'
+      + '<div class="conv-meta">'
+        + '<div class="conv-time">' + timeStr + '</div>'
+        + (c.unread > 0 ? '<span class="conv-badge">' + c.unread + '</span>' : '')
+      + '</div>'
+      + '</div>';
+  }).join('');
+
+  // Wire clicks via data attribute — avoids all string escaping issues
+  list.querySelectorAll('.conv-item').forEach((el, i) => {
+    const c = convData[i];
+    el.addEventListener('click', () => openConvChat(c.chatId, c.otherName, c.otherUid));
+  });
 }
 
 /**
  * Open a specific conversation in the in-page chat view.
  */
 function openConvChat(chatId, otherName, otherUid) {
+  if (!currentUser) { openAuth('login'); return; }
   activeChatId       = chatId;
   activeChatSellerId = otherUid;
 
@@ -3540,13 +3772,14 @@ function openConvChat(chatId, otherName, otherUid) {
       msgsEl.innerHTML = snap.docs.map(d => {
         const m    = d.data();
         const isMe = m.senderId === currentUser.uid;
-        const t    = m.createdAt
+        const t    = (m.createdAt && m.createdAt.toDate)
           ? m.createdAt.toDate().toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })
           : '';
-        return `<div class="bubble-wrap ${isMe ? 'me' : 'them'}">
-          <div class="bubble ${isMe ? 'me' : 'them'}">${m.text}</div>
-          <div class="bubble-time">${t}</div>
-        </div>`;
+        const txt  = (m.text || '').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+        return '<div class="bubble-wrap ' + (isMe ? 'me' : 'them') + '">'
+             + '<div class="bubble '      + (isMe ? 'me' : 'them') + '">' + txt + '</div>'
+             + '<div class="bubble-time">' + t + '</div>'
+             + '</div>';
       }).join('');
       msgsEl.scrollTop = msgsEl.scrollHeight;
 
@@ -3572,15 +3805,269 @@ async function msgpageSend() {
   const text = inp.value.trim();
   if (!text || !currentUser || !activeChatId) return;
   inp.value = '';
-  await db.collection('chats').doc(activeChatId).collection('messages').add({
-    text,
-    senderId:      currentUser.uid,
-    senderName:    currentUser.displayName || currentUser.email,
-    recipientId:   activeChatSellerId,
-    recipientName: document.getElementById('msgTopTitle').textContent || 'Utilisateur',
-    read:          false,
-    createdAt:     firebase.firestore.FieldValue.serverTimestamp()
-  });
+  inp.disabled = true;
+  try {
+    await db.collection('chats').doc(activeChatId).collection('messages').add({
+      text,
+      senderId:      currentUser.uid,
+      senderName:    currentUser.displayName || currentUser.email,
+      recipientId:   activeChatSellerId || '',
+      recipientName: document.getElementById('msgTopTitle').textContent || 'Utilisateur',
+      read:          false,
+      createdAt:     firebase.firestore.FieldValue.serverTimestamp()
+    });
+  } catch(e) {
+    showToast('❌ Erreur envoi: ' + e.message);
+    inp.value = text; // restore on failure
+  } finally {
+    inp.disabled = false;
+    inp.focus();
+  }
+}
+
+// ═══ [P3] USER PROFILE ═══════════════════════════════════════
+
+/** Open profile from the detail overlay seller card */
+function openProfileFromDetail() {
+  const uid = document.getElementById('dtSellerCard').dataset.sellerId;
+  if (!uid) return showToast('Profil indisponible');
+  openProfile(uid);
+}
+
+/** Open a user profile overlay by uid */
+async function openProfile(uid) {
+  if (!uid) return;
+  profileUserId = uid;
+
+  // Show overlay immediately with loading state
+  document.getElementById('profileOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  document.getElementById('profileName').textContent      = '…';
+  document.getElementById('profileTopName').textContent   = 'Profil';
+  document.getElementById('profileBio').textContent       = '';
+  document.getElementById('profileLocation').innerHTML    = '';
+  document.getElementById('profileListingsCount').textContent = '0';
+  document.getElementById('profileFollowersCount').textContent = '0';
+  document.getElementById('profileFollowingCount').textContent = '0';
+  document.getElementById('profileGrid').innerHTML =
+    '<div style="grid-column:1/-1;text-align:center;padding:40px;color:var(--gray)">Chargement…</div>';
+
+  // Hide edit / follow until we know who this is
+  document.getElementById('profileEditToggleBtn').style.display = 'none';
+  document.getElementById('profileFollowBtn').style.display     = 'none';
+  document.getElementById('profileEditForm').style.display      = 'none';
+
+  try {
+    const snap = await db.collection('users').doc(uid).get();
+    if (!snap.exists) { showToast('Utilisateur introuvable'); closeProfile(); return; }
+
+    const u = snap.data();
+    _renderProfileHeader(u);
+
+    // Show correct action button
+    if (currentUser && currentUser.uid === uid) {
+      // Own profile → edit button
+      document.getElementById('profileEditToggleBtn').style.display = 'flex';
+      // Pre-fill edit form
+      document.getElementById('editName').value  = u.name    || '';
+      document.getElementById('editBio').value   = u.bio     || '';
+      document.getElementById('editCity').value  = u.city    || '';
+      document.getElementById('editPhoto').value = u.photoURL || '';
+    } else if (currentUser) {
+      // Someone else's profile → follow button
+      const followSnap = await db.collection('followers')
+        .doc(uid).collection('list').doc(currentUser.uid).get();
+      const following = followSnap.exists;
+      _renderFollowBtn(following);
+    }
+
+    // Load this user's products
+    _loadProfileProducts(uid);
+
+  } catch(e) {
+    console.error('openProfile:', e);
+    showToast('Erreur chargement profil');
+  }
+}
+
+/** Render avatar, name, location, bio, stats */
+function _renderProfileHeader(u) {
+  // Avatar
+  const av = document.getElementById('profileAv');
+  if (u.photoURL) {
+    av.innerHTML = `<img src="${u.photoURL}" alt="" onerror="this.parentElement.textContent='${(u.name||'?').charAt(0).toUpperCase()}'" />`;
+  } else {
+    av.textContent = (u.name || '?').charAt(0).toUpperCase();
+  }
+
+  const name = u.name || 'Utilisateur';
+  document.getElementById('profileName').textContent    = name;
+  document.getElementById('profileTopName').textContent = name;
+
+  // Location
+  const locEl = document.getElementById('profileLocation');
+  locEl.innerHTML = u.city ? `📍 ${u.city}` : '';
+
+  // Bio
+  document.getElementById('profileBio').textContent = u.bio || '';
+
+  // Stats
+  document.getElementById('profileFollowersCount').textContent = u.followersCount || 0;
+  document.getElementById('profileFollowingCount').textContent = u.followingCount || 0;
+}
+
+function _renderFollowBtn(isFollowing) {
+  const btn = document.getElementById('profileFollowBtn');
+  btn.style.display = 'block';
+  btn.textContent   = isFollowing ? '✓ Abonné' : 'Suivre';
+  btn.classList.toggle('following', isFollowing);
+}
+
+/** Load and render products for this profile */
+function _loadProfileProducts(uid) {
+  if (unsubscribeProfile) { unsubscribeProfile(); unsubscribeProfile = null; }
+
+  unsubscribeProfile = db.collection('products')
+    .where('sellerId', '==', uid)
+    .orderBy('createdAt', 'desc')
+    .onSnapshot(snap => {
+      const products = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+      const count    = products.length;
+      document.getElementById('profileListingsCount').textContent = count;
+      document.getElementById('profileListingsBadge').textContent = count;
+
+      const grid = document.getElementById('profileGrid');
+      const isAr = L === 'ar';
+
+      if (!count) {
+        grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:40px;color:var(--gray)"><div style="font-size:32px;margin-bottom:8px">👗</div><div>Aucune annonce</div></div>';
+        return;
+      }
+
+      grid.innerHTML = products.map(item => {
+        const isFav = userFavorites.includes(item.id);
+        const img   = item.imageUrl
+          ? `<img src="${item.imageUrl}" alt="" style="width:100%;height:100%;object-fit:cover;" />`
+          : '<span style="font-size:42px">👗</span>';
+        return `<div class="card" onclick="openProductDetail('${item.id}')">
+          <div class="card-img">
+            ${img}
+            <button class="fav ${isFav?'on':''}" onclick="toggleFav(event,'${item.id}')">${isFav?'❤️':'🤍'}</button>
+          </div>
+          <div class="card-body">
+            <div class="card-brand">${item.brand||''}</div>
+            <div class="card-title">${item.title||''}</div>
+            <div class="card-meta">${item.wilaya||''} · ${item.state||''}</div>
+            <div class="card-foot">
+              <div class="card-price">${Number(item.price||0).toLocaleString('fr-DZ')} <small>${isAr?'دج':'DA'}</small></div>
+            </div>
+          </div>
+        </div>`;
+      }).join('');
+    }, err => {
+      // May need composite index — fallback
+      console.warn('Profile products index needed:', err.message);
+      db.collection('products').where('sellerId', '==', uid).get().then(snap => {
+        const products = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+        // Re-use same render logic without listener
+        document.getElementById('profileListingsCount').textContent = products.length;
+        document.getElementById('profileListingsBadge').textContent = products.length;
+        document.getElementById('profileGrid').innerHTML = products.length
+          ? products.map(item => `<div class="card" onclick="openProductDetail('${item.id}')">
+              <div class="card-img">${item.imageUrl ? `<img src="${item.imageUrl}" style="width:100%;height:100%;object-fit:cover;" />` : '<span style="font-size:42px">👗</span>'}</div>
+              <div class="card-body">
+                <div class="card-brand">${item.brand||''}</div>
+                <div class="card-title">${item.title||''}</div>
+                <div class="card-price">${Number(item.price||0).toLocaleString('fr-DZ')} DA</div>
+              </div>
+            </div>`).join('')
+          : '<div style="text-align:center;padding:40px;color:var(--gray)">Aucune annonce</div>';
+      });
+    });
+}
+
+/** Follow / unfollow the current profile user */
+async function toggleFollow() {
+  if (!currentUser) { openAuth('login'); return; }
+  if (!profileUserId || currentUser.uid === profileUserId) return;
+
+  const followRef  = db.collection('followers').doc(profileUserId).collection('list').doc(currentUser.uid);
+  const myFollowRef = db.collection('followers').doc(currentUser.uid).collection('following').doc(profileUserId);
+  const btn        = document.getElementById('profileFollowBtn');
+  const isFollowing = btn.classList.contains('following');
+
+  btn.disabled = true;
+  try {
+    const batch = db.batch();
+    const targetUserRef = db.collection('users').doc(profileUserId);
+    const myUserRef     = db.collection('users').doc(currentUser.uid);
+
+    if (isFollowing) {
+      // Unfollow
+      batch.delete(followRef);
+      batch.delete(myFollowRef);
+      batch.update(targetUserRef, { followersCount: firebase.firestore.FieldValue.increment(-1) });
+      batch.update(myUserRef,     { followingCount: firebase.firestore.FieldValue.increment(-1) });
+    } else {
+      // Follow
+      batch.set(followRef,  { uid: currentUser.uid, followedAt: firebase.firestore.FieldValue.serverTimestamp() });
+      batch.set(myFollowRef, { uid: profileUserId,  followedAt: firebase.firestore.FieldValue.serverTimestamp() });
+      batch.update(targetUserRef, { followersCount: firebase.firestore.FieldValue.increment(1) });
+      batch.update(myUserRef,     { followingCount: firebase.firestore.FieldValue.increment(1) });
+    }
+    await batch.commit();
+
+    // Update UI
+    _renderFollowBtn(!isFollowing);
+    const newCount = parseInt(document.getElementById('profileFollowersCount').textContent) + (isFollowing ? -1 : 1);
+    document.getElementById('profileFollowersCount').textContent = Math.max(0, newCount);
+    showToast(isFollowing ? 'Abonnement annulé' : '✅ Abonné !');
+  } catch(e) {
+    showToast('❌ ' + e.message);
+  } finally {
+    btn.disabled = false;
+  }
+}
+
+/** Save profile edits (own profile only) */
+async function saveProfile() {
+  if (!currentUser) return;
+  const name    = document.getElementById('editName').value.trim();
+  const bio     = document.getElementById('editBio').value.trim();
+  const city    = document.getElementById('editCity').value.trim();
+  const photoURL = document.getElementById('editPhoto').value.trim();
+
+  try {
+    await db.collection('users').doc(currentUser.uid).update({
+      name: name || currentUser.displayName || currentUser.email,
+      bio, city, photoURL,
+    });
+    showToast('✅ Profil mis à jour !');
+    // Re-render header with fresh data
+    const snap = await db.collection('users').doc(currentUser.uid).get();
+    if (snap.exists) _renderProfileHeader(snap.data());
+    document.getElementById('profileEditForm').style.display = 'none';
+    document.getElementById('profileEditToggleBtn').textContent = 'Modifier';
+  } catch(e) {
+    showToast('❌ ' + e.message);
+  }
+}
+
+/** Toggle the edit form visibility */
+function toggleProfileEdit() {
+  const form = document.getElementById('profileEditForm');
+  const btn  = document.getElementById('profileEditToggleBtn');
+  const open = form.style.display === 'none';
+  form.style.display = open ? 'block' : 'none';
+  btn.textContent    = open ? 'Annuler' : 'Modifier';
+}
+
+/** Close profile overlay and clean up */
+function closeProfile() {
+  document.getElementById('profileOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+  if (unsubscribeProfile) { unsubscribeProfile(); unsubscribeProfile = null; }
+  profileUserId = null;
 }
 
 // ═══ [Q] TOAST ══════════════════════════════════════════════
@@ -3593,8 +4080,13 @@ async function msgpageSend() {
 }
 
 // ═══ [R] INIT — runs once on page load ══════════════════════
-  renderCatNav();
-  renderSbCats();
+  // Restore saved language (default: fr)
+  (function() {
+    let saved = 'fr';
+    try { saved = localStorage.getItem('chifoune_lang') || 'fr'; } catch(_) {}
+    if (!['fr','en','ar'].includes(saved)) saved = 'fr';
+    lang(saved);  // applies lang, calls renderCatNav + renderSbCats
+  })();
 </script>
 
 <!-- ═══════════════════════════════════════════════════════
@@ -3634,6 +4126,82 @@ async function msgpageSend() {
              onkeypress="if(event.key==='Enter')msgpageSend()" />
       <button class="msgpage-send" onclick="msgpageSend()">➤</button>
     </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     USER PROFILE OVERLAY
+════════════════════════════════════════════════════════ -->
+<div class="profile-overlay" id="profileOverlay">
+
+  <!-- Top bar -->
+  <div class="profile-topbar">
+    <button class="profile-back" onclick="closeProfile()">←</button>
+    <div class="profile-topbar-title" id="profileTopName">Profil</div>
+    <!-- Edit button — only shown to profile owner -->
+    <button class="profile-back" id="profileEditToggleBtn"
+            style="display:none;width:auto;padding:0 12px;font-size:12px;font-weight:700;"
+            onclick="toggleProfileEdit()">Modifier</button>
+    <button class="profile-back" onclick="closeProfile()" style="margin-left:auto">✕</button>
+  </div>
+
+  <!-- Hero: avatar, name, bio, stats, follow -->
+  <div class="profile-hero" id="profileHero">
+    <div class="profile-av-wrap">
+      <div class="profile-av" id="profileAv">?</div>
+    </div>
+    <div class="profile-name" id="profileName">—</div>
+    <div class="profile-location" id="profileLocation"></div>
+    <div class="profile-bio" id="profileBio"></div>
+    <div class="profile-stats">
+      <div class="profile-stat">
+        <div class="profile-stat-n" id="profileListingsCount">0</div>
+        <div class="profile-stat-l">Annonces</div>
+      </div>
+      <div class="profile-stat">
+        <div class="profile-stat-n" id="profileFollowersCount">0</div>
+        <div class="profile-stat-l">Abonnés</div>
+      </div>
+      <div class="profile-stat">
+        <div class="profile-stat-n" id="profileFollowingCount">0</div>
+        <div class="profile-stat-l">Abonnements</div>
+      </div>
+    </div>
+    <button class="btn-follow" id="profileFollowBtn" style="display:none" onclick="toggleFollow()">
+      Suivre
+    </button>
+  </div>
+
+  <!-- Edit profile form (owner only, hidden by default) -->
+  <div class="profile-edit-form" id="profileEditForm" style="display:none">
+    <div class="fg">
+      <label class="fl-label">Nom affiché</label>
+      <input class="fi" id="editName" type="text" placeholder="Ton nom public" />
+    </div>
+    <div class="fg">
+      <label class="fl-label">Bio</label>
+      <textarea class="fi" id="editBio" rows="3" placeholder="Parle-toi en quelques mots..."></textarea>
+    </div>
+    <div class="fg">
+      <label class="fl-label">Ville / Région</label>
+      <input class="fi" id="editCity" type="text" placeholder="Ex: Alger, Oran..." />
+    </div>
+    <div class="fg">
+      <label class="fl-label">Photo de profil (URL)</label>
+      <input class="fi" id="editPhoto" type="url" placeholder="https://..." />
+    </div>
+    <button class="post-submit" onclick="saveProfile()" style="margin-top:4px">
+      ✓ Enregistrer
+    </button>
+  </div>
+
+  <!-- Listings by this user -->
+  <div class="profile-listings-wrap">
+    <div class="profile-section-head">
+      Annonces <span class="profile-section-count" id="profileListingsBadge">0</span>
+    </div>
+    <div class="listings" id="profileGrid" style="min-height:80px"></div>
   </div>
 
 </div>
