@@ -1937,6 +1937,314 @@ border-radius: 10px; padding: 14px 16px;
   padding: 2px 8px;
 }
 
+
+/* ═══ [15c] DASHBOARD TABS ════════════════════════════════════ */
+.dash-tabs {
+  display: none;          /* shown only for own profile */
+  background: white;
+  border-bottom: 1px solid var(--border);
+  padding: 0 16px;
+  flex-shrink: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.dash-tabs.visible { display: flex; }
+.dash-tabs::-webkit-scrollbar { display: none; }
+
+.dash-tab {
+  padding: 13px 16px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--gray);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  white-space: nowrap;
+  transition: all 0.15s;
+  font-family: 'Instrument Sans', sans-serif;
+  flex-shrink: 0;
+}
+.dash-tab:hover { color: var(--dark); }
+.dash-tab.on    { color: var(--black); border-bottom-color: var(--accent); }
+
+/* Tab panels */
+.dash-panel         { display: none; flex: 1; overflow-y: auto; }
+.dash-panel.active  { display: flex; flex-direction: column; }
+
+/* Followers / Following list */
+.follow-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding: 12px;
+}
+.follow-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  margin-bottom: 8px;
+  cursor: pointer;
+  transition: border-color 0.15s;
+}
+.follow-row:hover { border-color: #ccc; }
+.follow-row-av {
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  background: var(--black);
+  color: white;
+  font-family: 'Nunito', sans-serif;
+  font-size: 16px; font-weight: 800;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+.follow-row-av img { width: 100%; height: 100%; object-fit: cover; }
+.follow-row-name  { font-size: 13px; font-weight: 700; color: var(--black); }
+.follow-row-sub   { font-size: 11px; color: var(--gray-light); margin-top: 2px; }
+.follow-empty {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--gray);
+  font-size: 13px;
+}
+
+
+/* ═══ STATUS BADGES ════════════════════════════════════════════ */
+.status-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+.status-available { background: #E8F5E9; color: #2E7D32; }
+.status-reserved  { background: #FFF3E0; color: #E65100; }
+.status-sold      { background: #EEEEEE; color: #616161; }
+
+/* Card status overlay badge (top-left, over image) */
+.card-status {
+  position: absolute;
+  top: 8px; left: 8px;
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  z-index: 2;
+  pointer-events: none;
+}
+.card-status-reserved { background: #FF6F00; color: white; }
+.card-status-sold     { background: #616161; color: white; }
+
+/* Overlay status row in detail */
+.dt-status-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 14px;
+  flex-wrap: wrap;
+}
+
+/* Offer button */
+.dt-btn-offer {
+  width: 100%;
+  padding: 13px;
+  background: var(--teal, #006B5E);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 14px;
+  font-weight: 800;
+  cursor: pointer;
+  margin-bottom: 8px;
+  transition: all 0.2s;
+}
+.dt-btn-offer:hover    { filter: brightness(1.1); transform: translateY(-1px); }
+.dt-btn-offer:disabled { background: var(--gray-light); cursor: not-allowed; transform: none; }
+
+/* Offer input overlay */
+.offer-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 550;
+  background: rgba(0,0,0,0.5);
+  backdrop-filter: blur(6px);
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.offer-overlay.open { display: flex; }
+.offer-box {
+  background: white;
+  border-radius: 16px;
+  padding: 28px;
+  max-width: 400px;
+  width: 100%;
+  box-shadow: 0 24px 80px rgba(0,0,0,0.14);
+  animation: fadeScale 0.25s ease;
+}
+.offer-title {
+  font-family: 'Nunito', sans-serif;
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--black);
+  margin-bottom: 6px;
+}
+.offer-sub {
+  font-size: 12px;
+  color: var(--gray);
+  margin-bottom: 18px;
+}
+.offer-inp-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+.offer-inp {
+  flex: 1;
+  padding: 12px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  font-size: 16px;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700;
+  color: var(--black);
+  outline: none;
+  transition: border-color 0.2s;
+}
+.offer-inp:focus { border-color: var(--black); }
+.offer-currency {
+  font-size: 13px;
+  color: var(--gray);
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.offer-submit {
+  width: 100%;
+  padding: 13px;
+  background: var(--black);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 14px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-bottom: 8px;
+}
+.offer-submit:hover { background: var(--accent); }
+.offer-cancel {
+  width: 100%;
+  padding: 10px;
+  background: transparent;
+  color: var(--gray);
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'Instrument Sans', sans-serif;
+}
+
+/* Seller offer panel (inside detail overlay) */
+.seller-offers-wrap {
+  margin-top: 12px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+}
+.seller-offers-head {
+  padding: 10px 14px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--gray);
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.seller-offer-row {
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.seller-offer-row:last-child { border-bottom: none; }
+.offer-amount {
+  font-family: 'Nunito', sans-serif;
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--black);
+  flex: 1;
+}
+.offer-buyer { font-size: 11px; color: var(--gray); margin-top: 2px; }
+.offer-status-badge {
+  padding: 3px 8px;
+  border-radius: 20px;
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+.offer-pending  { background: #FFF3E0; color: #E65100; }
+.offer-accepted { background: #E8F5E9; color: #2E7D32; }
+.offer-rejected { background: #EEEEEE; color: #616161; }
+.offer-act-btn {
+  padding: 5px 11px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  border: none;
+  font-family: 'Nunito', sans-serif;
+  transition: all 0.15s;
+}
+.offer-accept { background: var(--black); color: white; }
+.offer-accept:hover { background: #2E7D32; }
+.offer-reject { background: var(--bg); color: var(--gray); border: 1px solid var(--border); margin-left: 4px; }
+.offer-reject:hover { border-color: var(--gray); }
+
+/* Seller status actions bar */
+.seller-actions-bar {
+  display: none;   /* shown only when viewer is seller */
+  gap: 8px;
+  padding: 12px 0;
+  flex-wrap: wrap;
+}
+.seller-actions-bar.visible { display: flex; }
+.btn-mark-sold {
+  flex: 1;
+  padding: 10px;
+  background: var(--bg);
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: 'Nunito', sans-serif;
+  color: var(--dark);
+  transition: all 0.15s;
+}
+.btn-mark-sold:hover { border-color: var(--black); }
+
+/* Notification panel improvements */
+.nd-item[data-product-id] { cursor: pointer; }
+.nd-item.notif-offer .nd-ico::before { content: '💰'; }
+
 /* ═══ [16] RESPONSIVE BREAKPOINTS ════════════════════════════ */
 @media (max-width: 900px) {
 .layout { grid-template-columns: 1fr; }
@@ -1998,8 +2306,8 @@ border-radius: 10px; padding: 14px 16px;
       </button>
       <button class="nbtn nbtn-outline" id="btnConnexion" data-fr="Se connecter" data-en="Log in" data-ar="دخول" >Se connecter</button>
       <button class="nbtn nbtn-dark" id="btnInscription"  data-fr="S'inscrire" data-en="Sign up" data-ar="تسجيل">S'inscrire</button>
-      <div id="userInfo" style="display:none;align-items:center;gap:8px;">
-        <div style="width:32px;height:32px;border-radius:50%;background:var(--accent);color:white;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;font-family:'Nunito',sans-serif;" id="userAvatar">U</div>
+      <div id="userInfo" style="display:none;align-items:center;gap:8px;cursor:pointer;" id="userInfo" title="Mon tableau de bord">
+        <div style="width:32px;height:32px;border-radius:50%;background:var(--accent);color:white;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;font-family:'Nunito',sans-serif;overflow:hidden;" id="userAvatar">U</div>
         <span class="user-name" style="font-size:13px;font-weight:600;color:var(--dark);max-width:100px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;"></span>
       </div>
       <button class="nbtn" id="btnLogout" style="display:none;background:var(--bg);border:1px solid var(--border);color:var(--gray);font-size:12px;" >Déconnexion</button>
@@ -2425,8 +2733,31 @@ border-radius: 10px; padding: 14px 16px;
         <div class="dt-title" id="dtTitle"></div>
         <div class="dt-price" id="dtPrice"></div>
         <div style="display:flex;gap:14px;flex-wrap:wrap;margin-bottom:20px" id="dtMeta"></div>
+                <!-- Status badge -->
+        <div class="dt-status-row">
+          <span id="dtStatusBadge" class="status-badge status-available" style="display:none">Disponible</span>
+        </div>
+
         <button class="dt-btn-contact" id="dtBtnContact">💬 Contacter le vendeur</button>
-        <button class="dt-btn-fav" id="dtBtnFav">🤍 Ajouter aux favoris</button>
+        <button class="dt-btn-offer"   id="dtBtnOffer"   style="display:none">💰 Faire une offre</button>
+        <button class="dt-btn-fav"     id="dtBtnFav">🤍 Ajouter aux favoris</button>
+
+        <!-- Seller: status actions -->
+        <div class="seller-actions-bar" id="dtSellerActBar">
+          <button class="btn-mark-sold" id="dtMarkSoldBtn">Marquer comme vendu</button>
+        </div>
+
+        <!-- Seller: incoming offers -->
+        <div id="dtSellerOffersWrap" style="display:none">
+          <div class="seller-offers-wrap">
+            <div class="seller-offers-head">
+              💰 Offres reçues
+              <span id="dtOffersCount" style="background:var(--accent);color:white;font-size:10px;font-weight:800;padding:2px 7px;border-radius:20px;">0</span>
+            </div>
+            <div id="dtOffersList"></div>
+          </div>
+        </div>
+
         <div class="dt-safety">🛡️ Ne payez jamais en dehors de la plateforme. Chifoune ne peut pas garantir les transactions externes.</div>
         <div class="dt-seller" style="cursor:pointer" id="dtSellerCard">
           <div style="font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--gray);margin-bottom:12px">Vendeur</div>
@@ -2649,8 +2980,9 @@ async function loginEmail() {
 
 async function doLogout() {
   await auth.signOut();
-  currentUser = null;
+  currentUser   = null;
   userFavorites = [];
+  if (unsubscribeOffers) { unsubscribeOffers(); unsubscribeOffers = null; }
   updateNavAuth(null);
   renderGrid([]);
   showToast('À bientôt ! 👋');
@@ -2665,6 +2997,7 @@ auth.onAuthStateChanged(async (user) => {
     startNotifListener(user.uid);
   } else {
     if (unsubscribeNotifs) { unsubscribeNotifs(); unsubscribeNotifs = null; }
+    if (unsubscribeOffers) { unsubscribeOffers(); unsubscribeOffers = null; }
     unreadCount = 0;
     updateBadge(0);
   }
@@ -2687,6 +3020,21 @@ function updateNavAuth(user) {
       userInfo.style.display = 'flex';
       const nameEl = userInfo.querySelector('.user-name');
       if (nameEl) nameEl.textContent = user.displayName || user.email.split('@')[0];
+      // Refresh avatar from Firestore (async, best-effort)
+      const av = document.getElementById('userAvatar');
+      if (av) {
+        db.collection('users').doc(user.uid).get().then(snap => {
+          if (!snap.exists) return;
+          const u = snap.data();
+          if (u.photoURL) {
+            av.innerHTML = `<img src="${u.photoURL}" style="width:100%;height:100%;object-fit:cover;border-radius:50%;" onerror="this.parentElement.textContent='${(u.name||user.email).charAt(0).toUpperCase()}'" />`;
+          } else {
+            av.textContent = (u.name || user.displayName || user.email).charAt(0).toUpperCase();
+          }
+        }).catch(() => {
+          av.textContent = (user.displayName || user.email).charAt(0).toUpperCase();
+        });
+      }
     }
   } else {
     if (btnLogin)  btnLogin.style.display  = 'flex';
@@ -2731,6 +3079,7 @@ function updateNavAuth(user) {
       sellerId:    currentUser.uid,
       sellerName:  currentUser.displayName || currentUser.email,
       sellerPhoto: currentUser.photoURL || '',
+      status:      'available',  // available | reserved | sold
       likes: 0, likedBy: [],
       createdAt: firebase.firestore.FieldValue.serverTimestamp()
     });
@@ -2918,10 +3267,16 @@ function _resetPostForm() {
     const escTitle  = (item.title      || '').replace(/"/g, '&quot;');
     const escSeller = (item.sellerName || 'Vendeur').replace(/"/g, '&quot;');
 
+    const statusBadge = item.status === 'reserved'
+      ? '<div class="card-status card-status-reserved">Réservé</div>'
+      : item.status === 'sold'
+      ? '<div class="card-status card-status-sold">Vendu</div>'
+      : '';
     return `
-    <div class="card" data-product-id="${item.id}" style="cursor:pointer">
+    <div class="card" data-product-id="${item.id}" style="cursor:pointer${item.status === 'sold' ? ';opacity:0.7' : ''}">
       <div class="card-img">
         ${imgContent}
+        ${statusBadge}
         <button class="fav ${isFav ? 'on' : ''}" data-product-id="${item.id}" aria-label="favori">
           ${isFav ? '❤️' : '🤍'}
         </button>
@@ -3167,6 +3522,13 @@ function search() {
 }
 
 function showProductDetail(p) {
+  // Reset seller-only panels so stale data from a previous product never shows
+  const _offWrap = document.getElementById('dtSellerOffersWrap');
+  const _actBar  = document.getElementById('dtSellerActBar');
+  if (_offWrap) _offWrap.style.display = 'none';
+  if (_actBar)  _actBar.classList.remove('visible');
+  if (unsubscribeOffers) { unsubscribeOffers(); unsubscribeOffers = null; }
+
   document.getElementById('detailOverlay').classList.add('open');
   document.body.style.overflow = 'hidden';
 
@@ -3236,9 +3598,57 @@ function showProductDetail(p) {
     descEl.style.fontStyle = 'italic';
   }
 
+  // ── Status badge ────────────────────────────────────────────
+  const status    = p.status || 'available';
+  const statusMap = {
+    available: { label: 'Disponible', cls: 'status-available' },
+    reserved:  { label: 'Réservé',    cls: 'status-reserved' },
+    sold:      { label: 'Vendu',      cls: 'status-sold' },
+  };
+  const sm = statusMap[status] || statusMap.available;
+  const statusBadgeEl = document.getElementById('dtStatusBadge');
+  if (statusBadgeEl) {
+    statusBadgeEl.textContent  = sm.label;
+    statusBadgeEl.className    = 'status-badge ' + sm.cls;
+    statusBadgeEl.style.display = 'inline-block';
+  }
+
+  // ── Contact button ───────────────────────────────────────────
   document.getElementById('dtBtnContact').onclick = () =>
     openChat({ stopPropagation:()=>{} }, p.id, p.title, p.price, p.sellerName, p.sellerId);
 
+  // ── Offer button ─────────────────────────────────────────────
+  const offerBtn = document.getElementById('dtBtnOffer');
+  if (offerBtn) {
+    const isSeller       = currentUser && currentUser.uid === p.sellerId;
+    const canOffer       = status === 'available' && !isSeller;
+    offerBtn.disabled    = !canOffer;
+    offerBtn.textContent = status === 'sold' ? '✕ Vendu' : status === 'reserved' ? '⏳ Réservé' : '💰 Faire une offre';
+    offerBtn.onclick     = canOffer ? () => openOfferModal(p) : null;
+    offerBtn.style.display = isSeller ? 'none' : 'block';
+  }
+
+  // ── Seller-only: status actions + offer list ─────────────────
+  const isSeller = currentUser && currentUser.uid === p.sellerId;
+  const actBar   = document.getElementById('dtSellerActBar');
+  if (actBar) {
+    actBar.classList.toggle('visible', isSeller);
+    if (isSeller) {
+      const soldBtn = document.getElementById('dtMarkSoldBtn');
+      if (soldBtn) {
+        soldBtn.onclick = () => markProductSold(p.id, p.title);
+        soldBtn.disabled = status === 'sold';
+        soldBtn.textContent = status === 'sold' ? '✓ Déjà vendu' : 'Marquer comme vendu';
+      }
+      loadSellerOffers(p.id);
+    } else {
+      // hide offers panel if not seller
+      const offersWrap = document.getElementById('dtSellerOffersWrap');
+      if (offersWrap) offersWrap.style.display = 'none';
+    }
+  }
+
+  // ── Favourites ───────────────────────────────────────────────
   const favBtn = document.getElementById('dtBtnFav');
   const isFav  = userFavorites.includes(p.id);
   favBtn.innerHTML = isFav ? '❤️ Dans vos favoris' : '🤍 Ajouter aux favoris';
@@ -3249,6 +3659,7 @@ function showProductDetail(p) {
 function closeDetail() {
   document.getElementById('detailOverlay').classList.remove('open');
   document.body.style.overflow = '';
+  if (unsubscribeOffers) { unsubscribeOffers(); unsubscribeOffers = null; }
 }
 
 // ═══ [M] LANGUAGE SWITCHER ══════════════════════════════════
@@ -3492,11 +3903,23 @@ function otpNext(input, index) {
 // ═══ [P] NOTIFICATIONS DROPDOWN ════════════════════════════
 function toggleNotif() {
   document.getElementById('notifDrop').classList.toggle('open');
-  // Mark all as read when dropdown is opened
   if (document.getElementById('notifDrop').classList.contains('open')) {
     unreadCount = 0;
     updateBadge(0);
     document.querySelectorAll('#notifList .nd-item.unread').forEach(el => el.classList.remove('unread'));
+    // Mark all unread notifications as read in Firestore (best-effort batch)
+    if (currentUser) {
+      db.collection('notifications')
+        .where('userId', '==', currentUser.uid)
+        .where('read', '==', false)
+        .get()
+        .then(snap => {
+          const batch = db.batch();
+          snap.docs.forEach(d => batch.update(d.ref, { read: true }));
+          return batch.commit();
+        })
+        .catch(() => {});
+    }
   }
 }
 
@@ -3509,60 +3932,97 @@ function updateBadge(n) {
   b.textContent   = n > 9 ? '9+' : n;
 }
 
-/** Render incoming message notifications into the dropdown */
-function renderNotifList(messages) {
+/** Render unified notifications (offers, status, messages) into dropdown */
+function renderNotifList(notifs) {
   const list = document.getElementById('notifList');
   if (!list) return;
-  if (!messages.length) {
+  if (!notifs.length) {
     list.innerHTML = '<div class="nd-item"><div class="nd-ico">🎉</div><div><div class="nd-txt">Bienvenue ! Publiez votre première annonce gratuitement.</div><div class="nd-time">maintenant</div></div></div>';
     return;
   }
-  list.innerHTML = messages.slice(0, 10).map((m, i) => {
-    const isUnread = i < unreadCount;
-    const initial  = (m.senderName || 'U').charAt(0).toUpperCase();
-    const preview  = m.text.length > 40 ? m.text.slice(0, 40) + '…' : m.text;
-    const t        = m.createdAt ? m.createdAt.toDate().toLocaleTimeString('fr-FR', {hour:'2-digit', minute:'2-digit'}) : '';
-    return `<div class="nd-item ${isUnread ? 'unread' : ''}" onclick="toggleNotif()">
-      <div class="nd-ico">💬</div>
+  const icoMap = {
+    offer:          '💰',
+    offer_accepted: '✅',
+    offer_rejected: '❌',
+    reserved:       '🔒',
+    sold:           '🏷️',
+    message:        '💬',
+  };
+  list.innerHTML = notifs.slice(0, 15).map(n => {
+    const ico     = icoMap[n.type] || '🔔';
+    const t       = (n.createdAt && n.createdAt.toDate)
+      ? n.createdAt.toDate().toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })
+      : '';
+    const preview = (n.message || '').slice(0, 55) + ((n.message || '').length > 55 ? '…' : '');
+    const pid     = n.productId ? ` data-product-id="${n.productId}"` : '';
+    return `<div class="nd-item ${n.read ? '' : 'unread'}"${pid}>
+      <div class="nd-ico">${ico}</div>
       <div>
-        <div class="nd-txt"><strong>${initial}</strong> ${preview}</div>
+        <div class="nd-txt">${preview}</div>
         <div class="nd-time">${t}</div>
       </div>
     </div>`;
   }).join('');
+
+  // Wire clicks: product notifications → open product; message notifications → open messaging
+  list.querySelectorAll('.nd-item').forEach((el, i) => {
+    const n = notifs[i];
+    if (!n) return;
+    el.style.cursor = 'pointer';
+    el.addEventListener('click', () => {
+      toggleNotif();
+      // Mark this notification read
+      if (n.id && !n.read) {
+        db.collection('notifications').doc(n.id).update({ read: true }).catch(() => {});
+      }
+      // Navigate
+      if (n.type === 'message') {
+        openMsgPage();
+      } else if (n.productId) {
+        openProductDetail(n.productId);
+      }
+    });
+  });
 }
 
 /**
- * Listen for messages addressed TO the current user across all chats.
- * Uses a collectionGroup query on "messages" where recipientId === uid.
- * Falls back gracefully if index is not ready.
+ * Unified real-time notification listener.
+ * Listens to the 'notifications' collection (offers, status changes)
+ * AND collectionGroup 'messages' (chat messages) in parallel.
  */
 function startNotifListener(uid) {
   if (unsubscribeNotifs) { unsubscribeNotifs(); unsubscribeNotifs = null; }
 
-  unsubscribeNotifs = db.collectionGroup('messages')
-    .where('recipientId', '==', uid)
+  // ── Notifications collection (offers / status changes) ───────
+  const unsubN = db.collection('notifications')
+    .where('userId', '==', uid)
     .orderBy('createdAt', 'desc')
-    .limit(20)
+    .limit(30)
     .onSnapshot(snap => {
-      const msgs = snap.docs.map(d => ({ ...d.data(), _chatId: d.ref.parent.parent.id }));
-
-      // Count truly new unread messages added since last snapshot
-      const added = snap.docChanges().filter(c => c.type === 'added' && c.doc.data().read === false);
+      const notifs  = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+      const added   = snap.docChanges().filter(c => c.type === 'added' && !c.doc.data().read);
       if (added.length > 0 && !document.getElementById('notifDrop').classList.contains('open')) {
         unreadCount += added.length;
         updateBadge(unreadCount);
       }
+      renderNotifList(notifs);
+    }, err => console.warn('Notification listener:', err.message));
 
-      // 💬 badge = total unread received
-      const totalUnread = msgs.filter(m => m.read === false).length;
+  // ── Messages (chat) — drives 💬 badge only ───────────────────
+  const unsubM = db.collectionGroup('messages')
+    .where('recipientId', '==', uid)
+    .orderBy('createdAt', 'desc')
+    .limit(20)
+    .onSnapshot(snap => {
+      const totalUnread = snap.docs.filter(d => d.data().read === false).length;
       updateMsgBadge(totalUnread);
+    }, err => console.warn('Msg badge listener:', err.message));
 
-      renderNotifList(msgs);
-    }, (err) => {
-      // collectionGroup index missing — log once, degrade gracefully
-      console.warn('Notif listener needs Firestore index:', err.message);
-    });
+  // Combined teardown — both listeners stopped together
+  unsubscribeNotifs = () => {
+    try { unsubN(); } catch(_) {}
+    try { unsubM(); } catch(_) {}
+  };
 }
 
 /** Update the 💬 badge on the messages nav button */
@@ -3628,8 +4088,12 @@ function showConvList() {
 
 /** Show the in-page chat panel */
 function showMsgChat() {
-  document.getElementById('convList').classList.add('hidden');
-  document.getElementById('msgpageChat').classList.add('open');
+  const convList  = document.getElementById('convList');
+  const chatPanel = document.getElementById('msgpageChat');
+  convList.classList.add('hidden');
+  chatPanel.classList.add('open');
+  console.log('[MSG] showMsgChat → convList hidden:', convList.classList.contains('hidden'),
+    '| msgpageChat open:', chatPanel.classList.contains('open'));
 }
 
 /**
@@ -3638,8 +4102,9 @@ function showMsgChat() {
  * chatId contains the user's uid (both as sender and recipient).
  */
 async function loadConversations(uid) {
+  console.log('[MSG] loadConversations uid:', uid);
   const list = document.getElementById('convList');
-  list.innerHTML = '<div style="text-align:center;padding:40px;color:var(--gray)">Chargement...</div>';
+  list.innerHTML = '<div style="text-align:center;padding:40px;color:var(--gray)">Chargement…</div>';
 
   // Tear down any previous real-time listener
   if (unsubscribeConvs) { unsubscribeConvs(); unsubscribeConvs = null; }
@@ -3765,85 +4230,149 @@ function _renderConvList(convData) {
  * Open a specific conversation in the in-page chat view.
  */
 function openConvChat(chatId, otherName, otherUid) {
-  if (!currentUser) { openAuth('login'); return; }
+  console.log('[MSG] openConvChat called', { chatId, otherName, otherUid });
+
+  if (!currentUser) {
+    console.warn('[MSG] No currentUser — redirecting to login');
+    openAuth('login');
+    return;
+  }
+
   activeChatId       = chatId;
   activeChatSellerId = otherUid;
 
-  // Update topbar
-  document.getElementById('msgTopTitle').textContent = otherName;
+  // Update topbar title
+  document.getElementById('msgTopTitle').textContent = otherName || 'Conversation';
 
-  // chatId format: uid1_uid2_productId
-  // Firebase UIDs have no underscores, so we can safely find the 3rd segment
+  // Extract productId: chatId = uid1_uid2_productId (uids have no underscores)
   const uidPart   = chatId.lastIndexOf('_');
   const productId = uidPart >= 0 ? chatId.slice(uidPart + 1) : '';
+  console.log('[MSG] chatId:', chatId, '→ productId:', productId);
 
-  // Clear product preview (will populate if product exists)
-  document.getElementById('msgpageIco').textContent      = '👗';
-  document.getElementById('msgpageProdName').textContent = 'Conversation';
+  // Reset product preview bar
+  document.getElementById('msgpageIco').textContent       = '👗';
+  document.getElementById('msgpageProdName').textContent  = 'Conversation';
   document.getElementById('msgpageProdPrice').textContent = '';
 
-  // Optionally load product info
+  // Load product info if we have a productId
   if (productId && productId.length > 5) {
-    db.collection('products').doc(productId).get().then(snap => {
-      if (snap.exists) {
-        const p = snap.data();
-        document.getElementById('msgpageProdName').textContent  = p.title  || '';
-        document.getElementById('msgpageProdPrice').textContent = p.price
-          ? Number(p.price).toLocaleString('fr-DZ') + ' DA' : '';
-      }
-    }).catch(() => {});
+    db.collection('products').doc(productId).get()
+      .then(snap => {
+        if (snap.exists) {
+          const p = snap.data();
+          console.log('[MSG] product loaded:', p.title);
+          document.getElementById('msgpageProdName').textContent  = p.title || '';
+          document.getElementById('msgpageProdPrice').textContent = p.price
+            ? Number(p.price).toLocaleString('fr-DZ') + ' DA' : '';
+        }
+      })
+      .catch(err => console.warn('[MSG] product load failed:', err.message));
   }
 
+  // Show chat panel (hide conv list)
   showMsgChat();
+  console.log('[MSG] showMsgChat called, msgpageChat visible');
 
-  // Subscribe to messages
-  if (unsubscribeMsgPage) unsubscribeMsgPage();
+  // Tear down previous listener
+  if (unsubscribeMsgPage) {
+    unsubscribeMsgPage();
+    unsubscribeMsgPage = null;
+  }
+
   const msgsEl = document.getElementById('msgpageMsgs');
-  msgsEl.innerHTML = '<div style="text-align:center;padding:16px;color:var(--gray);font-size:12px">Chargement...</div>';
+  if (!msgsEl) {
+    console.error('[MSG] msgpageMsgs element NOT FOUND in DOM');
+    return;
+  }
+  msgsEl.innerHTML = '<div style="text-align:center;padding:16px;color:var(--gray);font-size:12px">Chargement…</div>';
 
-  unsubscribeMsgPage = db.collection('chats').doc(chatId)
-    .collection('messages')
+  console.log('[MSG] Subscribing to chats/' + chatId + '/messages');
+
+  // Primary: real-time listener with orderBy (needs Firestore index)
+  const ref = db.collection('chats').doc(chatId).collection('messages');
+
+  unsubscribeMsgPage = ref
     .orderBy('createdAt', 'asc')
-    .onSnapshot(snap => {
-      if (snap.empty) {
-        msgsEl.innerHTML = '<div style="text-align:center;padding:16px;color:var(--gray);font-size:12px">Commence la conversation 👋</div>';
-        return;
+    .onSnapshot(
+      snap => {
+        console.log('[MSG] onSnapshot fired, docs:', snap.docs.length,
+          'fields in first doc:', snap.docs[0] ? Object.keys(snap.docs[0].data()) : 'none');
+        _renderMessages(snap.docs, msgsEl);
+      },
+      err => {
+        // Index missing — fall back to unordered get()
+        console.warn('[MSG] onSnapshot error (index missing?):', err.code, err.message);
+        console.log('[MSG] Falling back to .get() without orderBy');
+        ref.get()
+          .then(snap => {
+            console.log('[MSG] Fallback get(), docs:', snap.docs.length);
+            // Sort client-side by createdAt millis
+            const sorted = snap.docs.slice().sort((a, b) => {
+              const ta = a.data().createdAt ? a.data().createdAt.toMillis() : 0;
+              const tb = b.data().createdAt ? b.data().createdAt.toMillis() : 0;
+              return ta - tb;
+            });
+            _renderMessages(sorted, msgsEl);
+          })
+          .catch(e2 => {
+            console.error('[MSG] Fallback get() also failed:', e2.message);
+            msgsEl.innerHTML = '<div style="text-align:center;padding:16px;color:var(--gray);font-size:12px">Erreur chargement 😕</div>';
+          });
       }
-      msgsEl.innerHTML = snap.docs.map(d => {
-        const m    = d.data();
-        const isMe = m.senderId === currentUser.uid;
-        const t    = (m.createdAt && m.createdAt.toDate)
-          ? m.createdAt.toDate().toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })
-          : '';
-        const txt  = (m.text || '').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-        return '<div class="bubble-wrap ' + (isMe ? 'me' : 'them') + '">'
-             + '<div class="bubble '      + (isMe ? 'me' : 'them') + '">' + txt + '</div>'
-             + '<div class="bubble-time">' + t + '</div>'
-             + '</div>';
-      }).join('');
-      msgsEl.scrollTop = msgsEl.scrollHeight;
+    );
+}
 
-      // Mark messages as read and update badge immediately
-      let markedAny = false;
-      snap.docs.forEach(d => {
-        const m = d.data();
-        if (m.recipientId === currentUser.uid && m.read === false) {
-          d.ref.update({ read: true }).catch(() => {});
-          markedAny = true;
-        }
-      });
-      if (markedAny) {
-        unreadCount = Math.max(0, unreadCount - 1);
-        updateBadge(unreadCount);
-      }
-    });
+/** Render message docs into the msgs container */
+function _renderMessages(docs, msgsEl) {
+  if (!docs.length) {
+    msgsEl.innerHTML = '<div style="text-align:center;padding:16px;color:var(--gray);font-size:12px">Commence la conversation 👋</div>';
+    return;
+  }
+
+  msgsEl.innerHTML = docs.map(d => {
+    const m = d.data();
+    // Support both field name conventions: senderId (current) and userId (legacy)
+    const sender = m.senderId || m.userId || '';
+    const isMe   = sender === (currentUser && currentUser.uid);
+    const t = (m.createdAt && m.createdAt.toDate)
+      ? m.createdAt.toDate().toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })
+      : '';
+    const txt = (m.text || m.message || m.content || '').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
+    console.log('[MSG] rendering doc:', d.id, '| senderId:', sender, '| isMe:', isMe, '| text:', txt.slice(0,30));
+
+    return '<div class="bubble-wrap ' + (isMe ? 'me' : 'them') + '">'
+         + '<div class="bubble '      + (isMe ? 'me' : 'them') + '">' + txt + '</div>'
+         + '<div class="bubble-time">' + t + '</div>'
+         + '</div>';
+  }).join('');
+
+  msgsEl.scrollTop = msgsEl.scrollHeight;
+
+  // Mark unread messages as read
+  let markedAny = false;
+  docs.forEach(d => {
+    const m = d.data();
+    if ((m.recipientId === (currentUser && currentUser.uid)) && m.read === false) {
+      d.ref.update({ read: true }).catch(() => {});
+      markedAny = true;
+    }
+  });
+  if (markedAny) {
+    unreadCount = Math.max(0, unreadCount - 1);
+    updateBadge(unreadCount);
+  }
 }
 
 /** Send from the in-page chat input */
 async function msgpageSend() {
   const inp  = document.getElementById('msgpageInp');
   const text = inp.value.trim();
-  if (!text || !currentUser || !activeChatId) return;
+  if (!text || !currentUser || !activeChatId) {
+    console.warn('[MSG] msgpageSend blocked', { text: !!text, user: !!currentUser, chatId: activeChatId });
+    return;
+  }
+  console.log('[MSG] sending to chats/' + activeChatId + '/messages:', text.slice(0,30));
   inp.value = '';
   inp.disabled = true;
   try {
@@ -3856,9 +4385,11 @@ async function msgpageSend() {
       read:          false,
       createdAt:     firebase.firestore.FieldValue.serverTimestamp()
     });
+    console.log('[MSG] message sent ✓');
   } catch(e) {
+    console.error('[MSG] send failed:', e.message);
     showToast('❌ Erreur envoi: ' + e.message);
-    inp.value = text; // restore on failure
+    inp.value = text;
   } finally {
     inp.disabled = false;
     inp.focus();
@@ -3868,34 +4399,109 @@ async function msgpageSend() {
 // ═══ [P3] USER PROFILE ═══════════════════════════════════════
 
 /** Open profile from the detail overlay seller card */
+// ═══ [P3] USER PROFILE & DASHBOARD ══════════════════════════
+
+// ─────────────────────────────────────────────────────────────
+// ROUTING
+// openDashboard()         → private dashboard (own user only)
+// openPublicProfile(uid)  → public read-only profile
+// openProfileFromDetail() → routes based on sellerId vs currentUser
+// ─────────────────────────────────────────────────────────────
+
+/** Route: seller card in detail overlay */
 function openProfileFromDetail() {
   const uid = document.getElementById('dtSellerCard').dataset.sellerId;
   if (!uid) return showToast('Profil indisponible');
-  openProfile(uid);
+  if (currentUser && uid === currentUser.uid) {
+    openDashboard();
+  } else {
+    openPublicProfile(uid);
+  }
 }
 
-/** Open a user profile overlay by uid */
-async function openProfile(uid) {
+// ─────────────────────────────────────────────────────────────
+// PRIVATE DASHBOARD  — own user only
+// ─────────────────────────────────────────────────────────────
+
+/** Open private dashboard. Guard: must be logged in. */
+function openDashboard() {
+  if (!currentUser) { openAuth('login'); return; }
+  _openProfileOverlay(currentUser.uid, true);
+}
+
+// ─────────────────────────────────────────────────────────────
+// PUBLIC PROFILE  — read-only, anyone can view
+// ─────────────────────────────────────────────────────────────
+
+/** Open read-only public profile for any uid. */
+function openPublicProfile(uid) {
   if (!uid) return;
+  _openProfileOverlay(uid, false);
+}
+
+// kept for backward compat (called by follow-row clicks, etc.)
+function openProfile(uid) {
+  if (!uid) return;
+  if (currentUser && uid === currentUser.uid) {
+    openDashboard();
+  } else {
+    openPublicProfile(uid);
+  }
+}
+
+// ─────────────────────────────────────────────────────────────
+// SHARED OVERLAY ENGINE
+// ─────────────────────────────────────────────────────────────
+
+/**
+ * Internal: open profileOverlay for a uid.
+ * isOwn = true  → dashboard mode (tabs, edit, no follow btn)
+ * isOwn = false → public mode  (no tabs, no edit, follow btn)
+ */
+async function _openProfileOverlay(uid, isOwn) {
   profileUserId = uid;
 
-  // Show overlay immediately with loading state
+  // Open overlay
   document.getElementById('profileOverlay').classList.add('open');
   document.body.style.overflow = 'hidden';
-  document.getElementById('profileName').textContent      = '…';
-  document.getElementById('profileTopName').textContent   = 'Profil';
-  document.getElementById('profileBio').textContent       = '';
-  document.getElementById('profileLocation').innerHTML    = '';
-  document.getElementById('profileListingsCount').textContent = '0';
+
+  // Reset display
+  document.getElementById('profileName').textContent           = '…';
+  document.getElementById('profileTopName').textContent        = isOwn ? 'Mon tableau de bord' : 'Profil';
+  document.getElementById('profileBio').textContent            = '';
+  document.getElementById('profileLocation').innerHTML         = '';
+  document.getElementById('profileListingsCount').textContent  = '0';
   document.getElementById('profileFollowersCount').textContent = '0';
   document.getElementById('profileFollowingCount').textContent = '0';
-  document.getElementById('profileGrid').innerHTML =
+  document.getElementById('profileGrid').innerHTML             =
     '<div style="grid-column:1/-1;text-align:center;padding:40px;color:var(--gray)">Chargement…</div>';
 
-  // Hide edit / follow until we know who this is
-  document.getElementById('profileEditToggleBtn').style.display = 'none';
-  document.getElementById('profileFollowBtn').style.display     = 'none';
-  document.getElementById('profileEditForm').style.display      = 'none';
+  // Dashboard tabs: visible in private mode only
+  document.getElementById('dashTabs').classList.toggle('visible', isOwn);
+
+  // Panel visibility
+  document.querySelectorAll('.dash-panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('panelAds').classList.add('active');
+  if (isOwn) _switchDashTab('panelAds');
+
+  // Follow button: public mode only, for non-owner
+  document.getElementById('profileFollowBtn').style.display = 'none';
+
+  // Stat click behaviour
+  const followerStat  = document.getElementById('profileFollowersStat');
+  const followingStat = document.getElementById('profileFollowingStat');
+  if (followerStat) {
+    followerStat.style.cursor = 'pointer';
+    followerStat.onclick = isOwn
+      ? () => _switchDashTab('panelFollowers')
+      : () => _showPublicFollowers(uid, 'followers');
+  }
+  if (followingStat) {
+    followingStat.style.cursor = 'pointer';
+    followingStat.onclick = isOwn
+      ? () => _switchDashTab('panelFollowing')
+      : () => _showPublicFollowers(uid, 'following');
+  }
 
   try {
     const snap = await db.collection('users').doc(uid).get();
@@ -3904,54 +4510,129 @@ async function openProfile(uid) {
     const u = snap.data();
     _renderProfileHeader(u);
 
-    // Show correct action button
-    if (currentUser && currentUser.uid === uid) {
-      // Own profile → edit button
-      document.getElementById('profileEditToggleBtn').style.display = 'flex';
-      // Pre-fill edit form
-      document.getElementById('editName').value  = u.name    || '';
-      document.getElementById('editBio').value   = u.bio     || '';
-      document.getElementById('editCity').value  = u.city    || '';
+    if (isOwn) {
+      // Pre-fill edit form (only in dashboard)
+      document.getElementById('editName').value  = u.name     || '';
+      document.getElementById('editBio').value   = u.bio      || '';
+      document.getElementById('editCity').value  = u.city     || '';
       document.getElementById('editPhoto').value = u.photoURL || '';
-    } else if (currentUser) {
-      // Someone else's profile → follow button
-      const followSnap = await db.collection('followers')
-        .doc(uid).collection('list').doc(currentUser.uid).get();
-      const following = followSnap.exists;
-      _renderFollowBtn(following);
+      // Preload followers/following panels
+      _loadAndShowFollowers(uid, 'followers');
+      _loadAndShowFollowers(uid, 'following');
+    } else {
+      // Public: show follow button (if viewer is logged in and not owner)
+      if (currentUser && currentUser.uid !== uid) {
+        const followSnap = await db.collection('followers')
+          .doc(uid).collection('list').doc(currentUser.uid).get();
+        _renderFollowBtn(followSnap.exists);
+      }
     }
 
-    // Load this user's products
+    // Load products (both modes)
     _loadProfileProducts(uid);
 
   } catch(e) {
-    console.error('openProfile:', e);
+    console.error('_openProfileOverlay:', e);
     showToast('Erreur chargement profil');
   }
 }
 
-/** Render avatar, name, location, bio, stats */
+// ─────────────────────────────────────────────────────────────
+// DASHBOARD TAB SWITCHING
+// ─────────────────────────────────────────────────────────────
+
+function _switchDashTab(panelId) {
+  document.querySelectorAll('.dash-tab').forEach(t =>
+    t.classList.toggle('on', t.dataset.panel === panelId)
+  );
+  document.querySelectorAll('.dash-panel').forEach(p =>
+    p.classList.toggle('active', p.id === panelId)
+  );
+}
+
+// ─────────────────────────────────────────────────────────────
+// FOLLOWERS / FOLLOWING LISTS
+// ─────────────────────────────────────────────────────────────
+
+/** Load into dashboard panel (own profile) */
+async function _loadAndShowFollowers(uid, type) {
+  const listId = type === 'followers' ? 'followersList' : 'followingList';
+  const listEl = document.getElementById(listId);
+  if (!listEl) return;
+  await _renderFollowList(listEl, uid, type);
+}
+
+/** Show in a toast/mini-modal for public profiles */
+async function _showPublicFollowers(uid, type) {
+  // For public profiles: just open as dashboard would show — reuse panel but swap uid
+  const listId = type === 'followers' ? 'followersList' : 'followingList';
+  const listEl = document.getElementById(listId);
+  if (!listEl) return;
+  await _renderFollowList(listEl, uid, type);
+  // Switch to the panel so user can see it (tabs hidden, but panel still shows)
+  const panelId = type === 'followers' ? 'panelFollowers' : 'panelFollowing';
+  document.querySelectorAll('.dash-panel').forEach(p => p.classList.remove('active'));
+  document.getElementById(panelId).classList.add('active');
+}
+
+async function _renderFollowList(listEl, uid, type) {
+  listEl.innerHTML = '<div class="follow-empty">Chargement…</div>';
+  try {
+    const collName = type === 'followers' ? 'list' : 'following';
+    const snap = await db.collection('followers').doc(uid).collection(collName).limit(50).get();
+    if (snap.empty) {
+      listEl.innerHTML = `<div class="follow-empty">${type === 'followers' ? 'Aucun abonné' : 'Aucun abonnement'}</div>`;
+      return;
+    }
+    const rows = await Promise.all(snap.docs.map(async d => {
+      const otherUid = d.data().uid;
+      if (!otherUid) return null;
+      try {
+        const uSnap = await db.collection('users').doc(otherUid).get();
+        if (!uSnap.exists) return null;
+        const u = uSnap.data();
+        const initial = (u.name || '?').charAt(0).toUpperCase();
+        const avHtml  = u.photoURL
+          ? `<div class="follow-row-av"><img src="${u.photoURL}" alt="" onerror="this.parentElement.textContent='${initial}'" /></div>`
+          : `<div class="follow-row-av">${initial}</div>`;
+        return `<div class="follow-row" data-uid="${otherUid}">
+          ${avHtml}
+          <div>
+            <div class="follow-row-name">${u.name || 'Utilisateur'}</div>
+            <div class="follow-row-sub">${u.city || 'Algérie'}</div>
+          </div>
+        </div>`;
+      } catch(_) { return null; }
+    }));
+    listEl.innerHTML = rows.filter(Boolean).join('') ||
+      '<div class="follow-empty">Aucun utilisateur trouvé</div>';
+    listEl.querySelectorAll('.follow-row[data-uid]').forEach(row => {
+      row.addEventListener('click', () => openProfile(row.dataset.uid));
+    });
+  } catch(e) {
+    console.error('_renderFollowList:', e);
+    listEl.innerHTML = '<div class="follow-empty">Erreur de chargement</div>';
+  }
+}
+
+// ─────────────────────────────────────────────────────────────
+// PROFILE HEADER RENDER  (shared)
+// ─────────────────────────────────────────────────────────────
+
 function _renderProfileHeader(u) {
-  // Avatar
   const av = document.getElementById('profileAv');
   if (u.photoURL) {
-    av.innerHTML = `<img src="${u.photoURL}" alt="" onerror="this.parentElement.textContent='${(u.name||'?').charAt(0).toUpperCase()}'" />`;
+    const initial = (u.name || '?').charAt(0).toUpperCase();
+    av.innerHTML = `<img src="${u.photoURL}" alt=""
+      onerror="this.parentElement.textContent='${initial}'" />`;
   } else {
     av.textContent = (u.name || '?').charAt(0).toUpperCase();
   }
-
   const name = u.name || 'Utilisateur';
   document.getElementById('profileName').textContent    = name;
   document.getElementById('profileTopName').textContent = name;
-
-  // Location
-  const locEl = document.getElementById('profileLocation');
-  locEl.innerHTML = u.city ? `📍 ${u.city}` : '';
-
-  // Bio
-  document.getElementById('profileBio').textContent = u.bio || '';
-
-  // Stats
+  document.getElementById('profileLocation').innerHTML  = u.city ? `📍 ${u.city}` : '';
+  document.getElementById('profileBio').textContent     = u.bio  || '';
   document.getElementById('profileFollowersCount').textContent = u.followersCount || 0;
   document.getElementById('profileFollowingCount').textContent = u.followingCount || 0;
 }
@@ -3963,104 +4644,95 @@ function _renderFollowBtn(isFollowing) {
   btn.classList.toggle('following', isFollowing);
 }
 
-/** Load and render products for this profile */
+// ─────────────────────────────────────────────────────────────
+// PRODUCTS IN PROFILE  (shared, query by sellerId)
+// ─────────────────────────────────────────────────────────────
+
 function _loadProfileProducts(uid) {
   if (unsubscribeProfile) { unsubscribeProfile(); unsubscribeProfile = null; }
 
+  const render = (products) => {
+    const count = products.length;
+    document.getElementById('profileListingsCount').textContent = count;
+    document.getElementById('profileListingsBadge').textContent = count;
+    const grid  = document.getElementById('profileGrid');
+    const isAr  = L === 'ar';
+    if (!count) {
+      grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:40px;color:var(--gray)"><div style="font-size:32px;margin-bottom:8px">👗</div><div>Aucune annonce</div></div>';
+      return;
+    }
+    grid.innerHTML = products.map(item => {
+      const isFav = userFavorites.includes(item.id);
+      const img   = item.imageUrl
+        ? `<img src="${item.imageUrl}" alt="" style="width:100%;height:100%;object-fit:cover;" />`
+        : '<span style="font-size:42px">👗</span>';
+      return `<div class="card" data-product-id="${item.id}" style="cursor:pointer">
+        <div class="card-img">
+          ${img}
+          <button class="fav ${isFav?'on':''}" data-product-id="${item.id}" aria-label="favori">${isFav?'❤️':'🤍'}</button>
+        </div>
+        <div class="card-body">
+          <div class="card-brand">${item.brand||''}</div>
+          <div class="card-title">${item.title||''}</div>
+          <div class="card-meta">${item.wilaya||''} · ${item.state||''}</div>
+          <div class="card-foot">
+            <div class="card-price">${Number(item.price||0).toLocaleString('fr-DZ')} <small>${isAr?'دج':'DA'}</small></div>
+          </div>
+        </div>
+      </div>`;
+    }).join('');
+  };
+
+  // Primary: real-time listener
   unsubscribeProfile = db.collection('products')
     .where('sellerId', '==', uid)
     .orderBy('createdAt', 'desc')
-    .onSnapshot(snap => {
-      const products = snap.docs.map(d => ({ id: d.id, ...d.data() }));
-      const count    = products.length;
-      document.getElementById('profileListingsCount').textContent = count;
-      document.getElementById('profileListingsBadge').textContent = count;
-
-      const grid = document.getElementById('profileGrid');
-      const isAr = L === 'ar';
-
-      if (!count) {
-        grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:40px;color:var(--gray)"><div style="font-size:32px;margin-bottom:8px">👗</div><div>Aucune annonce</div></div>';
-        return;
+    .onSnapshot(
+      snap => render(snap.docs.map(d => ({ id: d.id, ...d.data() }))),
+      err  => {
+        // Firestore index missing → fallback to simple get
+        console.warn('Profile products query (index needed):', err.message);
+        db.collection('products').where('sellerId', '==', uid).get()
+          .then(snap => render(snap.docs.map(d => ({ id: d.id, ...d.data() }))))
+          .catch(e2 => console.error('Profile products fallback failed:', e2));
       }
-
-      grid.innerHTML = products.map(item => {
-        const isFav = userFavorites.includes(item.id);
-        const img   = item.imageUrl
-          ? `<img src="${item.imageUrl}" alt="" style="width:100%;height:100%;object-fit:cover;" />`
-          : '<span style="font-size:42px">👗</span>';
-        return `<div class="card" data-product-id="${item.id}" style="cursor:pointer">
-          <div class="card-img">
-            ${img}
-            <button class="fav ${isFav?'on':''}" data-product-id="${item.id}" aria-label="favori">${isFav?'❤️':'🤍'}</button>
-          </div>
-          <div class="card-body">
-            <div class="card-brand">${item.brand||''}</div>
-            <div class="card-title">${item.title||''}</div>
-            <div class="card-meta">${item.wilaya||''} · ${item.state||''}</div>
-            <div class="card-foot">
-              <div class="card-price">${Number(item.price||0).toLocaleString('fr-DZ')} <small>${isAr?'دج':'DA'}</small></div>
-            </div>
-          </div>
-        </div>`;
-      }).join('');
-    }, err => {
-      // May need composite index — fallback
-      console.warn('Profile products index needed:', err.message);
-      db.collection('products').where('sellerId', '==', uid).get().then(snap => {
-        const products = snap.docs.map(d => ({ id: d.id, ...d.data() }));
-        // Re-use same render logic without listener
-        document.getElementById('profileListingsCount').textContent = products.length;
-        document.getElementById('profileListingsBadge').textContent = products.length;
-        document.getElementById('profileGrid').innerHTML = products.length
-          ? products.map(item => `<div class="card" data-product-id="${item.id}" style="cursor:pointer">
-              <div class="card-img">${item.imageUrl ? `<img src="${item.imageUrl}" style="width:100%;height:100%;object-fit:cover;" />` : '<span style="font-size:42px">👗</span>'}</div>
-              <div class="card-body">
-                <div class="card-brand">${item.brand||''}</div>
-                <div class="card-title">${item.title||''}</div>
-                <div class="card-price">${Number(item.price||0).toLocaleString('fr-DZ')} DA</div>
-              </div>
-            </div>`).join('')
-          : '<div style="text-align:center;padding:40px;color:var(--gray)">Aucune annonce</div>';
-      });
-    });
+    );
 }
 
-/** Follow / unfollow the current profile user */
-async function toggleFollow() {
-  if (!currentUser) { openAuth('login'); return; }
-  if (!profileUserId || currentUser.uid === profileUserId) return;
+// ─────────────────────────────────────────────────────────────
+// FOLLOW / UNFOLLOW  (public profile only — owner guard enforced)
+// ─────────────────────────────────────────────────────────────
 
-  const followRef  = db.collection('followers').doc(profileUserId).collection('list').doc(currentUser.uid);
+async function toggleFollow() {
+  if (!currentUser)                             { openAuth('login'); return; }
+  if (!profileUserId)                           return;
+  if (currentUser.uid === profileUserId)        { showToast('C\'est votre propre profil'); return; }
+
+  const followRef   = db.collection('followers').doc(profileUserId).collection('list').doc(currentUser.uid);
   const myFollowRef = db.collection('followers').doc(currentUser.uid).collection('following').doc(profileUserId);
-  const btn        = document.getElementById('profileFollowBtn');
+  const btn         = document.getElementById('profileFollowBtn');
   const isFollowing = btn.classList.contains('following');
 
   btn.disabled = true;
   try {
-    const batch = db.batch();
+    const batch         = db.batch();
     const targetUserRef = db.collection('users').doc(profileUserId);
     const myUserRef     = db.collection('users').doc(currentUser.uid);
-
     if (isFollowing) {
-      // Unfollow
       batch.delete(followRef);
       batch.delete(myFollowRef);
       batch.update(targetUserRef, { followersCount: firebase.firestore.FieldValue.increment(-1) });
       batch.update(myUserRef,     { followingCount: firebase.firestore.FieldValue.increment(-1) });
     } else {
-      // Follow
-      batch.set(followRef,  { uid: currentUser.uid, followedAt: firebase.firestore.FieldValue.serverTimestamp() });
-      batch.set(myFollowRef, { uid: profileUserId,  followedAt: firebase.firestore.FieldValue.serverTimestamp() });
+      batch.set(followRef,   { uid: currentUser.uid, followedAt: firebase.firestore.FieldValue.serverTimestamp() });
+      batch.set(myFollowRef, { uid: profileUserId,   followedAt: firebase.firestore.FieldValue.serverTimestamp() });
       batch.update(targetUserRef, { followersCount: firebase.firestore.FieldValue.increment(1) });
       batch.update(myUserRef,     { followingCount: firebase.firestore.FieldValue.increment(1) });
     }
     await batch.commit();
-
-    // Update UI
     _renderFollowBtn(!isFollowing);
-    const newCount = parseInt(document.getElementById('profileFollowersCount').textContent) + (isFollowing ? -1 : 1);
-    document.getElementById('profileFollowersCount').textContent = Math.max(0, newCount);
+    const cur = parseInt(document.getElementById('profileFollowersCount').textContent) || 0;
+    document.getElementById('profileFollowersCount').textContent = Math.max(0, cur + (isFollowing ? -1 : 1));
     showToast(isFollowing ? 'Abonnement annulé' : '✅ Abonné !');
   } catch(e) {
     showToast('❌ ' + e.message);
@@ -4069,45 +4741,282 @@ async function toggleFollow() {
   }
 }
 
-/** Save profile edits (own profile only) */
+// ─────────────────────────────────────────────────────────────
+// SAVE PROFILE  (dashboard / owner only — hard guard)
+// ─────────────────────────────────────────────────────────────
+
 async function saveProfile() {
+  // Hard security guard: only owner can save
   if (!currentUser) return;
-  const name    = document.getElementById('editName').value.trim();
-  const bio     = document.getElementById('editBio').value.trim();
-  const city    = document.getElementById('editCity').value.trim();
+  if (profileUserId !== currentUser.uid) {
+    console.error('saveProfile: attempted edit on non-own profile', profileUserId);
+    showToast('❌ Non autorisé');
+    return;
+  }
+
+  const name     = document.getElementById('editName').value.trim();
+  const bio      = document.getElementById('editBio').value.trim();
+  const city     = document.getElementById('editCity').value.trim();
   const photoURL = document.getElementById('editPhoto').value.trim();
 
   try {
     await db.collection('users').doc(currentUser.uid).update({
-      name: name || currentUser.displayName || currentUser.email,
+      name:     name || currentUser.displayName || currentUser.email,
       bio, city, photoURL,
     });
     showToast('✅ Profil mis à jour !');
-    // Re-render header with fresh data
+    // Re-render header with saved data
     const snap = await db.collection('users').doc(currentUser.uid).get();
     if (snap.exists) _renderProfileHeader(snap.data());
-    document.getElementById('profileEditForm').style.display = 'none';
-    document.getElementById('profileEditToggleBtn').textContent = 'Modifier';
   } catch(e) {
     showToast('❌ ' + e.message);
   }
 }
 
-/** Toggle the edit form visibility */
-function toggleProfileEdit() {
-  const form = document.getElementById('profileEditForm');
-  const btn  = document.getElementById('profileEditToggleBtn');
-  const open = form.style.display === 'none';
-  form.style.display = open ? 'block' : 'none';
-  btn.textContent    = open ? 'Annuler' : 'Modifier';
-}
+// ─────────────────────────────────────────────────────────────
+// CLOSE
+// ─────────────────────────────────────────────────────────────
 
-/** Close profile overlay and clean up */
 function closeProfile() {
   document.getElementById('profileOverlay').classList.remove('open');
   document.body.style.overflow = '';
   if (unsubscribeProfile) { unsubscribeProfile(); unsubscribeProfile = null; }
   profileUserId = null;
+}
+
+// ═══ [P4] OFFERS, STATUS, NOTIFICATIONS ═════════════════════
+
+// ── State ────────────────────────────────────────────────────
+let _currentOfferProduct = null;  // product object for open offer modal
+let unsubscribeOffers    = null;  // listener for seller's offers panel
+
+// ── Helpers ──────────────────────────────────────────────────
+
+/** Write a notification document to Firestore */
+async function _createNotification(userId, type, message, productId) {
+  if (!userId) return;
+  try {
+    await db.collection('notifications').add({
+      userId,
+      type,       // 'offer' | 'offer_accepted' | 'offer_rejected' | 'reserved' | 'sold' | 'message'
+      message,
+      productId:  productId || '',
+      read:       false,
+      createdAt:  firebase.firestore.FieldValue.serverTimestamp(),
+    });
+  } catch(e) {
+    console.warn('_createNotification failed:', e.message);
+  }
+}
+
+// ── Offer Modal ───────────────────────────────────────────────
+
+function openOfferModal(p) {
+  if (!currentUser) { openAuth('login'); return; }
+  _currentOfferProduct = p;
+  document.getElementById('offerProductLabel').textContent =
+    p.title + ' — ' + Number(p.price || 0).toLocaleString('fr-DZ') + ' DA';
+  document.getElementById('offerPriceHint').textContent =
+    'Prix demandé : ' + Number(p.price || 0).toLocaleString('fr-DZ') + ' DA';
+  document.getElementById('offerAmount').value = '';
+  document.getElementById('offerOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  setTimeout(() => document.getElementById('offerAmount').focus(), 100);
+}
+
+function closeOfferModal() {
+  document.getElementById('offerOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+  _currentOfferProduct = null;
+}
+
+async function submitOffer() {
+  const p      = _currentOfferProduct;
+  const amount = Number(document.getElementById('offerAmount').value);
+  if (!p || !amount || amount <= 0) return showToast('Entre un montant valide');
+  if (!currentUser) return;
+
+  const btn = document.getElementById('offerSubmitBtn');
+  btn.disabled    = true;
+  btn.textContent = 'Envoi…';
+
+  try {
+    // Write offer document
+    await db.collection('offers').add({
+      productId:   p.id,
+      productTitle: p.title || '',
+      sellerId:    p.sellerId,
+      buyerId:     currentUser.uid,
+      buyerName:   currentUser.displayName || currentUser.email,
+      amount,
+      status:      'pending',   // pending | accepted | rejected
+      createdAt:   firebase.firestore.FieldValue.serverTimestamp(),
+    });
+
+    // Notify seller
+    await _createNotification(
+      p.sellerId,
+      'offer',
+      (currentUser.displayName || currentUser.email) + ' a fait une offre de ' +
+        amount.toLocaleString('fr-DZ') + ' DA sur "' + p.title + '"',
+      p.id
+    );
+
+    closeOfferModal();
+    showToast('✅ Offre envoyée !');
+  } catch(e) {
+    showToast('❌ ' + e.message);
+  } finally {
+    btn.disabled    = false;
+    btn.textContent = "Envoyer l'offre";
+  }
+}
+
+// ── Seller: load offers for a product ────────────────────────
+
+function loadSellerOffers(productId) {
+  const wrap   = document.getElementById('dtSellerOffersWrap');
+  const list   = document.getElementById('dtOffersList');
+  const badge  = document.getElementById('dtOffersCount');
+  if (!wrap || !list) return;
+
+  if (unsubscribeOffers) { unsubscribeOffers(); unsubscribeOffers = null; }
+
+  unsubscribeOffers = db.collection('offers')
+    .where('productId', '==', productId)
+    .orderBy('createdAt', 'desc')
+    .onSnapshot(snap => {
+      const offers = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+      wrap.style.display  = 'block';
+      badge.textContent   = offers.length;
+
+      if (!offers.length) {
+        list.innerHTML = '<div style="padding:12px 14px;font-size:12px;color:var(--gray)">Aucune offre pour l\'instant</div>';
+        return;
+      }
+
+      list.innerHTML = offers.map(o => {
+        const statusLabel = { pending: 'En attente', accepted: 'Acceptée', rejected: 'Refusée' }[o.status] || o.status;
+        const statusCls   = { pending: 'offer-pending', accepted: 'offer-accepted', rejected: 'offer-rejected' }[o.status] || '';
+        const actBtns = o.status === 'pending'
+          ? `<button class="offer-act-btn offer-accept" data-offer-id="${o.id}" data-product-id="${o.productId}" data-buyer-id="${o.buyerId}" data-amount="${o.amount}" data-title="${(o.productTitle||'').replace(/"/g,'&quot;')}">Accepter</button>
+             <button class="offer-act-btn offer-reject" data-offer-id="${o.id}" data-buyer-id="${o.buyerId}" data-title="${(o.productTitle||'').replace(/"/g,'&quot;')}">Refuser</button>`
+          : '';
+        return `<div class="seller-offer-row">
+          <div style="flex:1">
+            <div class="offer-amount">${Number(o.amount || 0).toLocaleString('fr-DZ')} DA</div>
+            <div class="offer-buyer">${o.buyerName || 'Acheteur'}</div>
+          </div>
+          <span class="offer-status-badge ${statusCls}">${statusLabel}</span>
+          <div style="display:flex;gap:4px">${actBtns}</div>
+        </div>`;
+      }).join('');
+
+      // Wire accept/reject buttons via delegation
+      list.querySelectorAll('.offer-accept').forEach(btn => {
+        btn.addEventListener('click', () =>
+          acceptOffer(btn.dataset.offerId, btn.dataset.productId, btn.dataset.buyerId,
+                      Number(btn.dataset.amount), btn.dataset.title));
+      });
+      list.querySelectorAll('.offer-reject').forEach(btn => {
+        btn.addEventListener('click', () =>
+          rejectOffer(btn.dataset.offerId, btn.dataset.buyerId, btn.dataset.title));
+      });
+    }, err => {
+      console.warn('loadSellerOffers error (index needed):', err.message);
+      wrap.style.display = 'none';
+    });
+}
+
+// ── Seller: accept offer → product becomes reserved ──────────
+
+async function acceptOffer(offerId, productId, buyerId, amount, productTitle) {
+  if (!currentUser) return;
+  // Hard owner guard: verify caller is the product seller
+  try {
+    const prodSnap = await db.collection('products').doc(productId).get();
+    if (!prodSnap.exists || prodSnap.data().sellerId !== currentUser.uid) {
+      return showToast('❌ Non autorisé');
+    }
+  } catch(e) { return showToast('❌ ' + e.message); }
+  if (!confirm('Accepter cette offre de ' + Number(amount).toLocaleString('fr-DZ') + ' DA ?')) return;
+
+  try {
+    const batch = db.batch();
+
+    // 1. Mark offer accepted
+    batch.update(db.collection('offers').doc(offerId), { status: 'accepted' });
+
+    // 2. Reject all other pending offers for this product
+    const otherOffers = await db.collection('offers')
+      .where('productId', '==', productId)
+      .where('status', '==', 'pending')
+      .get();
+    otherOffers.docs.forEach(d => {
+      if (d.id !== offerId) batch.update(d.ref, { status: 'rejected' });
+    });
+
+    // 3. Product → reserved, link buyer
+    batch.update(db.collection('products').doc(productId), {
+      status:      'reserved',
+      reservedFor: buyerId,
+    });
+
+    await batch.commit();
+
+    // 4. Notify buyer: offer accepted + reserved
+    await _createNotification(buyerId, 'offer_accepted',
+      'Votre offre de ' + Number(amount).toLocaleString('fr-DZ') + ' DA sur "' + productTitle + '" a été acceptée !',
+      productId);
+    await _createNotification(buyerId, 'reserved',
+      '"' + productTitle + '" est maintenant réservé pour vous.', productId);
+
+    showToast('✅ Offre acceptée — article réservé');
+  } catch(e) {
+    showToast('❌ ' + e.message);
+  }
+}
+
+// ── Seller: reject offer ──────────────────────────────────────
+
+async function rejectOffer(offerId, buyerId, productTitle) {
+  if (!currentUser) return;
+  try {
+    await db.collection('offers').doc(offerId).update({ status: 'rejected' });
+    await _createNotification(buyerId, 'offer_rejected',
+      'Votre offre sur "' + productTitle + '" a été refusée.', '');
+    showToast('Offre refusée');
+  } catch(e) {
+    showToast('❌ ' + e.message);
+  }
+}
+
+// ── Seller: mark product as sold ─────────────────────────────
+
+async function markProductSold(productId, productTitle) {
+  if (!currentUser) return;
+  if (!confirm('Marquer cet article comme vendu ?')) return;
+  try {
+    const prodRef = db.collection('products').doc(productId);
+    const snap    = await prodRef.get();
+    if (!snap.exists) return;
+    const p = snap.data();
+    // Hard owner guard
+    if (p.sellerId !== currentUser.uid) return showToast('❌ Non autorisé');
+
+    await prodRef.update({ status: 'sold' });
+
+    // Notify reservedFor buyer if any
+    if (p.reservedFor) {
+      await _createNotification(p.reservedFor, 'sold',
+        '"' + (productTitle || p.title) + '" a été marqué comme vendu.', productId);
+    }
+
+    showToast('✅ Article marqué comme vendu');
+    closeDetail();
+  } catch(e) {
+    showToast('❌ ' + e.message);
+  }
 }
 
 // ═══ [Q] TOAST ══════════════════════════════════════════════
@@ -4200,11 +5109,32 @@ document.addEventListener('DOMContentLoaded', function () {
   on('msgBackBtn',  'click', msgGoBack);
 
   // ── Profile overlay ────────────────────────────────────────
-  on('profileEditToggleBtn', 'click', toggleProfileEdit);
-  on('profileFollowBtn',     'click', toggleFollow);
-  on('profileSaveBtn',       'click', saveProfile);
-  on('profileCloseBtn',      'click', closeProfile);
-  on('profileBackBtn',       'click', closeProfile);
+  // Avatar/name → own dashboard
+  on('userInfo', 'click', () => { if (currentUser) openDashboard(); else openAuth('login'); });
+
+  // Profile overlay buttons
+  on('profileFollowBtn', 'click', toggleFollow);
+  on('profileSaveBtn',   'click', saveProfile);
+  on('profileCloseBtn',  'click', closeProfile);
+  on('profileBackBtn',   'click', closeProfile);
+
+  // Dashboard tabs (event delegation on dash-tabs container)
+  const dashTabsEl = document.getElementById('dashTabs');
+  if (dashTabsEl) {
+    dashTabsEl.addEventListener('click', e => {
+      const tab = e.target.closest('.dash-tab');
+      if (tab && tab.dataset.panel) _switchDashTab(tab.dataset.panel);
+    });
+  }
+
+  // Dashboard → open messaging shortcut
+  on('dashOpenMsgBtn', 'click', () => { closeProfile(); openMsgPage(); });
+
+  // ── Offer modal ──────────────────────────────────────────────
+  on('offerSubmitBtn', 'click', submitOffer);
+  on('offerCancelBtn', 'click', closeOfferModal);
+  on('offerAmount', 'keypress', e => { if (e.key === 'Enter') submitOffer(); });
+  on('offerOverlay', 'click',   e => { if (e.target.id === 'offerOverlay') closeOfferModal(); });
 
   // ── Event delegation: product grid (cards rendered dynamically) ──
   document.addEventListener('click', function (e) {
@@ -4317,75 +5247,120 @@ document.addEventListener('DOMContentLoaded', function () {
 ════════════════════════════════════════════════════════ -->
 <div class="profile-overlay" id="profileOverlay">
 
-  <!-- Top bar -->
+  <!-- ── Top bar ─────────────────────────────────────────── -->
   <div class="profile-topbar">
-    <button class="profile-back">←</button>
+    <button class="profile-back" id="profileBackBtn">←</button>
     <div class="profile-topbar-title" id="profileTopName">Profil</div>
-    <!-- Edit button — only shown to profile owner -->
-    <button class="profile-back" id="profileEditToggleBtn"
-            style="display:none;width:auto;padding:0 12px;font-size:12px;font-weight:700;"
-           >Modifier</button>
-    <button class="profile-back" style="margin-left:auto">✕</button>
+    <button class="profile-back" id="profileCloseBtn" style="margin-left:auto">✕</button>
   </div>
 
-  <!-- Hero: avatar, name, bio, stats, follow -->
+  <!-- ── Hero: avatar / name / bio / stats / follow ────── -->
   <div class="profile-hero" id="profileHero">
     <div class="profile-av-wrap">
       <div class="profile-av" id="profileAv">?</div>
     </div>
-    <div class="profile-name" id="profileName">—</div>
+    <div class="profile-name"     id="profileName">—</div>
     <div class="profile-location" id="profileLocation"></div>
-    <div class="profile-bio" id="profileBio"></div>
+    <div class="profile-bio"      id="profileBio"></div>
     <div class="profile-stats">
       <div class="profile-stat">
         <div class="profile-stat-n" id="profileListingsCount">0</div>
         <div class="profile-stat-l">Annonces</div>
       </div>
-      <div class="profile-stat">
+      <div class="profile-stat" style="cursor:pointer" id="profileFollowersStat">
         <div class="profile-stat-n" id="profileFollowersCount">0</div>
         <div class="profile-stat-l">Abonnés</div>
       </div>
-      <div class="profile-stat">
+      <div class="profile-stat" style="cursor:pointer" id="profileFollowingStat">
         <div class="profile-stat-n" id="profileFollowingCount">0</div>
         <div class="profile-stat-l">Abonnements</div>
       </div>
     </div>
-    <button class="btn-follow" id="profileFollowBtn" style="display:none">
-      Suivre
-    </button>
+    <!-- Follow button — shown for OTHER user's profile -->
+    <button class="btn-follow" id="profileFollowBtn" style="display:none">Suivre</button>
   </div>
 
-  <!-- Edit profile form (owner only, hidden by default) -->
-  <div class="profile-edit-form" id="profileEditForm" style="display:none">
-    <div class="fg">
-      <label class="fl-label">Nom affiché</label>
-      <input class="fi" id="editName" type="text" placeholder="Ton nom public" />
-    </div>
-    <div class="fg">
-      <label class="fl-label">Bio</label>
-      <textarea class="fi" id="editBio" rows="3" placeholder="Parle-toi en quelques mots..."></textarea>
-    </div>
-    <div class="fg">
-      <label class="fl-label">Ville / Région</label>
-      <input class="fi" id="editCity" type="text" placeholder="Ex: Alger, Oran..." />
-    </div>
-    <div class="fg">
-      <label class="fl-label">Photo de profil (URL)</label>
-      <input class="fi" id="editPhoto" type="url" placeholder="https://..." />
-    </div>
-    <button class="post-submit" style="margin-top:4px">
-      ✓ Enregistrer
-    </button>
+  <!-- ── Dashboard tabs — shown ONLY for own profile ─────── -->
+  <div class="dash-tabs" id="dashTabs">
+    <div class="dash-tab on"  data-panel="panelAds">      📦 Mes annonces</div>
+    <div class="dash-tab"     data-panel="panelEdit">     ✏️ Modifier</div>
+    <div class="dash-tab"     data-panel="panelMsg">      💬 Messages</div>
+    <div class="dash-tab"     data-panel="panelFollowers">👥 Abonnés</div>
+    <div class="dash-tab"     data-panel="panelFollowing">🔍 Abonnements</div>
   </div>
 
-  <!-- Listings by this user -->
-  <div class="profile-listings-wrap">
-    <div class="profile-section-head">
-      Annonces <span class="profile-section-count" id="profileListingsBadge">0</span>
+  <!-- ── PANEL: My ads ────────────────────────────────────── -->
+  <div class="dash-panel active" id="panelAds">
+    <div class="profile-listings-wrap">
+      <div class="profile-section-head">
+        Annonces <span class="profile-section-count" id="profileListingsBadge">0</span>
+      </div>
+      <div class="listings" id="profileGrid" style="min-height:80px"></div>
     </div>
-    <div class="listings" id="profileGrid" style="min-height:80px"></div>
   </div>
 
+  <!-- ── PANEL: Edit profile ──────────────────────────────── -->
+  <div class="dash-panel" id="panelEdit">
+    <div class="profile-edit-form" id="profileEditForm" style="display:block;margin:16px;">
+      <div class="fg">
+        <label class="fl-label">Nom affiché</label>
+        <input class="fi" id="editName" type="text" placeholder="Ton nom public" />
+      </div>
+      <div class="fg">
+        <label class="fl-label">Bio</label>
+        <textarea class="fi" id="editBio" rows="3" placeholder="Parle-toi en quelques mots..."></textarea>
+      </div>
+      <div class="fg">
+        <label class="fl-label">Ville / Région</label>
+        <input class="fi" id="editCity" type="text" placeholder="Ex: Alger, Oran..." />
+      </div>
+      <div class="fg">
+        <label class="fl-label">Photo de profil (URL ou base64)</label>
+        <input class="fi" id="editPhoto" type="text" placeholder="https://..." />
+      </div>
+      <button class="post-submit" id="profileSaveBtn" style="margin-top:4px">✓ Enregistrer</button>
+    </div>
+  </div>
+
+  <!-- ── PANEL: Messages shortcut ─────────────────────────── -->
+  <div class="dash-panel" id="panelMsg">
+    <div style="padding:24px;text-align:center;flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;">
+      <div style="font-size:48px">💬</div>
+      <div style="font-family:'Nunito',sans-serif;font-size:17px;font-weight:800;color:var(--black)">Messagerie</div>
+      <div style="font-size:13px;color:var(--gray);margin-bottom:8px">Toutes vos conversations en un seul endroit</div>
+      <button class="post-submit" id="dashOpenMsgBtn" style="max-width:240px">Ouvrir la messagerie</button>
+    </div>
+  </div>
+
+  <!-- ── PANEL: Followers ──────────────────────────────────── -->
+  <div class="dash-panel" id="panelFollowers">
+    <div class="follow-list" id="followersList">
+      <div class="follow-empty">Chargement…</div>
+    </div>
+  </div>
+
+  <!-- ── PANEL: Following ──────────────────────────────────── -->
+  <div class="dash-panel" id="panelFollowing">
+    <div class="follow-list" id="followingList">
+      <div class="follow-empty">Chargement…</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══ OFFER MODAL ════════════════════════════════════════ -->
+<div class="offer-overlay" id="offerOverlay">
+  <div class="offer-box">
+    <div class="offer-title">💰 Faire une offre</div>
+    <div class="offer-sub" id="offerProductLabel">—</div>
+    <div class="offer-inp-row">
+      <input class="offer-inp" id="offerAmount" type="number" min="1" placeholder="0" />
+      <span class="offer-currency">DA</span>
+    </div>
+    <div style="font-size:11px;color:var(--gray-light);margin-bottom:14px" id="offerPriceHint"></div>
+    <button class="offer-submit" id="offerSubmitBtn">Envoyer l'offre</button>
+    <button class="offer-cancel" id="offerCancelBtn">Annuler</button>
+  </div>
 </div>
 
 </body>
